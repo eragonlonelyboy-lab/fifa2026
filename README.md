@@ -82,10 +82,21 @@ python -m http.server 8770 --directory .            # http://127.0.0.1:8770/inde
   - **Manual / social:** edit `data/adjustments.json` directly, or pull X/Reddit posts with the
     last30days / agent-reach skills and add cited entries.
 
-## Host it free (GitHub Pages)
-This repo is a static site. In the GitHub repo: **Settings → Pages → Source: Deploy from a branch →
-`main` / root**. The dashboard goes live at `https://<user>.github.io/fifa2026/`. Re-run the script
-and `git push` to update it.
+## Deploy in the cloud, laptop OFF (GitHub Actions + Pages)
+`.github/workflows/update.yml` runs the model **every ~10 min on GitHub's servers** — fetches live
+results, recomputes predictions, pulls the public injury trackers, and commits the new `index.html`
+(only when data actually changed, so no commit spam). No laptop required.
+
+**Two one-time clicks in the repo** (these can't be scripted):
+1. **Settings → Actions → General → Workflow permissions → "Read and write permissions" → Save**
+   (lets the bot publish updates).
+2. **Settings → Pages → Source: "Deploy from a branch" → `main` / `/(root)` → Save**
+   (serves the page). Live at `https://<user>.github.io/fifa2026/`.
+
+What auto-updates: results, predictions, scoring, odds, the bubble, auto-tuning, and injury news
+from public web/RSS trackers. What does **not** auto-update in the cloud: X/Reddit **rumours**
+(they need your login cookie, which must never live in a public repo) and the hand-curated premium
+notes — both stay manual. GitHub's `*/10` schedule is best-effort and can lag a few minutes under load.
 
 ## Data source (swappable)
 All network/parse logic is behind `fetch_matches()`. Default = **ESPN** keyless JSON (live,

@@ -1,0 +1,56 @@
+name: Update Apollo's Oracle
+
+# Runs the dashboard in the cloud — no laptop required.
+# Fetches live results + injury trackers, recomputes predictions, republishes index.html.
+on:
+  schedule:
+    - cron: "*/10 * * * *"      # ~every 10 min (GitHub may delay runs under load)
+  workflow_dispatch:            # manual "Run workflow" button
+  push:
+    branches: [main]
+    paths:                      # rebuild immediately when the code/model changes
+      - "scripts/**"
+      - "data/results.json"
+      - "data/eragon-ratings.json"
+
+permissions:
+  contents: write               # allow the bot to commit the updated page
+
+concurrency:
+  group: update-dashboard       # never overlap two runs
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # reuse fetched ESPN responses (finished-match summaries never change) to keep runs fast
+      - name: Restore fetch cache
+        uses: actions/cache@v4
+        with:
+          path: cache
+          key: espn-cache-${{ github.run_id }}
+          restore-keys: espn-cache-
+
+      - name: Run model (results + predictions + injury news)
+        run: python scripts/update_dashboard.py --refresh-news
+
+      - name: Commit only if data changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # state.json is normally git-ignored; force-add it so the data-hash persists between
+          # runs and we DON'T commit when only the timestamp changed.
+          git add -f index.html data/adjustments.json state/state.json
+          if git diff --cached --quiet; then
+            echo "No data change — nothing to publish."
+          else
+            git commit -m "Auto-update: results + predictions [skip ci]"
+            git push || (git pull --rebase --autostash origin main && git push)
+          fi
