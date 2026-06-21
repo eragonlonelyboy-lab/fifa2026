@@ -60,7 +60,25 @@ python -m http.server 8770 --directory .            # http://127.0.0.1:8770/inde
 | `--dry-run` | print a JSON summary of what would change; write nothing |
 | `--recalibrate` | rebuild frozen model ratings from `data/results.json` |
 | `--no-enrich` | skip per-match goal/card enrichment (faster) |
+| `--no-tune` | disable live auto-tuning of the squad-value weight |
 | `--source espn\|apifootball` | choose data provider |
+
+## Live signal layers
+- **Model vs Market.** Every finished match is also scored against the DraftKings 3-way odds
+  (de-vigged). The "Me vs the bookmaker" panel shows whether this independent model beats Vegas on
+  RPS. It never sees the odds.
+- **Auto-tuning.** The squad-value weight self-tunes on accumulated live results, shrunk toward a
+  0.25 prior by sample size (so it tracks signal, not small-sample noise). Ratings stay frozen; only
+  this one hyperparameter adapts. Disable with `--no-tune`.
+- **News / injury layer.** `data/adjustments.json` holds forward-looking Elo deltas (e.g. a key
+  player ruled out) applied to **upcoming** matches only, never to the frozen scorecard. See
+  `data/adjustments.example.json` for the schema. Refresh it from recent reporting using the
+  last30days / agent-reach tools.
+
+## Host it free (GitHub Pages)
+This repo is a static site. In the GitHub repo: **Settings → Pages → Source: Deploy from a branch →
+`main` / root**. The dashboard goes live at `https://<user>.github.io/fifa2026/`. Re-run the script
+and `git push` to update it.
 
 ## Data source (swappable)
 All network/parse logic is behind `fetch_matches()`. Default = **ESPN** keyless JSON (live,
