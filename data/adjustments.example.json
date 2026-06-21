@@ -1,0 +1,5 @@
+{
+  "_comment": "News / injury adjustment layer. Copy real entries into adjustments.json. Each key is a team slug; 'delta' is an Elo-point adjustment (negative = weaker, e.g. key player out) applied to UPCOMING matches only (never to the frozen scorecard). Refresh from recent reporting using the last30days or agent-reach tools, e.g. search 'Norway World Cup squad injury Haaland'. Keep deltas bounded (roughly -60..+40). Always cite the source in 'reason'.",
+  "norway": { "delta": -40, "reason": "(example) Star striker ruled out with hamstring injury — Source: [outlet, date]" },
+  "france": { "delta": -15, "reason": "(example) First-choice keeper doubtful, late fitness test — Source: [outlet, date]" }
+}

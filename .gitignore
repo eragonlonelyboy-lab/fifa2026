@@ -1,0 +1,12 @@
+# runtime artifacts (regenerated every run)
+cache/
+backups/
+logs/
+state/
+__pycache__/
+*.pyc
+*.tmp
+.DS_Store
+
+# local news layer (keep the example template, ignore the live file if it holds private notes)
+# data/adjustments.json
