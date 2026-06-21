@@ -1,15 +1,127 @@
 {
-  "argentina": {
+  "germany": {
+    "delta": -15,
+    "note": "(auto) LK Lennart KarlMidfielder Germany Severe left thigh muscle bundle tearSevere left thigh muscle bundle tear Injured Unknown (ruled out of World Cup) Jun 21, 2026",
+    "source": "Soccer26Live, Jun 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "england": {
+    "delta": -15,
+    "note": "(auto) TL Tino LivramentoDefender England Calf injuryCalf injury Injured Ruled out of World Cup Jun 21, 2026",
+    "source": "Soccer26Live, Jun 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "morocco": {
     "delta": -8,
-    "note": "Messi (hamstring) and Alvarez (ankle) carrying knocks; Martinez set to start with a fractured finger. All cleared but managed.",
-    "source": "ESPN, Jun 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/49075716"
+    "note": "(auto) AE Abde EzzalzouliForward Morocco Knee injuryKnee injury Doubtful Uncertain for early stages of tournament Jun 21, 2026",
+    "source": "Soccer26Live, Jun 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
   },
   "france": {
     "delta": -8,
     "note": "Saliba playing through a persistent back issue (surgery deferred to after the tournament); Dembele back in contention.",
     "source": "FOX Sports, Jun 2026",
     "url": "https://www.foxsports.com/stories/soccer/william-saliba-hands-france-massive-injury-lift-as-didier-deschamps-issues-blunt-selection-warning-over-ousmane-dembele"
+  },
+  "ghana": {
+    "delta": -5,
+    "note": "(auto) Mohammed Kudus Ghana Long-term injury Out",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "austria": {
+    "delta": -5,
+    "note": "(auto) Christoph Baumgartner Austria Pre-tournament injury Out (not replaced)",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "netherlands": {
+    "delta": -5,
+    "note": "(auto) The Netherlands lost two more first-choice players to injury.",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "japan": {
+    "delta": -15,
+    "note": "(auto) Japan captain Wataru Endo was ruled out three days before the tournament after failing to recover from a foot injury that required surgery in February, and he announced h",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "uruguay": {
+    "delta": 6,
+    "note": "(auto) Jose Gimenez Uruguay Ankle Nearing return, Uruguay open June 21",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "mexico": {
+    "delta": -8,
+    "note": "(auto) Edson Alvarez Mexico Fitness concern Being monitored",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "egypt": {
+    "delta": 6,
+    "note": "(auto) Mohamed Salah (Egypt): Recovered from a hamstring tear and captains Egypt, who open against Belgium on June 15.",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "usa": {
+    "delta": 6,
+    "note": "(auto) Chris Richards (United States): Recovered from an ankle injury and started the co-hosts’ opening 4-1 win over Paraguay, anchoring the defense.",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "paraguay": {
+    "delta": 6,
+    "note": "(auto) Julio Enciso (Paraguay): Recovered after a pre-tournament scare and started against the United States.",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "argentina": {
+    "delta": -8,
+    "note": "Messi (hamstring) and Alvarez (ankle) carrying knocks; Martinez set to start with a fractured finger. All cleared but managed.",
+    "source": "ESPN, Jun 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/49075716"
+  },
+  "croatia": {
+    "delta": 6,
+    "note": "(auto) Luka Modric (Croatia): Recovered from a facial fracture and captains Croatia, now at AC Milan, at his fifth and likely final World Cup.",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "spain": {
+    "delta": 6,
+    "note": "(auto) Mikel Merino (Spain): Recovered from a foot problem that had sidelined him since January.",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "algeria": {
+    "delta": 6,
+    "note": "(auto) Luca Zidane (Algeria): Recovered from a fractured jaw and chin, returned wearing a protective mask, and is Algeria’s first-choice goalkeeper for their opener against Arge",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "turkey": {
+    "delta": 6,
+    "note": "(auto) Arda Guler (Turkey): Fully fit and the focal point of Turkey’s midfield on their return to the World Cup for the first time since 2002.",
+    "source": "WorldCupWiki, Jun 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
   },
   "norway": {
     "delta": 6,
