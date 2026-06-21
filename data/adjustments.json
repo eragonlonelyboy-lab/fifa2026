@@ -27,10 +27,10 @@
     "url": "https://www.foxsports.com/stories/soccer/william-saliba-hands-france-massive-injury-lift-as-didier-deschamps-issues-blunt-selection-warning-over-ousmane-dembele"
   },
   "ghana": {
-    "delta": -5,
-    "note": "(auto) Mohammed Kudus Ghana Long-term injury Out",
-    "source": "WorldCupWiki, Jun 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "delta": -15,
+    "note": "(auto) This is a major blow for Ghana, who look to Kudus for moments of inspiration.",
+    "source": "ESPN, Jun 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "austria": {
@@ -76,17 +76,17 @@
     "auto": true
   },
   "usa": {
-    "delta": 6,
-    "note": "(auto) Chris Richards (United States): Recovered from an ankle injury and started the co-hosts’ opening 4-1 win over Paraguay, anchoring the defense.",
-    "source": "WorldCupWiki, Jun 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "delta": -5,
+    "note": "(auto) Johnny Cardoso United States Ankle injury",
+    "source": "Covers, Jun 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "paraguay": {
-    "delta": 6,
-    "note": "(auto) Julio Enciso (Paraguay): Recovered after a pre-tournament scare and started against the United States.",
-    "source": "WorldCupWiki, Jun 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "delta": -5,
+    "note": "(auto) Julio Enciso avoided a serious thigh injury, but Paraguay is unlikely to rush its star attacker back into action.",
+    "source": "Covers, Jun 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "argentina": {
@@ -103,10 +103,10 @@
     "auto": true
   },
   "spain": {
-    "delta": 6,
-    "note": "(auto) Mikel Merino (Spain): Recovered from a foot problem that had sidelined him since January.",
-    "source": "WorldCupWiki, Jun 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "delta": -15,
+    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
+    "source": "Covers, Jun 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "algeria": {
@@ -121,6 +121,20 @@
     "note": "(auto) Arda Guler (Turkey): Fully fit and the focal point of Turkey’s midfield on their return to the World Cup for the first time since 2002.",
     "source": "WorldCupWiki, Jun 2026",
     "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "brazil": {
+    "delta": -15,
+    "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
+    "source": "ESPN, Jun 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "auto": true
+  },
+  "canada": {
+    "delta": -5,
+    "note": "(auto) Davies has not played for Canada since March 2025, when he tore an ACL in the CONCACAF Nations League finals, and injured a hamstring last month while playing for Bayern ",
+    "source": "ESPN, Jun 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "norway": {

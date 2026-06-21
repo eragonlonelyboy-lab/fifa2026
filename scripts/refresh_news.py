@@ -27,11 +27,13 @@ SSLCTX = ssl.create_default_context()
 SOURCES = [
     ("Soccer26Live",  "https://soccer26live.com/world-cup-2026/injuries/"),
     ("WorldCupWiki",  "https://worldcupwiki.com/world-cup-2026-injury-list/"),
-]
+    ("ESPN",          "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info"),
+    ("Covers",        "https://www.covers.com/world-cup/injury-report-2026"),
+]   # FourFourTwo dropped: prose squad-admin format caused team mis-attribution
 # keyword -> bounded Elo delta. Recovery FIRST so "recovered ... had sidelined him" reads positive;
 # first match wins per sentence.
 RULES = [
-    (r"\brecover(?:ed|ing|y)\b|\bback (?:in contention|in training|to fitness)\b|\breturns?\b|\bfit again\b|\bback to full\b|\bcleared\b|\bboost\b", 6),
+    (r"\brecover(?:ed|ing|y)\b|\bback (?:in contention|in training|to fitness|to full fitness)\b|\bfit again\b|\bfully fit\b|\bnearing return\b|\bcleared (?:to|for|after)\b|\bavailable again\b", 6),
     (r"\bruled out\b|\bout of the (?:tournament|world cup)\b|\bwill miss\b|\bmajor blow\b|\bsidelined for\b|\bseason[- ]ending\b", -15),
     (r"\bdoubt(?:ful)?\b|\bfitness (?:concern|test|scare)\b|\binjury scare\b|\brace against time\b|\bsuspended\b|\bsuspension\b", -8),
     (r"\binjur(?:y|ed)\b|\bknock\b|\bstrain\b|\bsidelined\b", -5),

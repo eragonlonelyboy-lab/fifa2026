@@ -756,9 +756,11 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
     for t,v in top:
         P.append(f'<div class="odds"><span class="fl">{flag(t)}</span><b style="width:120px">{html.escape(disp(t))}</b>'
                  f'<div class="bar"><i style="width:{v/mx*100:.0f}%"></i></div><div class="p">{v*100:.1f}%</div></div>')
-    P.append('</div><div class="card"><div class="sub">Reaching the knockouts · top 10</div>')
-    topa = sorted(adv.items(), key=lambda x: x[1], reverse=True)[:10]
-    for t,v in topa:
+    P.append('</div><div class="card"><div class="sub">On the bubble · qualification still in doubt</div>')
+    bubble = sorted([(t, v) for t, v in adv.items() if 0.02 < v < 0.985], key=lambda x: abs(x[1] - 0.5))[:10]
+    if not bubble:
+        P.append('<div class="sub" style="padding:10px 0">Every group is all but decided. No live qualification races.</div>')
+    for t, v in bubble:
         P.append(f'<div class="odds"><span class="fl">{flag(t)}</span><b style="width:120px">{html.escape(disp(t))}</b>'
                  f'<div class="bar"><i style="width:{v*100:.0f}%"></i></div><div class="p">{v*100:.0f}%</div></div>')
     P.append('</div></div>')
