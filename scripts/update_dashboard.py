@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Eragon — FIFA World Cup 2026 prediction dashboard (self-updating, pure stdlib).
+Apollo's Oracle — FIFA World Cup 2026 prediction dashboard (self-updating, pure stdlib).
 
 What it does, every run:
   1. Loads MY frozen prediction model (Elo + Dixon-Coles time-decay -> Karlis-Ntzoufras
@@ -714,12 +714,12 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
     P = []
     P.append('<div class="wrap">')
     P.append('<header class="mast">'
-             '<div><div class="kicker"><span class="dot"></span>Independent model · scored live</div>'
+             '<div><div class="kicker"><span class="dot"></span>Apollo&#39;s Oracle · independent model</div>'
              '<h1>World Cup 2026<span class="acc">.</span><br>Predictions <i>vs</i> Reality</h1></div>'
-             f'<div class="stamp">Eragon model<br>updated<br>{now}</div></header>')
-    P.append(f'<p class="lede">My own forecasting model (Elo, squad market value, bivariate Poisson, ensemble) '
-             f'calls <b>every match</b> of the tournament, then is scored live against what actually happened '
-             f'<b>and</b> against the bookmaker. It never sees the odds.</p>')
+             f'<div class="stamp">Apollo&#39;s Oracle<br>updated<br>{now}</div></header>')
+    P.append(f'<p class="lede"><b>Apollo&#39;s Oracle</b> is my own forecasting model (Elo, squad market value, '
+             f'bivariate Poisson, ensemble). It calls <b>every match</b> of the tournament, then is scored live against '
+             f'what actually happened <b>and</b> against the bookmaker. It never sees the odds.</p>')
 
     # at a glance
     P.append('<h2>At a glance</h2><div class="grid g5">')
@@ -762,6 +762,33 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
         P.append(f'<div class="odds"><span class="fl">{flag(t)}</span><b style="width:120px">{html.escape(disp(t))}</b>'
                  f'<div class="bar"><i style="width:{v*100:.0f}%"></i></div><div class="p">{v*100:.0f}%</div></div>')
     P.append('</div></div>')
+
+    # next up (forward-looking, news-adjusted, with cited notes)
+    P.append('<h2>Next up <span class="badge">my prediction, news-adjusted</span></h2>')
+    nxt = [m for m in upcoming if m["t1"] in NAME and m["t2"] in NAME][:12]
+    if not nxt: P.append('<p class="sub">No upcoming fixtures in range.</p>')
+    for m in nxt:
+        pr = predict(M, m["t1"], m["t2"], host_side(m), adj=True)["blend"] if (m["t1"] in M["elo"] and m["t2"] in M["elo"]) else None
+        P.append('<div class="card" style="padding:12px 14px;margin-bottom:9px">')
+        P.append(f'<div class="match" style="margin:0;background:transparent;border:0;padding:0">'
+                 f'{_team(m["t1"])}<div class="sc" style="font-size:12px;color:var(--mut)">{_fmt_local(m["date"])}</div>{_team(m["t2"],"away")}</div>')
+        if pr:
+            P.append(_bar3(pr))
+            P.append(f'<div class="pred"><span>{disp(m["t1"])} {pr[0]*100:.0f}% · Draw {pr[1]*100:.0f}% · {disp(m["t2"])} {pr[2]*100:.0f}%</span>'
+                     f'<span class="tag">{m["group"] or "KO"}</span></div>')
+        for t in (m["t1"], m["t2"]):
+            a = ADJUSTMENTS.get(t)
+            if not a: continue
+            d = float(a.get("delta", 0)); col = "var(--win)" if d > 0 else "var(--loss)"
+            src, url = a.get("source", ""), a.get("url", "")
+            srch = (f'<a href="{html.escape(url)}" target="_blank" rel="noopener" class="tag">{html.escape(src)}</a>'
+                    if url else f'<span class="tag">{html.escape(src)}</span>')
+            P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
+                     f'<span>{flag(t)} <b style="color:{col}">{disp(t)} {"+" if d>0 else ""}{d:.0f}</b> {html.escape(a.get("note",""))}</span>{srch}</div>')
+        P.append('</div>')
+    if ADJUSTMENTS:
+        P.append('<p class="sub">News and injury deltas are curated from the cited reporting above (refreshed with the '
+                 'last30days / agent-reach tools). They move upcoming-match odds only, never the frozen scorecard.</p>')
 
     # prediction vs reality
     P.append('<h2>Completed matches<span class="badge">my call vs reality</span></h2>')
@@ -808,32 +835,6 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
         P.append('</table></div>')
     P.append('</div>')
 
-    # next up
-    P.append('<h2>Next up</h2>')
-    nxt = [m for m in upcoming if m["t1"] in NAME and m["t2"] in NAME][:12]
-    if not nxt: P.append('<p class="sub">No upcoming fixtures in range.</p>')
-    for m in nxt:
-        pr = predict(M, m["t1"], m["t2"], host_side(m), adj=True)["blend"] if (m["t1"] in M["elo"] and m["t2"] in M["elo"]) else None
-        P.append('<div class="card" style="padding:12px 14px;margin-bottom:9px">')
-        P.append(f'<div class="match" style="margin:0;background:transparent;border:0;padding:0">'
-                 f'{_team(m["t1"])}<div class="sc" style="font-size:12px;color:var(--mut)">{_fmt_local(m["date"])}</div>{_team(m["t2"],"away")}</div>')
-        if pr:
-            P.append(_bar3(pr))
-            P.append(f'<div class="pred"><span>{disp(m["t1"])} {pr[0]*100:.0f}% · Draw {pr[1]*100:.0f}% · {disp(m["t2"])} {pr[2]*100:.0f}%</span>'
-                     f'<span class="tag">{m["group"] or "KO"}</span></div>')
-        P.append('</div>')
-
-    # news / injury watch
-    if ADJUSTMENTS:
-        P.append('<h2>News &amp; injury watch <span class="badge">forward-looking, upcoming matches only</span></h2><div class="card">')
-        for t, a in ADJUSTMENTS.items():
-            d = float(a.get("delta", 0)); col = "var(--win)" if d > 0 else "var(--loss)"
-            P.append(f'<div class="lead"><span class="fl">{flag(t)}</span><b>{html.escape(disp(t))}</b>'
-                     f'<span class="sub" style="margin:0 0 0 6px;flex:1">{html.escape(a.get("reason",""))}</span>'
-                     f'<span class="v" style="color:{col}">{"+" if d>0 else ""}{d:.0f} Elo</span></div>')
-        P.append('</div><p class="sub">Hand-curated from recent reporting (refresh with the last30days / agent-reach tools). '
-                 'Applied to upcoming-match predictions only, never to the frozen scorecard.</p>')
-
     elo_share = round((1 - SV_W) * 100); sv_share = round(SV_W * 100)
     P.append(f'<div class="foot"><b>Methodology.</b> Team strength = World-Football Elo with Dixon-Coles exponential '
              f'time-decay (913 internationals, Oct 2023 to Jun 2026, frozen pre-tournament), blended {elo_share}/{sv_share} '
@@ -843,8 +844,8 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
              f'ensembled 90/10 with a Maher attack/defence Poisson. Tournament: Monte Carlo. The Elo+ensemble core backtests '
              f'walk-forward out-of-sample at RPS 0.171 / 62% / ECE 2.0% (beats the open-source baseline 0.175); the squad-value '
              f'blend is evidence-based (Groll et al.) but forward-looking, not back-tested on historical squad values. Live '
-             f'results + bookmaker odds: ESPN / DraftKings. The model never sees the odds. Built by Eragon. Champion odds use a '
-             f'simplified rating-seeded bracket (approximate).</div>')
+             f'results + bookmaker odds: ESPN / DraftKings. The model never sees the odds. Apollo&#39;s Oracle, built by Eragon. '
+             f'Champion odds use a simplified rating-seeded bracket (approximate).</div>')
     P.append('</div>')
     return "\n".join(P)
 
@@ -858,7 +859,7 @@ def build_html(body):
     css = extract_css(DEFAULT_CSS)
     return ("<!doctype html><html lang='en'><head><meta charset='utf-8'>"
             "<meta name='viewport' content='width=device-width,initial-scale=1'>"
-            "<title>Eragon · World Cup 2026 Predictions vs Reality</title>"
+            "<title>Apollo's Oracle · World Cup 2026 Predictions vs Reality</title>"
             "<link rel='preconnect' href='https://fonts.googleapis.com'>"
             "<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>"
             "<link href='https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap' rel='stylesheet'>"

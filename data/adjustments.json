@@ -1,1 +1,26 @@
-{}
+{
+  "argentina": {
+    "delta": -8,
+    "note": "Messi (hamstring) and Alvarez (ankle) carrying knocks; Martinez set to start with a fractured finger. All cleared but managed.",
+    "source": "ESPN, Jun 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/49075716"
+  },
+  "france": {
+    "delta": -8,
+    "note": "Saliba playing through a persistent back issue (surgery deferred to after the tournament); Dembele back in contention.",
+    "source": "FOX Sports, Jun 2026",
+    "url": "https://www.foxsports.com/stories/soccer/william-saliba-hands-france-massive-injury-lift-as-didier-deschamps-issues-blunt-selection-warning-over-ousmane-dembele"
+  },
+  "norway": {
+    "delta": 6,
+    "note": "Haaland fit and scoring (4-1 v Iraq); captain Odegaard cleared after an injury-hit club season.",
+    "source": "World Soccer Talk, Jun 2026",
+    "url": "https://worldsoccertalk.com/world-cup/norway-2026-world-cup-preview-squad-breakdown-key-player-and-tactical-analysis/"
+  },
+  "senegal": {
+    "delta": -10,
+    "note": "Camp reportedly unsettled by off-field issues clouding the campaign; squad talent intact (Mane, Koulibaly, Mendy).",
+    "source": "Africa Top Sports, Jun 2026",
+    "url": "https://en.africatopsports.com/2026-fifa-world-cup-unrest-in-senegal-camp-as-off-field-issues-cloud-world-cup-campaign/"
+  }
+}

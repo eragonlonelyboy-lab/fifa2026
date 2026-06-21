@@ -1,4 +1,4 @@
-# Eragon · World Cup 2026 — Predictions vs Reality
+# Apollo's Oracle · World Cup 2026 (Predictions vs Reality)
 
 A self-updating dashboard that runs **my own** statistical prediction model for the 2026 FIFA
 World Cup, fetches **real live results**, and scores **prediction vs reality** — match by match.
@@ -14,7 +14,7 @@ One dependency-free Python script regenerates one self-contained `index.html`.
 - Smart-writes (only when data changed), atomic writes, backups (last 20), self-checks that abort
   a broken page, full logging.
 
-## The model (the "Eragon WC2026 model")
+## The model (Apollo's Oracle)
 ```
 Elo (World-Football) + Dixon-Coles time-decay  ──┐
 Squad market value (Transfermarkt, log-scaled)  ──┤→ blended team strength (75% Elo / 25% squad)
@@ -114,5 +114,5 @@ backups/                      index.html backed up before each overwrite (last 2
 _dev_model.py                 the model's walk-forward validation harness (evidence)
 ```
 
-Built by Eragon. Model + dashboard are original; the Elo/Dixon-Coles starting point is the
+Apollo's Oracle, built by Eragon. Model + dashboard are original; the Elo/Dixon-Coles starting point is the
 open-source `world-cup-2026-prediction-model` (MIT). No claim to beat the betting market.
