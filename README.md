@@ -61,6 +61,7 @@ python -m http.server 8770 --directory .            # http://127.0.0.1:8770/inde
 | `--recalibrate` | rebuild frozen model ratings from `data/results.json` |
 | `--no-enrich` | skip per-match goal/card enrichment (faster) |
 | `--no-tune` | disable live auto-tuning of the squad-value weight |
+| `--refresh-news` | run `refresh_news.py` first to auto-update the injury layer, then rebuild |
 | `--source espn\|apifootball` | choose data provider |
 
 ## Live signal layers
@@ -71,9 +72,15 @@ python -m http.server 8770 --directory .            # http://127.0.0.1:8770/inde
   0.25 prior by sample size (so it tracks signal, not small-sample noise). Ratings stay frozen; only
   this one hyperparameter adapts. Disable with `--no-tune`.
 - **News / injury layer.** `data/adjustments.json` holds forward-looking Elo deltas (e.g. a key
-  player ruled out) applied to **upcoming** matches only, never to the frozen scorecard. See
-  `data/adjustments.example.json` for the schema. Refresh it from recent reporting using the
-  last30days / agent-reach tools.
+  player ruled out) applied to **upcoming** matches only, never to the frozen scorecard. Each shows
+  its note + source link on the dashboard.
+  - **Auto-refresh:** `python scripts/refresh_news.py` reads public WC-2026 injury trackers (via
+    Jina Reader, no key), scans for the 48 finalists with parenthetical-team attribution + an
+    opponent-context guard, and writes **bounded, cited, `(auto)`-flagged** deltas. Hand-curated
+    entries (no `auto` flag) are always preserved and win. It is best-effort heuristic parsing, so
+    review the `(auto)` notes (each links its source). Or run it inline: `update_dashboard.py --refresh-news`.
+  - **Manual / social:** edit `data/adjustments.json` directly, or pull X/Reddit posts with the
+    last30days / agent-reach skills and add cited entries.
 
 ## Host it free (GitHub Pages)
 This repo is a static site. In the GitHub repo: **Settings → Pages → Source: Deploy from a branch →

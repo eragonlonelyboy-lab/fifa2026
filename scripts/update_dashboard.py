@@ -907,6 +907,13 @@ def main():
     if not matches:
         log("ABORT: zero matches parsed — not writing."); sys.exit(2)
     estats = enrich_events(matches, enable="--no-enrich" not in args)
+    if "--refresh-news" in args:
+        import subprocess
+        try:
+            subprocess.run([sys.executable, str(Path(__file__).with_name("refresh_news.py"))],
+                           timeout=180, check=False)
+        except Exception as e:
+            log(f"warn: refresh_news failed ({e})")
     load_adjustments()
     if "--no-tune" not in args:
         tuned, ntune, sv_live = auto_tune_sv_w(M, matches)
