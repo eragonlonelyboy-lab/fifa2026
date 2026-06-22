@@ -288,13 +288,17 @@ def load_adjustments():
         except Exception: ADJUSTMENTS = {}
     return ADJUSTMENTS
 
+FORM = {}   # in-tournament form delta (Elo pts) from over/under-performance; forward-looking only
 def strength(M, t, adj=False):
-    """Blended team strength: (1-SV_W)*Elo + SV_W*squad-value rating. adj=news/injury delta (upcoming only)."""
+    """Blended team strength: (1-SV_W)*Elo + SV_W*squad-value. adj adds news/injury + in-tournament
+    form deltas (UPCOMING matches only; the frozen scorecard uses adj=False)."""
     e = M["elo"].get(t, 1500)
     sv = squad_elo_map(M["elo"]).get(t, e)
     base = (1 - SV_W) * e + SV_W * sv
-    if adj and t in ADJUSTMENTS:
-        base += float(ADJUSTMENTS[t].get("delta", 0))
+    if adj:
+        if t in ADJUSTMENTS:
+            base += float(ADJUSTMENTS[t].get("delta", 0))
+        base += FORM.get(t, 0.0)
     return base
 
 def auto_tune_sv_w(M, matches, prior=0.25, K=150):
@@ -329,7 +333,7 @@ def expected_goals_fast(M, t1, t2, hs):
     key = (t1, t2, hs)
     v = _EG_CACHE.get(key)
     if v is not None: return v
-    r1 = strength(M, t1); r2 = strength(M, t2)
+    r1 = strength(M, t1, adj=True); r2 = strength(M, t2, adj=True)   # forward-looking: news + form
     hb = HOME_ADV if hs > 0 else (-HOME_ADV if hs < 0 else 0.0)
     v = (_elo_goals(r1, r2, hb), _elo_goals(r2, r1, -hb / 2)); _EG_CACHE[key] = v
     return v
@@ -371,6 +375,27 @@ def calibrate_draw_rate(M, matches, K=50, lo=0.85, hi=1.6):
     target = w * d_obs + (1 - w) * d_mod
     DRAW_FACTOR = round(max(lo, min(hi, target / d_mod)) if d_mod > 0 else 1.0, 3)
     return DRAW_FACTOR, d_obs, d_mod, n
+
+def compute_form(M, matches, K=22, cap=45):
+    """In-tournament form: a mini-Elo delta from each team's over/under-performance vs the model's
+    pre-match expectation, goal-difference weighted, bounded +-cap. Applied to UPCOMING matches only
+    (via strength(adj=True)); never re-rates the frozen ratings or the scorecard."""
+    global FORM, _EG_CACHE
+    FORM = {t: 0.0 for t in TEAM_GROUP}
+    played = sorted([m for m in matches if m["completed"] and m["g1"] is not None
+                     and m["t1"] in M["elo"] and m["t2"] in M["elo"]], key=lambda m: m.get("date", ""))
+    for m in played:
+        hs = host_side(m)
+        hb = HOME_ADV if hs > 0 else (-HOME_ADV if hs < 0 else 0.0)
+        e1 = _elo_exp(strength(M, m["t1"]), strength(M, m["t2"]), hb)      # base (no form) expectation
+        s1 = 1.0 if m["g1"] > m["g2"] else (0.5 if m["g1"] == m["g2"] else 0.0)
+        gd = abs(m["g1"] - m["g2"]); gm = 1.0 if gd <= 1 else (1.5 if gd == 2 else (11 + gd) / 8.0)
+        delta = K * gm * (s1 - e1)
+        FORM[m["t1"]] = max(-cap, min(cap, FORM[m["t1"]] + delta))
+        FORM[m["t2"]] = max(-cap, min(cap, FORM[m["t2"]] - delta))
+    FORM = {t: round(v, 1) for t, v in FORM.items()}
+    _EG_CACHE = {}   # force Monte-Carlo to re-sample with the new form/news strengths
+    return FORM
 
 # =========================================================================== LIVE DATA
 def _http_get(url, headers=None):
@@ -795,8 +820,9 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
                  f'<div class="bar"><i style="width:{v*100:.0f}%"></i></div><div class="p">{v*100:.0f}%</div></div>')
     P.append('</div></div>')
 
-    # next up (forward-looking, news-adjusted, with cited notes)
-    P.append('<h2>Next up <span class="badge">my prediction, news-adjusted</span></h2>')
+    # next up (forward-looking: news + in-tournament form + draw calibration)
+    P.append('<h2>Next up <span class="badge">my prediction · news + form adjusted</span></h2>')
+    rec = {r["team"]: f'{r["W"]}W-{r["D"]}D-{r["L"]}L' for rows in stand.values() for r in rows}
     nxt = [m for m in upcoming if m["t1"] in NAME and m["t2"] in NAME][:12]
     if not nxt: P.append('<p class="sub">No upcoming fixtures in range.</p>')
     for m in nxt:
@@ -810,13 +836,19 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
                      f'<span class="tag">{m["group"] or "KO"}</span></div>')
         for t in (m["t1"], m["t2"]):
             a = ADJUSTMENTS.get(t)
-            if not a: continue
-            d = float(a.get("delta", 0)); col = "var(--win)" if d > 0 else "var(--loss)"
-            src, url = a.get("source", ""), a.get("url", "")
-            srch = (f'<a href="{html.escape(url)}" target="_blank" rel="noopener" class="tag">{html.escape(src)}</a>'
-                    if url else f'<span class="tag">{html.escape(src)}</span>')
-            P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
-                     f'<span>{flag(t)} <b style="color:{col}">{disp(t)} {"+" if d>0 else ""}{d:.0f}</b> {html.escape(a.get("note",""))}</span>{srch}</div>')
+            if a:
+                d = float(a.get("delta", 0)); col = "var(--win)" if d > 0 else "var(--loss)"
+                src, url = a.get("source", ""), a.get("url", "")
+                srch = (f'<a href="{html.escape(url)}" target="_blank" rel="noopener" class="tag">{html.escape(src)}</a>'
+                        if url else f'<span class="tag">{html.escape(src)}</span>')
+                P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
+                         f'<span>{flag(t)} <b style="color:{col}">{disp(t)} {"+" if d>0 else ""}{d:.0f}</b> {html.escape(a.get("note",""))}</span>{srch}</div>')
+            fv = FORM.get(t, 0.0)
+            if abs(fv) >= 8:
+                col = "var(--win)" if fv > 0 else "var(--loss)"
+                P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
+                         f'<span>{flag(t)} <b style="color:{col}">{disp(t)} form {"+" if fv>0 else ""}{fv:.0f}</b> {rec.get(t,"")} so far, '
+                         f'{"over" if fv>0 else "under"}-performing expectations</span><span class="tag">in-tournament form</span></div>')
         P.append('</div>')
     if ADJUSTMENTS:
         P.append('<p class="sub">News and injury deltas are curated from the cited reporting above (refreshed with the '
@@ -875,7 +907,9 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
              f'expected goals → Karlis-Ntzoufras bivariate Poisson (λ₃=0.10) with a Dixon-Coles low-score correction (ρ=−0.05), '
              f'ensembled 90/10 with a Maher attack/defence Poisson. A tournament draw-rate calibration nudges the draw '
              f'probability toward this World Cup\'s actual draw frequency (shrunk by sample size), applied to upcoming '
-             f'matches and the Monte Carlo only, never the frozen scorecard. Tournament: Monte Carlo. The Elo+ensemble core backtests '
+             f'matches and the Monte Carlo only, never the frozen scorecard. An in-tournament form layer nudges each team\'s '
+             f'upcoming predictions by their over/under-performance vs expectation so far (bounded mini-Elo, forward-looking '
+             f'only). Tournament: Monte Carlo. The Elo+ensemble core backtests '
              f'walk-forward out-of-sample at RPS 0.171 / 62% / ECE 2.0% (beats the open-source baseline 0.175); the squad-value '
              f'blend is evidence-based (Groll et al.) but forward-looking, not back-tested on historical squad values. Live '
              f'results + bookmaker odds: ESPN / DraftKings. The model never sees the odds. Apollo&#39;s Oracle, built by Eragon. '
@@ -954,6 +988,9 @@ def main():
         log(f"auto-tuned SV_W -> {tuned} (live-optimal {sv_live} over {ntune} games, shrunk to 0.25 prior)")
     df, dobs, dmod, dn = calibrate_draw_rate(M, matches)
     log(f"draw calibration -> x{df} (tournament {dobs*100:.0f}% draws vs model {dmod*100:.0f}% over {dn} games)")
+    compute_form(M, matches)
+    _topform = sorted(FORM.items(), key=lambda x: abs(x[1]), reverse=True)[:3]
+    log("in-tournament form -> " + ", ".join(f"{disp(t)} {v:+.0f}" for t, v in _topform if abs(v) >= 1))
     stand = standings(matches)
     pvr, summary, market = pred_vs_reality(M, matches, estats)
     log(f"fetched {len(matches)} matches ({sum(1 for m in matches if m['completed'])} finished); "
