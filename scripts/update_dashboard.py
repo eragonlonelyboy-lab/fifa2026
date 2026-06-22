@@ -288,6 +288,53 @@ def load_adjustments():
         except Exception: ADJUSTMENTS = {}
     return ADJUSTMENTS
 
+SUSPENSIONS = {}
+def compute_suspensions(per=6, cap=12):
+    """Forward-looking card bans, read from ESPN card data in the day caches. A player who picks up a
+    red card or his 2nd tournament yellow in his team's MOST RECENT completed match misses the upcoming
+    one -> bounded team Elo delta on UPCOMING matches only; never touches the frozen scorecard. Heuristic:
+    fixed per-player penalty (does not weight player importance). Uses the same slug() as the fetch path."""
+    global SUSPENSIONS
+    SUSPENSIONS = {}
+    evs = {}
+    for f in sorted(CACHE.glob("day-*.json")):
+        try: j = json.loads(f.read_text(encoding="utf-8"))
+        except Exception: continue
+        for ev in j.get("events", []):
+            comp = (ev.get("competitions") or [{}])[0]
+            if (((comp.get("status") or {}).get("type") or {}).get("state")) == "post":
+                evs[ev["id"]] = ev                      # dedup snapshots: last write wins
+    cards = []; team_dates = {}
+    for ev in evs.values():
+        comp = ev["competitions"][0]; date = ev.get("date", "")
+        idmap = {}
+        for c in comp.get("competitors", []):
+            s = slug(c["team"].get("displayName", "")); idmap[c["team"]["id"]] = s
+            team_dates.setdefault(s, set()).add(date)
+        for d in comp.get("details", []):
+            s = idmap.get((d.get("team") or {}).get("id"))
+            if not s: continue
+            kind = "red" if d.get("redCard") else ("yellow" if d.get("yellowCard") else None)
+            if not kind: continue
+            ath = (d.get("athletesInvolved") or [{}])
+            cards.append((date, s, ath[0].get("id") if ath else None,
+                          ath[0].get("displayName") if ath else "?", kind))
+    cards.sort(key=lambda x: x[0])
+    cum = {}; bans = []
+    for date, s, aid, anm, kind in cards:
+        if kind == "red":
+            bans.append((date, s, anm, "red card"))
+        elif aid:
+            cum[aid] = cum.get(aid, 0) + 1
+            if cum[aid] == 2: bans.append((date, s, anm, "2nd yellow")); cum[aid] = 0
+    for s, dates in team_dates.items():
+        cur = [(anm, r) for d, t, anm, r in bans if t == s and d == max(dates)]
+        if cur:
+            SUSPENSIONS[s] = {"delta": max(-cap, -per * len(cur)),
+                              "note": "Suspended next match: " + "; ".join(f"{n} ({r})" for n, r in cur),
+                              "source": "ESPN cards", "auto": True}
+    return SUSPENSIONS
+
 FORM = {}   # in-tournament form delta (Elo pts) from over/under-performance; forward-looking only
 def strength(M, t, adj=False):
     """Blended team strength: (1-SV_W)*Elo + SV_W*squad-value. adj adds news/injury + in-tournament
@@ -298,6 +345,10 @@ def strength(M, t, adj=False):
     if adj:
         if t in ADJUSTMENTS:
             base += float(ADJUSTMENTS[t].get("delta", 0))
+        if t in SUSPENSIONS:
+            base += float(SUSPENSIONS[t].get("delta", 0))
+        if SVR_K:
+            base -= SVR_K * SV_W * (sv - e)              # structural squad-value shrink (forward only)
         base += FORM.get(t, 0.0)
     return base
 
@@ -396,6 +447,42 @@ def compute_form(M, matches, K=22, cap=45):
     FORM = {t: round(v, 1) for t, v in FORM.items()}
     _EG_CACHE = {}   # force Monte-Carlo to re-sample with the new form/news strengths
     return FORM
+
+SVR_K = 0.0
+def compute_svr(M, matches, gate=72, kmax=0.5, Kshrink=120):
+    """Structural squad-value reliability corrector. Asks: AFTER in-tournament form is applied, do
+    high squad-value-lift teams STILL over/under-perform as a CLASS? If so, shrink the squad-value
+    lift on UPCOMING matches by a bounded, sample-shrunk factor. Double-count-safe: residuals are
+    measured net of form (predict adj=True), so anything form already absorbed yields no signal.
+    Gated to the end of the group stage; below the gate it only MONITORS (logs beta, applies 0).
+    Frozen scorecard (adj=False) is never touched."""
+    global SVR_K, _EG_CACHE
+    SVR_K = 0.0                                          # measure the raw signal with no correction live
+    smap = squad_elo_map(M["elo"])
+    live = [m for m in matches if m["completed"] and m["g1"] is not None
+            and m["t1"] in M["elo"] and m["t2"] in M["elo"]]
+    n = len(live)
+    xs = []; ys = []
+    for m in live:
+        p = predict(M, m["t1"], m["t2"], host_side(m), adj=True, draw_cal=True)["blend"]
+        exp1 = p[0] + 0.5 * p[1]                         # model expected points share for t1 (incl. form)
+        act1 = 1.0 if m["g1"] > m["g2"] else (0.5 if m["g1"] == m["g2"] else 0.0)
+        lift = lambda t: SV_W * (smap.get(t, M["elo"][t]) - M["elo"][t])
+        xs.append(lift(m["t1"]) - lift(m["t2"])); ys.append(act1 - exp1)
+    beta = 0.0
+    if n >= 10:
+        mx = sum(xs) / n; my = sum(ys) / n
+        sxx = sum((x - mx) ** 2 for x in xs)
+        if sxx > 1e-9:
+            beta = sum((xs[i] - mx) * (ys[i] - my) for i in range(n)) / sxx   # resid pts per Elo of lift
+    # beta < 0 => more squad-value lift -> underperformance even net of form => over-rated class.
+    raw_k = max(0.0, -beta * 400.0)                      # normalise: 400 Elo of lift ~ one full pts swing
+    k = min(kmax, raw_k) * (n / (n + Kshrink))           # clamp + shrink toward 0 by sample size
+    SVR_K = round(k, 3) if n >= gate else 0.0            # below gate: monitor only, apply nothing
+    _EG_CACHE = {}
+    log(f"squad-value structural check -> beta {beta:+.4f} over {n} games, shrink k={SVR_K} "
+        f"({'applied' if n >= gate else f'monitor only, gate {gate}'})")
+    return SVR_K
 
 # =========================================================================== LIVE DATA
 def _http_get(url, headers=None):
@@ -921,6 +1008,11 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
                         if url else f'<span class="tag">{html.escape(src)}</span>')
                 P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
                          f'<span>{flag(t)} <b style="color:{col}">{disp(t)} {"+" if d>0 else ""}{d:.0f}</b> {html.escape(a.get("note",""))}</span>{srch}</div>')
+            su = SUSPENSIONS.get(t)
+            if su:
+                P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
+                         f'<span>{flag(t)} <b style="color:var(--loss)">{disp(t)} {su["delta"]:+d}</b> {html.escape(su.get("note",""))}</span>'
+                         f'<span class="tag">suspension</span></div>')
             fv = FORM.get(t, 0.0)
             if abs(fv) >= 8:
                 col = "var(--win)" if fv > 0 else "var(--loss)"
@@ -1069,6 +1161,10 @@ def main():
     compute_form(M, matches)
     _topform = sorted(FORM.items(), key=lambda x: abs(x[1]), reverse=True)[:3]
     log("in-tournament form -> " + ", ".join(f"{disp(t)} {v:+.0f}" for t, v in _topform if abs(v) >= 1))
+    compute_suspensions()
+    if SUSPENSIONS:
+        log("suspensions -> " + ", ".join(f"{disp(t)} {v['delta']:+d}" for t, v in SUSPENSIONS.items()))
+    compute_svr(M, matches)
     stand = standings(matches)
     pvr, summary, market = pred_vs_reality(M, matches, estats)
     log(f"fetched {len(matches)} matches ({sum(1 for m in matches if m['completed'])} finished); "
