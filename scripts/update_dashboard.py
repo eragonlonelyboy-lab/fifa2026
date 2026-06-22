@@ -417,6 +417,9 @@ def predict(M, t1, t2, host_side=0, adj=False, draw_cal=False):
     a1 = _elo_goals(r1, r2, hb); a2 = _elo_goals(r2, r1, -hb / 2)
     if adj and GOAL_FACTOR != 1.0:                          # forward goals calibration (this tournament's rate)
         a1 = min(4.8, a1 * GOAL_FACTOR); a2 = min(4.8, a2 * GOAL_FACTOR)
+    if adj and ATT_ADJ:                                     # live per-team attack/defence split (net of form)
+        a1 = max(0.15, min(5.0, a1 + ATT_ADJ.get(t1, 0.0) + DEF_ADJ.get(t2, 0.0)))
+        a2 = max(0.15, min(5.0, a2 + ATT_ADJ.get(t2, 0.0) + DEF_ADJ.get(t1, 0.0)))
     pElo = match_prob(a1, a2)
     # component B: attack/defence
     hfac = hf if host_side > 0 else (1.0 / hf if host_side < 0 else 1.0)
@@ -424,6 +427,9 @@ def predict(M, t1, t2, host_side=0, adj=False, draw_cal=False):
     b2 = max(0.2, min(4.5, att.get(t2,1.0) * dfc.get(t1,1.0) * (1.0 if host_side>=0 else hfac)))
     if adj and GOAL_FACTOR != 1.0:
         b1 = min(4.8, b1 * GOAL_FACTOR); b2 = min(4.8, b2 * GOAL_FACTOR)
+    if adj and ATT_ADJ:
+        b1 = max(0.15, min(5.0, b1 + ATT_ADJ.get(t1, 0.0) + DEF_ADJ.get(t2, 0.0)))
+        b2 = max(0.15, min(5.0, b2 + ATT_ADJ.get(t2, 0.0) + DEF_ADJ.get(t1, 0.0)))
     pAD = match_prob(b1, b2)
     # ensemble: log opinion pool
     blend = []
@@ -468,6 +474,39 @@ def calibrate_goal_rate(M, matches, K=60, lo=0.9, hi=1.25):
     GOAL_FACTOR = round(max(lo, min(hi, target)), 3)
     _EG_CACHE = {}
     return GOAL_FACTOR, g_obs, g_mod, n
+
+ATT_ADJ = {}   # live attack delta: goals/game a team scores ABOVE model expectation (forward-only)
+DEF_ADJ = {}   # live defence delta: goals/game a team concedes ABOVE expectation (leakiness, forward-only)
+def compute_att_def(M, matches, gate=72, K=4, cap=0.6):
+    """Per-team live attack/defence SPLIT. Measures how much each team out/under-scores AND
+    out/under-concedes vs the model's forward expectation (predict adj=True = NET OF form + goals
+    calibration, so it cannot double-count them). Captures 'potent attack / leaky defence' sides that
+    net-margin form misses. Per-team sample-shrunk + clamped; gated to the end of the group stage
+    (~3 games each). Forward-only; the frozen scorecard is untouched."""
+    global ATT_ADJ, DEF_ADJ, _EG_CACHE
+    ATT_ADJ, DEF_ADJ = {}, {}                               # measure with the adapter OFF (no circularity)
+    fin = [m for m in matches if m["completed"] and m["g1"] is not None
+           and m["t1"] in M["elo"] and m["t2"] in M["elo"]]
+    sc, cc, gp = {}, {}, {}
+    for m in fin:
+        eg = predict(M, m["t1"], m["t2"], host_side(m), adj=True)["eg"]   # incl. form + goal-cal, not att/def
+        for t, scored, conceded, exp_s, exp_c in ((m["t1"], m["g1"], m["g2"], eg[0], eg[1]),
+                                                  (m["t2"], m["g2"], m["g1"], eg[1], eg[0])):
+            sc[t] = sc.get(t, 0.0) + (scored - exp_s)
+            cc[t] = cc.get(t, 0.0) + (conceded - exp_c)
+            gp[t] = gp.get(t, 0) + 1
+    applied = len(fin) >= gate
+    if applied:
+        for t, g in gp.items():
+            w = g / (g + K)
+            ATT_ADJ[t] = round(max(-cap, min(cap, w * sc[t] / g)), 3)
+            DEF_ADJ[t] = round(max(-cap, min(cap, w * cc[t] / g)), 3)
+        _EG_CACHE = {}
+    if gp:
+        top = sorted(gp, key=lambda t: abs(sc[t]/gp[t]) + abs(cc[t]/gp[t]), reverse=True)[:3]
+        log("attack/defence split -> " + ", ".join(f"{disp(t)} att{sc[t]/gp[t]:+.1f}/def{cc[t]/gp[t]:+.1f}" for t in top)
+            + (" (applied)" if applied else f" (monitor only, gate {gate})"))
+    return ATT_ADJ, DEF_ADJ
 
 def compute_form(M, matches, K=22, cap=45):
     """In-tournament form: a mini-Elo delta from each team's over/under-performance vs the model's
@@ -1092,6 +1131,12 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
                 P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
                          f'<span>{flag(t)} <b style="color:{col}">{disp(t)} form {"+" if fv>0 else ""}{fv:.0f}</b> {rec.get(t,"")} so far, '
                          f'{"over" if fv>0 else "under"}-performing expectations</span><span class="tag">in-tournament form</span></div>')
+            aa = ATT_ADJ.get(t, 0.0); dd = DEF_ADJ.get(t, 0.0)
+            if abs(aa) >= 0.15 or abs(dd) >= 0.15:
+                col = "var(--win)" if (aa - dd) > 0 else "var(--loss)"
+                P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
+                         f'<span>{flag(t)} <b style="color:{col}">{disp(t)} att {aa:+.1f} / def {dd:+.1f}</b> goals/game vs expectation so far</span>'
+                         f'<span class="tag">live attack/defence</span></div>')
         P.append('</div>')
     if ADJUSTMENTS:
         P.append('<p class="sub">News and injury deltas are curated from the cited reporting above (refreshed with the '
@@ -1330,6 +1375,7 @@ def main():
     if SUSPENSIONS:
         log("suspensions -> " + ", ".join(f"{disp(t)} {v['delta']:+d}" for t, v in SUSPENSIONS.items()))
     compute_svr(M, matches)
+    compute_att_def(M, matches)
     stand = standings(matches)
     pvr, summary, market = pred_vs_reality(M, matches, estats)
     log(f"fetched {len(matches)} matches ({sum(1 for m in matches if m['completed'])} finished); "
