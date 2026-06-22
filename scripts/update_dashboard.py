@@ -867,7 +867,7 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
                      f'<td><b>{sh:.1f}%</b></td><td style="color:{col}">{"+" if diff > 0 else ""}{diff:.1f}</td></tr>')
         P.append('</table></div><p class="sub"><b>Pure model</b> = my independent 20,000-sim forecast (never sees odds). '
                  '<b>Polymarket</b> = real-money market, de-vigged. <b>Sharp blend</b> = 40% my model + 60% market (the '
-                 'headline Title odds above) — because the market pools sharp money and information I do not have. '
+                 'headline Title odds above), because the market pools sharp money and information I do not have. '
                  'Edge = where my pure model is higher than the market.</p>')
 
     # next up (forward-looking: news + in-tournament form + draw calibration)
