@@ -468,6 +468,7 @@ def _fetch_espn():
                     "g1": gi(home) if completed else None, "g2": gi(away) if completed else None,
                     "state": state, "statusName": sname, "completed": completed,
                     "group": TEAM_GROUP.get(t1) or TEAM_GROUP.get(t2),
+                    "mkodds": _market_from_scoreboard_odds(comp.get("odds") or []),   # pre-match DraftKings 3-way
                 }
                 if t1 and t1 not in NAME: log(f"warn: unknown team slug '{t1}' from '{home['team']['displayName']}'")
                 if t2 and t2 not in NAME: log(f"warn: unknown team slug '{t2}' from '{away['team']['displayName']}'")
@@ -500,21 +501,40 @@ def _ml_to_p(ml):
     ml = float(ml)
     return 100.0 / (ml + 100.0) if ml > 0 else (-ml) / ((-ml) + 100.0)
 
-def _parse_market(summary):
-    """DraftKings 3-way moneyline -> de-vigged (home, draw, away) implied probabilities."""
-    od = summary.get("odds") or []
-    if not od: return None
-    o = od[0]
-    h = o.get("homeTeamOdds", {}).get("moneyLine")
-    d = o.get("drawOdds", {}).get("moneyLine")
-    a = o.get("awayTeamOdds", {}).get("moneyLine")
+def _devig(h, d, a):
     if None in (h, d, a): return None
     try:
         ph, pd, pa = _ml_to_p(h), _ml_to_p(d), _ml_to_p(a)
+        t = ph + pd + pa
+        return [ph / t, pd / t, pa / t] if t else None
     except Exception:
         return None
-    t = ph + pd + pa
-    return [ph / t, pd / t, pa / t] if t else None
+
+def _market_from_oddslist(od):
+    """SUMMARY odds format (homeTeamOdds/drawOdds/awayTeamOdds.moneyLine) -> de-vigged 3-way."""
+    try:
+        if not od: return None
+        o = od[0]
+        return _devig((o.get("homeTeamOdds") or {}).get("moneyLine"),
+                      (o.get("drawOdds") or {}).get("moneyLine"),
+                      (o.get("awayTeamOdds") or {}).get("moneyLine"))
+    except Exception:
+        return None
+
+def _market_from_scoreboard_odds(od):
+    """SCOREBOARD odds format (moneyline.home/away.close.odds + drawOdds.moneyLine) -> de-vigged 3-way."""
+    try:
+        if not od: return None
+        o = od[0]; ml = o.get("moneyline") or {}
+        def side(k):
+            s = ml.get(k) or {}
+            return (s.get("close") or {}).get("odds") or (s.get("open") or {}).get("odds")
+        return _devig(side("home"), (o.get("drawOdds") or {}).get("moneyLine"), side("away"))
+    except Exception:
+        return None
+
+def _parse_market(summary):
+    return _market_from_oddslist(summary.get("odds") or [])
 
 def enrich_events(matches, enable=True):
     """Best-effort goals/cards from ESPN summary. Cached permanently for finished matches."""
@@ -871,18 +891,26 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
                  'Edge = where my pure model is higher than the market.</p>')
 
     # next up (forward-looking: news + in-tournament form + draw calibration)
-    P.append('<h2>Next up <span class="badge">my prediction · news + form adjusted</span></h2>')
+    P.append('<h2>Next up <span class="badge">sharp blend · my model (news + form) + market</span></h2>')
     rec = {r["team"]: f'{r["W"]}W-{r["D"]}D-{r["L"]}L' for rows in stand.values() for r in rows}
     nxt = [m for m in upcoming if m["t1"] in NAME and m["t2"] in NAME][:12]
     if not nxt: P.append('<p class="sub">No upcoming fixtures in range.</p>')
     for m in nxt:
-        pr = predict(M, m["t1"], m["t2"], host_side(m), adj=True, draw_cal=True)["blend"] if (m["t1"] in M["elo"] and m["t2"] in M["elo"]) else None
+        modelp = predict(M, m["t1"], m["t2"], host_side(m), adj=True, draw_cal=True)["blend"] if (m["t1"] in M["elo"] and m["t2"] in M["elo"]) else None
+        mko = m.get("mkodds")
+        if modelp and mko:                                  # sharp blend: 40% model + 60% market (matches title odds)
+            pr = [SHARP_WM * modelp[i] + (1 - SHARP_WM) * mko[i] for i in range(3)]
+            _s = sum(pr); pr = [x / _s for x in pr]
+        else:
+            pr = modelp
         P.append('<div class="card" style="padding:12px 14px;margin-bottom:9px">')
         P.append(f'<div class="match" style="margin:0;background:transparent;border:0;padding:0">'
                  f'{_team(m["t1"])}<div class="sc" style="font-size:12px;color:var(--mut)">{_fmt_local(m["date"])}</div>{_team(m["t2"],"away")}</div>')
         if pr:
             P.append(_bar3(pr))
-            P.append(f'<div class="pred"><span>{disp(m["t1"])} {pr[0]*100:.0f}% · Draw {pr[1]*100:.0f}% · {disp(m["t2"])} {pr[2]*100:.0f}%</span>'
+            tail = (f' · <span style="color:var(--mut)">blend of my model + market</span>' if (modelp and mko) else
+                    f' · <span style="color:var(--mut)">my model</span>')
+            P.append(f'<div class="pred"><span>{disp(m["t1"])} {pr[0]*100:.0f}% · Draw {pr[1]*100:.0f}% · {disp(m["t2"])} {pr[2]*100:.0f}%{tail}</span>'
                      f'<span class="tag">{m["group"] or "KO"}</span></div>')
         for t in (m["t1"], m["t2"]):
             a = ADJUSTMENTS.get(t)
