@@ -791,6 +791,15 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
     rc = sum(estats.get(m["id"], {}).get("red", 0) for m in finished)
     teams_played = len({t for m in finished for t in (m["t1"], m["t2"]) if t})
     now = datetime.datetime.now(LOCAL_TZ).strftime("%a %d %b %Y · %H:%M %Z")
+    # sharp blend: fuse my model's champion odds with Polymarket (market-weighted, it pools more info)
+    SHARP_WM = 0.40
+    if poly:
+        _u = set(list(champ) + list(poly))
+        _c = {t: SHARP_WM * champ.get(t, 0) + (1 - SHARP_WM) * poly.get(t, 0) for t in _u}
+        _s = sum(_c.values()) or 1.0
+        cons = {t: v / _s for t, v in _c.items()}
+    else:
+        cons = champ
     P = []
     P.append('<div class="wrap">')
     P.append('<header class="mast">'
@@ -829,9 +838,10 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
                  f'it is an independent forecast, shown head-to-head against the market.</p>')
 
     # champion + advancement odds
-    P.append('<h2>My title odds <span class="badge">'+f'{SIMS:,} Monte-Carlo sims, conditioned on real results</span></h2>')
+    _cbadge = "sharp blend · my model + Polymarket" if poly else f"{SIMS:,} Monte-Carlo sims"
+    P.append(f'<h2>Title odds <span class="badge">{_cbadge}</span></h2>')
     P.append('<div class="grid g2"><div class="card"><div class="sub">Champion probability · top 10</div>')
-    top = sorted(champ.items(), key=lambda x: x[1], reverse=True)[:10]
+    top = sorted(cons.items(), key=lambda x: x[1], reverse=True)[:10]
     mx = max((v for _,v in top), default=1) or 1
     for t,v in top:
         P.append(f'<div class="odds"><span class="fl">{flag(t)}</span><b style="width:120px">{html.escape(disp(t))}</b>'
@@ -848,15 +858,17 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
     # model vs the prediction market (Polymarket champion odds)
     if poly:
         teams = sorted(set(list(champ) + list(poly)), key=lambda t: max(champ.get(t, 0), poly.get(t, 0)), reverse=True)[:12]
-        P.append('<h2>Me vs the prediction market <span class="badge">title race · my Monte Carlo vs Polymarket</span></h2><div class="card">')
-        P.append('<table><tr><th class="t">Team</th><th>My model</th><th>Polymarket</th><th>Edge</th></tr>')
+        P.append('<h2>My pure model vs the market <span class="badge">where my independent model disagrees with the crowd</span></h2><div class="card">')
+        P.append('<table><tr><th class="t">Team</th><th>Pure model</th><th>Polymarket</th><th>Sharp blend</th><th>Edge vs mkt</th></tr>')
         for t in teams:
-            mc, pm = champ.get(t, 0) * 100, poly.get(t, 0) * 100
+            mc, pm, sh = champ.get(t, 0) * 100, poly.get(t, 0) * 100, cons.get(t, 0) * 100
             diff = mc - pm; col = "var(--win)" if diff > 0 else "var(--loss)"
             P.append(f'<tr><td class="t">{flag(t)} {html.escape(disp(t))}</td><td>{mc:.1f}%</td><td>{pm:.1f}%</td>'
-                     f'<td style="color:{col}">{"+" if diff > 0 else ""}{diff:.1f}</td></tr>')
-        P.append('</table></div><p class="sub">Champion odds: my 20,000-sim model vs Polymarket (real-money prediction '
-                 'market, de-vigged). Edge = where I am higher than the market. Polymarket is an independent reference, never an input.</p>')
+                     f'<td><b>{sh:.1f}%</b></td><td style="color:{col}">{"+" if diff > 0 else ""}{diff:.1f}</td></tr>')
+        P.append('</table></div><p class="sub"><b>Pure model</b> = my independent 20,000-sim forecast (never sees odds). '
+                 '<b>Polymarket</b> = real-money market, de-vigged. <b>Sharp blend</b> = 40% my model + 60% market (the '
+                 'headline Title odds above) — because the market pools sharp money and information I do not have. '
+                 'Edge = where my pure model is higher than the market.</p>')
 
     # next up (forward-looking: news + in-tournament form + draw calibration)
     P.append('<h2>Next up <span class="badge">my prediction · news + form adjusted</span></h2>')
