@@ -877,6 +877,25 @@ tr:last-child td{border-bottom:0}
  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}}
 @media(max-width:860px){.g5{grid-template-columns:repeat(2,1fr)}.g2,.g3{grid-template-columns:1fr}
  .mast{align-items:flex-start}.stamp{text-align:left}}
+
+/* ===== premium upgrade: WebGL ambient hero + GSAP motion + micro-interactions ===== */
+#oracle-fx{position:fixed;left:0;right:0;top:0;height:62vh;min-height:360px;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1.4s ease;-webkit-mask-image:linear-gradient(#000 0%,#000 36%,transparent 92%);mask-image:linear-gradient(#000 0%,#000 36%,transparent 92%)}
+#oracle-fx.on{opacity:.55}
+#oracle-fx canvas{display:block;width:100%;height:100%}
+html.gsap-on .wrap>*{animation:none}
+html.gsap-on .pbar i{transition:none}
+html.pre-anim .wrap>*{opacity:0}
+.card{transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .35s ease,box-shadow .35s ease}
+@media(hover:hover){
+ .card:hover{transform:translateY(-3px);border-color:var(--line2);box-shadow:0 16px 38px -24px rgba(0,0,0,.95)}
+ .lead{border-radius:8px;transition:background .25s ease,padding .25s ease}
+ .lead:hover{background:var(--card2);padding-left:8px;padding-right:8px}
+ .match .side b{transition:color .2s ease}
+ .match:hover .side b{color:var(--ink)}}
+@media(prefers-reduced-motion:no-preference){
+ .odds .bar i{position:relative;overflow:hidden}
+ .odds .bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.26),transparent);transform:translateX(-100%);animation:shmr 3.4s ease-in-out infinite}
+ @keyframes shmr{0%,55%{transform:translateX(-100%)}100%{transform:translateX(240%)}}}
 """
 def _bar3(p):
     return (f'<div class="pbar"><i class="w" style="width:{p[0]*100:.1f}%"></i>'
@@ -1093,6 +1112,95 @@ def extract_css(default):
         if mt: return mt.group(1)
     return default
 
+FX_HEAD = (
+ "<script>(function(){var d=document.documentElement;"
+ "if(!matchMedia('(prefers-reduced-motion: reduce)').matches){"
+ "d.className+=' pre-anim gsap-on';"
+ "window.__revealFail=setTimeout(function(){d.classList.remove('pre-anim');d.classList.remove('gsap-on');},1800);}})();</script>"
+ "<script defer src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js'></script>"
+ "<script defer src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js'></script>"
+ "<script defer src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'></script>"
+)
+
+FX_JS = r"""<script>
+(function(){
+function initMotion(){
+ if(typeof window.gsap==='undefined') return false;
+ if(window.__motionOn) return true; window.__motionOn=true;
+ var gsap=window.gsap, ST=window.ScrollTrigger, d=document.documentElement;
+ clearTimeout(window.__revealFail); d.classList.add('gsap-on');
+ var kids=gsap.utils.toArray('.wrap > *');
+ if(!ST){ gsap.set(kids,{opacity:1,y:0}); d.classList.remove('pre-anim'); return true; }
+ gsap.registerPlugin(ST);
+ var mm=gsap.matchMedia();
+ mm.add('(prefers-reduced-motion: no-preference)',function(){
+  gsap.set(kids,{opacity:0,y:16});
+  ST.batch(kids,{start:'top 88%',onEnter:function(b){
+   gsap.to(b,{opacity:1,y:0,duration:.7,stagger:.09,ease:'power3.out',overwrite:true});}});
+  gsap.utils.toArray('.stat .n').forEach(function(el){
+   var raw=el.textContent.trim(); if(!/^\d{1,4}$/.test(raw)) return;
+   var end=+raw,o={v:0}; el.textContent='0';
+   ST.create({trigger:el,start:'top 94%',once:true,onEnter:function(){
+    gsap.to(o,{v:end,duration:1.1,ease:'power2.out',onUpdate:function(){el.textContent=Math.round(o.v);}});}});});
+  gsap.utils.toArray('.pbar i, .odds .bar i').forEach(function(el){
+   var w=el.style.width; if(!w||w==='0%') return; el.style.width='0%';
+   ST.create({trigger:el,start:'top 96%',once:true,onEnter:function(){
+    gsap.to(el,{width:w,duration:.9,ease:'power2.out'});}});});
+  ST.refresh();
+ });
+ mm.add('(prefers-reduced-motion: reduce)',function(){ gsap.set(kids,{opacity:1,y:0}); d.classList.remove('pre-anim'); });
+ return true;
+}
+function initFX(){
+ if(window.innerWidth<760||typeof window.THREE==='undefined') return;
+ var THREE=window.THREE,host=document.createElement('div'); host.id='oracle-fx';
+ var rnd; try{ rnd=new THREE.WebGLRenderer({antialias:false,alpha:true,powerPreference:'low-power'}); }catch(e){ return; }
+ document.body.appendChild(host); host.appendChild(rnd.domElement);
+ var DPR=Math.min(window.devicePixelRatio||1,1.75); rnd.setPixelRatio(DPR);
+ var sc=new THREE.Scene(),cam=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+ var U={u_time:{value:0},u_res:{value:new THREE.Vector2(1,1)}};
+ var FRAG=[
+  "precision highp float;",
+  "uniform float u_time; uniform vec2 u_res;",
+  "float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}",
+  "float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);",
+  "return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}",
+  "float fbm(vec2 p){float v=0.0,a=0.5;for(int i=0;i<5;i++){v+=a*vn(p);p*=2.0;a*=0.5;}return v;}",
+  "void main(){",
+  "vec2 uv=gl_FragCoord.xy/u_res.xy;",
+  "vec2 p=uv*vec2(u_res.x/u_res.y,1.0)*2.2;",
+  "float t=u_time*0.06;",
+  "vec2 q=vec2(fbm(p+vec2(0.0,t)),fbm(p+vec2(5.2,-t)));",
+  "float f=fbm(p+1.8*q+t*0.5);",
+  "f=smoothstep(0.25,1.05,f);",
+  "vec3 base=vec3(0.039,0.047,0.039);",
+  "vec3 lime=vec3(0.776,0.949,0.306);",
+  "vec3 col=mix(base,lime,f*0.55);",
+  "col*=0.7+0.5*f;",
+  "float a=(0.30+0.55*f);",
+  "a*=0.4+0.6*smoothstep(1.0,0.15,uv.y);",
+  "gl_FragColor=vec4(col,a);}"
+ ].join('\n');
+ var mat=new THREE.ShaderMaterial({uniforms:U,transparent:true,vertexShader:'void main(){gl_Position=vec4(position,1.0);}',fragmentShader:FRAG});
+ sc.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2),mat));
+ function size(){var w=host.clientWidth,h=host.clientHeight; rnd.setSize(w,h,false); U.u_res.value.set(Math.max(1,w*DPR),Math.max(1,h*DPR));}
+ size(); window.addEventListener('resize',size);
+ requestAnimationFrame(function(){host.classList.add('on');});
+ var t0=performance.now(),raf=0;
+ function loop(now){ U.u_time.value=(now-t0)*0.001; rnd.render(sc,cam); raf=requestAnimationFrame(loop); }
+ function start(){ if(!raf) raf=requestAnimationFrame(loop); }
+ function stop(){ if(raf){ cancelAnimationFrame(raf); raf=0; } }
+ document.addEventListener('visibilitychange',function(){ document.hidden?stop():start(); });
+ start();
+}
+function go(){
+ try{ initMotion(); }catch(e){ document.documentElement.classList.remove('pre-anim'); document.documentElement.classList.remove('gsap-on'); }
+ try{ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) initFX(); }catch(e){}
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go();
+})();
+</script>"""
+
 def build_html(body):
     css = extract_css(DEFAULT_CSS)
     return ("<!doctype html><html lang='en'><head><meta charset='utf-8'>"
@@ -1101,7 +1209,8 @@ def build_html(body):
             "<link rel='preconnect' href='https://fonts.googleapis.com'>"
             "<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>"
             "<link href='https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap' rel='stylesheet'>"
-            f"<style>{css}</style></head><body>{body}</body></html>")
+            + FX_HEAD +
+            f"<style>{css}</style></head><body>{body}" + FX_JS + "</body></html>")
 
 # =========================================================================== CONTROL
 REQUIRED_HEADINGS = ["At a glance", "Model scorecard", "Completed matches", "Group standings", "Next up"]
