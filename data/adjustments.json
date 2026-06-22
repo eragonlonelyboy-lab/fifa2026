@@ -1,23 +1,23 @@
 {
   "germany": {
     "delta": -15,
-    "note": "(auto) LK Lennart KarlMidfielder Germany Severe left thigh muscle bundle tearSevere left thigh muscle bundle tear Injured Unknown (ruled out of World Cup) Jun 21, 2026",
+    "note": "(auto) LK Lennart KarlMidfielder Germany Muscle tear in left thighMuscle tear in left thigh Injured Ruled out for World Cup 2026 Jun 22, 2026",
     "source": "Soccer26Live, Jun 2026",
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "spain": {
+    "delta": -15,
+    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
+    "source": "Covers, Jun 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "england": {
-    "delta": -15,
-    "note": "(auto) TL Tino LivramentoDefender England Calf injuryCalf injury Injured Ruled out of World Cup Jun 21, 2026",
-    "source": "Soccer26Live, Jun 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "morocco": {
-    "delta": -8,
-    "note": "(auto) AE Abde EzzalzouliForward Morocco Knee injuryKnee injury Doubtful Uncertain for early stages of tournament Jun 21, 2026",
-    "source": "Soccer26Live, Jun 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "delta": -5,
+    "note": "(auto) The star winger has returned to action after playing through the injury late in the club season, but England is likely to monitor his minutes closely during the tournamen",
+    "source": "Covers, Jun 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "france": {
@@ -25,6 +25,20 @@
     "note": "Saliba playing through a persistent back issue (surgery deferred to after the tournament); Dembele back in contention.",
     "source": "FOX Sports, Jun 2026",
     "url": "https://www.foxsports.com/stories/soccer/william-saliba-hands-france-massive-injury-lift-as-didier-deschamps-issues-blunt-selection-warning-over-ousmane-dembele"
+  },
+  "morocco": {
+    "delta": -8,
+    "note": "(auto) AE Abde EzzalzouliForward Morocco Knee injuryKnee injury Doubtful Uncertain for early stages Jun 22, 2026",
+    "source": "Soccer26Live, Jun 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "canada": {
+    "delta": -8,
+    "note": "(auto) Alfie JonesDefender Canada Ankle injuryAnkle injury Doubtful Unclear Jun 22, 2026",
+    "source": "Soccer26Live, Jun 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
   },
   "ghana": {
     "delta": -15,
@@ -102,13 +116,6 @@
     "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
   },
-  "spain": {
-    "delta": -15,
-    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
-    "source": "Covers, Jun 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
-    "auto": true
-  },
   "algeria": {
     "delta": 6,
     "note": "(auto) Luca Zidane (Algeria): Recovered from a fractured jaw and chin, returned wearing a protective mask, and is Algeria’s first-choice goalkeeper for their opener against Arge",
@@ -126,13 +133,6 @@
   "brazil": {
     "delta": -15,
     "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
-    "source": "ESPN, Jun 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
-    "auto": true
-  },
-  "canada": {
-    "delta": -5,
-    "note": "(auto) Davies has not played for Canada since March 2025, when he tore an ACL in the CONCACAF Nations League finals, and injured a hamstring last month while playing for Bayern ",
     "source": "ESPN, Jun 2026",
     "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
