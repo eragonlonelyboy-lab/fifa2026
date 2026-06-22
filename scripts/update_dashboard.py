@@ -415,11 +415,15 @@ def predict(M, t1, t2, host_side=0, adj=False, draw_cal=False):
     hb = HOME_ADV if host_side > 0 else (-HOME_ADV if host_side < 0 else 0.0)
     # component A: Elo
     a1 = _elo_goals(r1, r2, hb); a2 = _elo_goals(r2, r1, -hb / 2)
+    if adj and GOAL_FACTOR != 1.0:                          # forward goals calibration (this tournament's rate)
+        a1 = min(4.8, a1 * GOAL_FACTOR); a2 = min(4.8, a2 * GOAL_FACTOR)
     pElo = match_prob(a1, a2)
     # component B: attack/defence
     hfac = hf if host_side > 0 else (1.0 / hf if host_side < 0 else 1.0)
     b1 = max(0.2, min(4.5, att.get(t1,1.0) * dfc.get(t2,1.0) * (hfac if host_side>0 else 1.0)))
     b2 = max(0.2, min(4.5, att.get(t2,1.0) * dfc.get(t1,1.0) * (1.0 if host_side>=0 else hfac)))
+    if adj and GOAL_FACTOR != 1.0:
+        b1 = min(4.8, b1 * GOAL_FACTOR); b2 = min(4.8, b2 * GOAL_FACTOR)
     pAD = match_prob(b1, b2)
     # ensemble: log opinion pool
     blend = []
@@ -444,6 +448,26 @@ def calibrate_draw_rate(M, matches, K=50, lo=0.85, hi=1.6):
     target = w * d_obs + (1 - w) * d_mod
     DRAW_FACTOR = round(max(lo, min(hi, target / d_mod)) if d_mod > 0 else 1.0, 3)
     return DRAW_FACTOR, d_obs, d_mod, n
+
+GOAL_FACTOR = 1.0   # tournament total-goals calibration (1.0 = off; set from live results in main)
+def calibrate_goal_rate(M, matches, K=60, lo=0.9, hi=1.25):
+    """Nudge the model's total-goals level toward THIS tournament's observed scoring rate, shrunk by
+    sample size so a hot group stage doesn't overfit. Forward-looking only (applied via predict adj=True);
+    the frozen scorecard is untouched. Scales both teams symmetrically -> ~outcome-neutral on 1X2, lifts
+    the scoreline tail (more weight on 3-1 / 4-2)."""
+    global GOAL_FACTOR, _EG_CACHE
+    fin = [m for m in matches if m["completed"] and m["g1"] is not None
+           and m["t1"] in M["elo"] and m["t2"] in M["elo"]]
+    n = len(fin)
+    if n < 12:
+        GOAL_FACTOR = 1.0; return 1.0, 0.0, 0.0, n
+    g_obs = sum(m["g1"] + m["g2"] for m in fin) / n
+    g_mod = sum(sum(predict(M, m["t1"], m["t2"], host_side(m))["eg"]) for m in fin) / n
+    w = n / (n + K)
+    target = w * (g_obs / g_mod) + (1 - w) if g_mod > 0 else 1.0
+    GOAL_FACTOR = round(max(lo, min(hi, target)), 3)
+    _EG_CACHE = {}
+    return GOAL_FACTOR, g_obs, g_mod, n
 
 def compute_form(M, matches, K=22, cap=45):
     """In-tournament form: a mini-Elo delta from each team's over/under-performance vs the model's
@@ -1297,6 +1321,8 @@ def main():
         log(f"auto-tuned SV_W -> {tuned} (live-optimal {sv_live} over {ntune} games, shrunk to 0.25 prior)")
     df, dobs, dmod, dn = calibrate_draw_rate(M, matches)
     log(f"draw calibration -> x{df} (tournament {dobs*100:.0f}% draws vs model {dmod*100:.0f}% over {dn} games)")
+    gf, gobs, gmod, gn = calibrate_goal_rate(M, matches)
+    log(f"goals calibration -> x{gf} (tournament {gobs:.2f} goals/game vs model {gmod:.2f} over {gn} games)")
     compute_form(M, matches)
     _topform = sorted(FORM.items(), key=lambda x: abs(x[1]), reverse=True)[:3]
     log("in-tournament form -> " + ", ".join(f"{disp(t)} {v:+.0f}" for t, v in _topform if abs(v) >= 1))
