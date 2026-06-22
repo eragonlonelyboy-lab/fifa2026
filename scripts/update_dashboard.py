@@ -207,6 +207,24 @@ def _apply_draw(p):
     s = (1.0 - d) / rest
     return [p[0] * s, d, p[2] * s]
 
+def score_lines(mu1, mu2, pr, maxg=8, topn=3):
+    """Most-likely exact scorelines grouped by outcome. Within-outcome shape comes from the bivariate
+    Poisson goal grid (mu1,mu2 = t1,t2 expected goals, already incl. in-tournament form/news); each
+    bucket is then rescaled so its scorelines sum to the DISPLAYED 1X2 (pr) -> the exact-score split
+    always reconciles with the win/tie/loss shown above it. Returns [t1_win, draw, t2_win] line lists."""
+    l1, l2 = max(0.05, mu1 - L3), max(0.05, mu2 - L3)
+    buckets = ([], [], [])
+    for a in range(maxg + 1):
+        for b in range(maxg + 1):
+            p = _bivpois(a, b, l1, l2, L3) * _dc_tau(a, b, mu1, mu2, RHO)
+            buckets[0 if a > b else (1 if a == b else 2)].append(((a, b), p))
+    out = []
+    for idx, cellist in enumerate(buckets):
+        tot = sum(p for _, p in cellist) or 1.0
+        cellist.sort(key=lambda x: -x[1])
+        out.append([((a, b), p / tot * pr[idx]) for (a, b), p in cellist[:topn]])
+    return out
+
 def _fit_attack_defence(matches, now_ts, half_life=18.0, iters=80):
     rows, teams = [], set()
     for m in matches:
@@ -1002,7 +1020,8 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
     nxt = [m for m in upcoming if m["t1"] in NAME and m["t2"] in NAME][:12]
     if not nxt: P.append('<p class="sub">No upcoming fixtures in range.</p>')
     for m in nxt:
-        modelp = predict(M, m["t1"], m["t2"], host_side(m), adj=True, draw_cal=True)["blend"] if (m["t1"] in M["elo"] and m["t2"] in M["elo"]) else None
+        _pred = predict(M, m["t1"], m["t2"], host_side(m), adj=True, draw_cal=True) if (m["t1"] in M["elo"] and m["t2"] in M["elo"]) else None
+        modelp = _pred["blend"] if _pred else None
         mko = m.get("mkodds")
         if modelp and mko:                                  # sharp blend: 40% model + 60% market (matches title odds)
             pr = [SHARP_WM * modelp[i] + (1 - SHARP_WM) * mko[i] for i in range(3)]
@@ -1018,6 +1037,17 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
                     f' · <span style="color:var(--mut)">my model</span>')
             P.append(f'<div class="pred"><span>{disp(m["t1"])} {pr[0]*100:.0f}% · Draw {pr[1]*100:.0f}% · {disp(m["t2"])} {pr[2]*100:.0f}%{tail}</span>'
                      f'<span class="tag">{m["group"] or "KO"}</span></div>')
+            if _pred:
+                sl = score_lines(_pred["eg"][0], _pred["eg"][1], pr)
+                lab = [f'{disp(m["t1"])} win', "Tie", f'{disp(m["t2"])} win']
+                P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;'
+                         'flex-direction:column;align-items:stretch;gap:3px">')
+                for li, lines in enumerate(sl):
+                    cells = " · ".join(f'<b style="color:var(--ink)">{a}-{b}</b> <span style="color:var(--mut)">{p*100:.0f}%</span>'
+                                       for (a, b), p in lines) or '<span style="color:var(--mut)">—</span>'
+                    P.append(f'<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">{lab[li]}</span>'
+                             f'<span>{cells}</span></span>')
+                P.append('<span class="tag" style="align-self:flex-end">likely scorelines · likely → less likely</span></div>')
         for t in (m["t1"], m["t2"]):
             a = ADJUSTMENTS.get(t)
             if a:
