@@ -546,6 +546,31 @@ def enrich_events(matches, enable=True):
             log(f"warn: enrich {m['id']} failed ({e})")
     return stats
 
+POLY_URL = "https://gamma-api.polymarket.com/events?slug=world-cup-winner"
+def fetch_polymarket_champion():
+    """Polymarket 'World Cup Winner' market -> {slug: champion_prob}. Public, no key, de-vigged.
+    A real-money prediction market shown head-to-head against my Monte-Carlo title odds."""
+    cf = CACHE / "polymarket-champion.json"
+    try:
+        d = json.loads(_http_get(POLY_URL))
+        e = d[0] if isinstance(d, list) else d
+        raw = {}
+        for m in e.get("markets", []):
+            sl = slug(m.get("groupItemTitle") or "")
+            if sl not in NAME: continue
+            try: raw[sl] = float(json.loads(m.get("outcomePrices", "[]"))[0])
+            except Exception: continue
+        s = sum(raw.values()) or 1.0
+        out = {k: v / s for k, v in raw.items()}
+        if out: cf.write_text(json.dumps(out), encoding="utf-8")
+        return out
+    except Exception as e:
+        log(f"warn: polymarket fetch failed ({e})")
+        if cf.exists():
+            try: return json.loads(cf.read_text(encoding="utf-8"))
+            except Exception: pass
+        return {}
+
 # =========================================================================== COMPUTE
 def standings(matches):
     table = {t: dict(team=t, P=0,W=0,D=0,L=0,GF=0,GA=0,Pts=0) for t in TEAM_GROUP}
@@ -757,7 +782,7 @@ def _fmt_local(iso):
         return dt.strftime("%a %d %b · %H:%M")
     except Exception: return iso
 
-def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
+def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=None):
     hits, n, avg_rps = summary
     finished = [m for m in matches if m["completed"]]
     upcoming = [m for m in matches if not m["completed"]]
@@ -819,6 +844,19 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
         P.append(f'<div class="odds"><span class="fl">{flag(t)}</span><b style="width:120px">{html.escape(disp(t))}</b>'
                  f'<div class="bar"><i style="width:{v*100:.0f}%"></i></div><div class="p">{v*100:.0f}%</div></div>')
     P.append('</div></div>')
+
+    # model vs the prediction market (Polymarket champion odds)
+    if poly:
+        teams = sorted(set(list(champ) + list(poly)), key=lambda t: max(champ.get(t, 0), poly.get(t, 0)), reverse=True)[:12]
+        P.append('<h2>Me vs the prediction market <span class="badge">title race · my Monte Carlo vs Polymarket</span></h2><div class="card">')
+        P.append('<table><tr><th class="t">Team</th><th>My model</th><th>Polymarket</th><th>Edge</th></tr>')
+        for t in teams:
+            mc, pm = champ.get(t, 0) * 100, poly.get(t, 0) * 100
+            diff = mc - pm; col = "var(--win)" if diff > 0 else "var(--loss)"
+            P.append(f'<tr><td class="t">{flag(t)} {html.escape(disp(t))}</td><td>{mc:.1f}%</td><td>{pm:.1f}%</td>'
+                     f'<td style="color:{col}">{"+" if diff > 0 else ""}{diff:.1f}</td></tr>')
+        P.append('</table></div><p class="sub">Champion odds: my 20,000-sim model vs Polymarket (real-money prediction '
+                 'market, de-vigged). Edge = where I am higher than the market. Polymarket is an independent reference, never an input.</p>')
 
     # next up (forward-looking: news + in-tournament form + draw calibration)
     P.append('<h2>Next up <span class="badge">my prediction · news + form adjusted</span></h2>')
@@ -1010,7 +1048,8 @@ def main():
         log("no data change — skipping write (use --force to override)."); return
 
     adv, champ = simulate(M, matches)
-    body = render(M, matches, stand, pvr, summary, market, adv, champ, estats)
+    poly = fetch_polymarket_champion()
+    body = render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly)
     full = build_html(body)
     missing = [hd for hd in REQUIRED_HEADINGS if f">{hd}" not in full and hd not in full]
     if missing:
