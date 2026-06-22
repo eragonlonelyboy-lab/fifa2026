@@ -198,6 +198,15 @@ def match_prob(mu1, mu2, maxg=8):
     t = wA + d + wB
     return wA / t, d / t, wB / t
 
+DRAW_FACTOR = 1.0   # tournament draw-rate calibration (1.0 = off; set from live results in main)
+def _apply_draw(p):
+    """Scale the draw probability by the tournament draw-calibration factor, renormalising W/L."""
+    if DRAW_FACTOR == 1.0: return p
+    d = min(0.92, p[1] * DRAW_FACTOR); rest = p[0] + p[2]
+    if rest <= 0: return p
+    s = (1.0 - d) / rest
+    return [p[0] * s, d, p[2] * s]
+
 def _fit_attack_defence(matches, now_ts, half_life=18.0, iters=80):
     rows, teams = [], set()
     for m in matches:
@@ -325,8 +334,9 @@ def expected_goals_fast(M, t1, t2, hs):
     v = (_elo_goals(r1, r2, hb), _elo_goals(r2, r1, -hb / 2)); _EG_CACHE[key] = v
     return v
 
-def predict(M, t1, t2, host_side=0, adj=False):
-    """host_side: +1 if t1 is host nation playing at home, -1 if t2, else 0 (neutral)."""
+def predict(M, t1, t2, host_side=0, adj=False, draw_cal=False):
+    """host_side: +1 if t1 is host nation playing at home, -1 if t2, else 0 (neutral).
+    draw_cal=True applies the tournament draw-rate calibration (forward-looking only)."""
     elo = M["elo"]; att = M["attack"]; dfc = M["defence"]; hf = M["homeFactor"]
     r1 = strength(M, t1, adj); r2 = strength(M, t2, adj)   # Elo + squad value (+ news delta if adj)
     hb = HOME_ADV if host_side > 0 else (-HOME_ADV if host_side < 0 else 0.0)
@@ -343,7 +353,24 @@ def predict(M, t1, t2, host_side=0, adj=False):
     for i in range(3):
         blend.append((pElo[i] ** ENS_W) * (pAD[i] ** (1 - ENS_W)))
     s = sum(blend); blend = [x / s for x in blend]
+    if draw_cal: blend = _apply_draw(blend)
     return {"elo": pElo, "ad": pAD, "blend": blend, "eg": (a1, a2), "r": (r1, r2)}
+
+def calibrate_draw_rate(M, matches, K=50, lo=0.85, hi=1.6):
+    """Nudge the model's draw probability toward THIS tournament's observed draw rate, shrunk by
+    sample size so few games don't overfit. Forward-looking only; the frozen scorecard is untouched."""
+    global DRAW_FACTOR
+    fin = [m for m in matches if m["completed"] and m["g1"] is not None
+           and m["t1"] in M["elo"] and m["t2"] in M["elo"]]
+    n = len(fin)
+    if n < 12:
+        DRAW_FACTOR = 1.0; return 1.0, 0.0, 0.0, n
+    d_obs = sum(1 for m in fin if m["g1"] == m["g2"]) / n
+    d_mod = sum(predict(M, m["t1"], m["t2"], host_side(m))["blend"][1] for m in fin) / n
+    w = n / (n + K)
+    target = w * d_obs + (1 - w) * d_mod
+    DRAW_FACTOR = round(max(lo, min(hi, target / d_mod)) if d_mod > 0 else 1.0, 3)
+    return DRAW_FACTOR, d_obs, d_mod, n
 
 # =========================================================================== LIVE DATA
 def _http_get(url, headers=None):
@@ -563,6 +590,9 @@ def simulate(M, matches, sims=SIMS):
         if ko and g1 == g2:
             if rng.random() < _elo_exp(M["elo"].get(t1,1500), M["elo"].get(t2,1500), HOME_ADV if hs>0 else 0): g1 += 1
             else: g2 += 1
+        elif (not ko) and DRAW_FACTOR > 1.0 and abs(g1 - g2) == 1 and rng.random() < min(0.45, (DRAW_FACTOR - 1.0) * 0.9):
+            if g1 > g2: g1 = g2          # tighten a one-goal game into a draw (tournament caution)
+            else: g2 = g1
         return g1, g2
     for _ in range(sims):
         tbl = {t: [0,0,0] for t in TEAM_GROUP}  # pts, gd, gf
@@ -770,7 +800,7 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
     nxt = [m for m in upcoming if m["t1"] in NAME and m["t2"] in NAME][:12]
     if not nxt: P.append('<p class="sub">No upcoming fixtures in range.</p>')
     for m in nxt:
-        pr = predict(M, m["t1"], m["t2"], host_side(m), adj=True)["blend"] if (m["t1"] in M["elo"] and m["t2"] in M["elo"]) else None
+        pr = predict(M, m["t1"], m["t2"], host_side(m), adj=True, draw_cal=True)["blend"] if (m["t1"] in M["elo"] and m["t2"] in M["elo"]) else None
         P.append('<div class="card" style="padding:12px 14px;margin-bottom:9px">')
         P.append(f'<div class="match" style="margin:0;background:transparent;border:0;padding:0">'
                  f'{_team(m["t1"])}<div class="sc" style="font-size:12px;color:var(--mut)">{_fmt_local(m["date"])}</div>{_team(m["t2"],"away")}</div>')
@@ -843,7 +873,9 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats):
              f'with a squad market-value rating (Transfermarkt-style, log-scaled to the Elo axis) so current squad quality '
              f'counts, not just past results. The squad weight auto-tunes on live results, shrunk to a 0.25 prior. Each match: '
              f'expected goals → Karlis-Ntzoufras bivariate Poisson (λ₃=0.10) with a Dixon-Coles low-score correction (ρ=−0.05), '
-             f'ensembled 90/10 with a Maher attack/defence Poisson. Tournament: Monte Carlo. The Elo+ensemble core backtests '
+             f'ensembled 90/10 with a Maher attack/defence Poisson. A tournament draw-rate calibration nudges the draw '
+             f'probability toward this World Cup\'s actual draw frequency (shrunk by sample size), applied to upcoming '
+             f'matches and the Monte Carlo only, never the frozen scorecard. Tournament: Monte Carlo. The Elo+ensemble core backtests '
              f'walk-forward out-of-sample at RPS 0.171 / 62% / ECE 2.0% (beats the open-source baseline 0.175); the squad-value '
              f'blend is evidence-based (Groll et al.) but forward-looking, not back-tested on historical squad values. Live '
              f'results + bookmaker odds: ESPN / DraftKings. The model never sees the odds. Apollo&#39;s Oracle, built by Eragon. '
@@ -920,6 +952,8 @@ def main():
     if "--no-tune" not in args:
         tuned, ntune, sv_live = auto_tune_sv_w(M, matches)
         log(f"auto-tuned SV_W -> {tuned} (live-optimal {sv_live} over {ntune} games, shrunk to 0.25 prior)")
+    df, dobs, dmod, dn = calibrate_draw_rate(M, matches)
+    log(f"draw calibration -> x{df} (tournament {dobs*100:.0f}% draws vs model {dmod*100:.0f}% over {dn} games)")
     stand = standings(matches)
     pvr, summary, market = pred_vs_reality(M, matches, estats)
     log(f"fetched {len(matches)} matches ({sum(1 for m in matches if m['completed'])} finished); "
