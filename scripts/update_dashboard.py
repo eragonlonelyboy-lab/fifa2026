@@ -841,13 +841,8 @@ def pred_vs_reality(M, matches, estats):
         pick = p.index(max(p)); hit = (pick == actual)
         rps = 0.5 * ((p[0]-y[0])**2 + (p[0]+p[1]-y[0]-y[1])**2)
         rps_sum += rps; n += 1; hits += 1 if hit else 0
-        # frozen predicted scoreline: top-3 from the same pre-match grid, with exact / top-3 match flags
-        _grid = _score_grid(_pr["eg"][0], _pr["eg"][1])
-        pscores = sorted(_grid.items(), key=lambda kv: kv[1], reverse=True)[:3]
-        _act = (m["g1"], m["g2"])
-        exact = (_act == pscores[0][0]); in_top3 = any(_act == sc for sc, _ in pscores)
-        row = {**m, "p": p, "pick": pick, "hit": hit, "rps": rps,
-               "pscores": pscores, "exact": exact, "in_top3": in_top3}
+        # frozen expected goals from the same pre-match grid the upcoming card used (scorelines built in render)
+        row = {**m, "p": p, "pick": pick, "hit": hit, "rps": rps, "eg": _pr["eg"]}
         mk = estats.get(m["id"], {}).get("market")
         if mk:
             mpick = mk.index(max(mk)); mhit = (mpick == actual)
@@ -1038,6 +1033,25 @@ def _fmt_local(iso):
         dt = datetime.datetime.fromisoformat(iso.replace("Z", "+00:00")).astimezone(LOCAL_TZ)
         return dt.strftime("%a %d %b · %H:%M")
     except Exception: return iso
+def _headline(t1, t2, pick, score, actual=None):
+    """Bold one-line scoreline call, aligned to the model's outcome pick: the favourite (pick) plus
+    the most-likely scoreline within that outcome's bucket. score=(t1_goals,t2_goals). On completed
+    cards, actual=(g1,g2) appends a verdict: nailed the exact score / right result / missed."""
+    a, b = score
+    if pick == 0:   call = f'{flag(t1)} <b>{html.escape(disp(t1))} {a}–{b}</b>'
+    elif pick == 2: call = f'{flag(t2)} <b>{html.escape(disp(t2))} {b}–{a}</b>'        # winner's goals first
+    else:           call = f'<b>Draw {a}–{b}</b>'
+    mark = ""
+    if actual is not None:
+        ao = 0 if actual[0] > actual[1] else (2 if actual[0] < actual[1] else 1)
+        if actual == score:
+            mark = '<span class="hit">🎯 nailed the exact score</span>'
+        elif ao == pick:
+            mark = '<span class="hit">✓ right result</span>'
+        else:
+            mark = '<span class="miss">✗ missed</span>'
+    return ('<div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px">'
+            f'<span style="font-size:13px">Our bold call: {call}</span>{mark}</div>')
 
 def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=None):
     hits, n, avg_rps = summary
@@ -1144,6 +1158,11 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
         P.append('<div class="card" style="padding:12px 14px;margin-bottom:9px">')
         P.append(f'<div class="match" style="margin:0;background:transparent;border:0;padding:0">'
                  f'{_team(m["t1"])}<div class="sc" style="font-size:12px;color:var(--mut)">{_fmt_local(m["date"])}</div>{_team(m["t2"],"away")}</div>')
+        if _pred and pr:
+            _pk = pr.index(max(pr))
+            _bt = score_lines(_pred["eg"][0], _pred["eg"][1], pr)[_pk]
+            if _bt:
+                P.append(_headline(m["t1"], m["t2"], _pk, _bt[0][0]))
         if pr:
             P.append(_bar3(pr))
             tail = (f' · <span style="color:var(--mut)">blend of my model + market</span>' if (modelp and mko) else
@@ -1207,23 +1226,39 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
         P.append('<div class="card" style="padding:12px 14px;margin-bottom:10px">')
         P.append(f'<div class="match" style="margin:0;background:transparent;border:0;padding:0">'
                  f'{_team(m["t1"])}<div class="sc">{res}</div>{_team(m["t2"],"away")}</div>')
+        if m.get("eg"):
+            _bt = score_lines(m["eg"][0], m["eg"][1], p)[m["pick"]]
+            if _bt:
+                P.append(_headline(m["t1"], m["t2"], m["pick"], _bt[0][0], actual=(m["g1"], m["g2"])))
         P.append(_bar3(p))
         P.append(f'<div class="pred"><span>My call: <b>{html.escape(pickteam)}{"" if m["pick"]==1 else " win"}</b> '
                  f'({max(p)*100:.0f}%) · RPS {m["rps"]:.3f}</span>'
                  f'<span class="{"hit" if m["hit"] else "miss"}">{"✅ HIT" if m["hit"] else "❌ MISS"}'
                  f' · <span class="tag">{m["group"] or "KO"}</span></span></div>')
-        ps = m.get("pscores")
-        if ps:                                              # predicted scoreline vs reality (frozen pre-match grid)
-            cells = " · ".join(
-                (f'<b style="color:{"var(--win)" if (a==m["g1"] and b==m["g2"]) else "var(--ink)"}">'
-                 f'{a}-{b}{" ✓" if (a==m["g1"] and b==m["g2"]) else ""}</b> '
-                 f'<span style="color:var(--mut)">{pp*100:.0f}%</span>')
-                for (a, b), pp in ps)
-            flagh = ('<span class="hit">🎯 exact score</span>' if m.get("exact") else
-                     '<span class="hit">scoreline in top 3 ✓</span>' if m.get("in_top3") else
-                     '<span class="tag">scoreline outside top 3</span>')
-            P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
-                     f'<span>Predicted score: {cells}</span>{flagh}</div>')
+        eg = m.get("eg")
+        if eg:                                              # goals outlook + bucketed scorelines (same layout as Next up, frozen)
+            _xg, _ou = goals_outlook(eg[0], eg[1])
+            _act_tot = m["g1"] + m["g2"]
+            _ou_hit = (_ou >= 0.5) == (_act_tot >= 3)
+            P.append('<div class="pred"><span style="color:var(--mut)">Total goals: '
+                     f'<b style="color:var(--ink)">{_xg:.1f}</b> expected · {_ou*100:.0f}% over 2.5 · '
+                     f'<b style="color:{"var(--win)" if _ou_hit else "var(--mut)"}">actual {_act_tot}{" ✓" if _ou_hit else ""}</b></span>'
+                     '<span class="tag">goals outlook</span></div>')
+            sl = score_lines(eg[0], eg[1], p)
+            lab = [f'{disp(m["t1"])} win', "Tie", f'{disp(m["t2"])} win']
+            called = any(a == m["g1"] and b == m["g2"] for lines in sl for (a, b), _ in lines)
+            P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;'
+                     'flex-direction:column;align-items:stretch;gap:3px">')
+            for li, lines in enumerate(sl):
+                cells = " · ".join(
+                    (f'<b style="color:{"var(--win)" if (a==m["g1"] and b==m["g2"]) else "var(--ink)"}">'
+                     f'{a}-{b}{" ✓" if (a==m["g1"] and b==m["g2"]) else ""}</b> '
+                     f'<span style="color:var(--mut)">{pp*100:.0f}%</span>')
+                    for (a, b), pp in lines) or '<span style="color:var(--mut)">—</span>'
+                P.append(f'<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">{lab[li]}</span>'
+                         f'<span>{cells}</span></span>')
+            flag_txt = ('scoreline called ✓' if called else 'scoreline missed')
+            P.append(f'<span class="{"hit" if called else "tag"}" style="align-self:flex-end">{flag_txt}</span></div>')
         if m.get("mk"):
             mk = m["mk"]
             P.append(f'<div class="pred" style="opacity:.72;border-top:1px dashed var(--line);padding-top:6px">'
