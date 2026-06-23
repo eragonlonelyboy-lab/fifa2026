@@ -101,91 +101,76 @@ html.pre-anim .wrap>*{opacity:0}
  .odds .bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.26),transparent);transform:translateX(-100%);animation:shmr 3.4s ease-in-out infinite}
  @keyframes shmr{0%,55%{transform:translateX(-100%)}100%{transform:translateX(240%)}}}
 </style></head><body><div class="wrap">
-<header class="mast"><div><div class="kicker"><span class="dot"></span>Apollo&#39;s Oracle · independent model</div><h1>World Cup 2026<span class="acc">.</span><br>Predictions <i>vs</i> Reality</h1></div><div class="stamp">Apollo&#39;s Oracle<br>updated<br>Tue 23 Jun 2026 · 17:32 UTC</div></header>
+<header class="mast"><div><div class="kicker"><span class="dot"></span>Apollo&#39;s Oracle · independent model</div><h1>World Cup 2026<span class="acc">.</span><br>Predictions <i>vs</i> Reality</h1></div><div class="stamp">Apollo&#39;s Oracle<br>updated<br>Tue 23 Jun 2026 · 19:30 UTC</div></header>
 <p class="lede"><b>Apollo&#39;s Oracle</b> is my own forecasting model (Elo, squad market value, bivariate Poisson, ensemble). It calls <b>every match</b> of the tournament, then is scored live against what actually happened <b>and</b> against the bookmaker. It never sees the odds.</p>
 <h2>At a glance</h2><div class="grid g5">
-<div class="card stat"><div class="n">44</div><div class="l">Matches played</div></div>
-<div class="card stat"><div class="n">134</div><div class="l">Goals</div></div>
+<div class="card stat"><div class="n">45</div><div class="l">Matches played</div></div>
+<div class="card stat"><div class="n">139</div><div class="l">Goals</div></div>
 <div class="card stat"><div class="n">48</div><div class="l">Teams in play</div></div>
-<div class="card stat"><div class="n">104</div><div class="l">Yellow cards</div></div>
+<div class="card stat"><div class="n">106</div><div class="l">Yellow cards</div></div>
 <div class="card stat"><div class="n">15</div><div class="l">Red cards</div></div>
 </div>
 <h2>Model scorecard <span class="badge">live, out-of-sample</span></h2><div class="grid g5">
-<div class="card stat"><div class="n">28/44</div><div class="l">Correct calls</div></div>
+<div class="card stat"><div class="n">29/45</div><div class="l">Correct calls</div></div>
 <div class="card stat"><div class="n">64%</div><div class="l">Hit rate</div></div>
-<div class="card stat"><div class="n">0.152</div><div class="l">Avg RPS (↓)</div></div>
+<div class="card stat"><div class="n">0.150</div><div class="l">Avg RPS (↓)</div></div>
 <div class="card stat"><div class="n">0.245</div><div class="l">Coin-flip RPS</div></div>
 <div class="card stat"><div class="n">0.171</div><div class="l">Backtest RPS</div></div>
 </div><p class="sub">Ratings are frozen pre-tournament, so these are the model's true pre-match calls, not retro-fitted.</p>
 <h2>Me vs the bookmaker <span class="badge">same matches, lower RPS wins</span></h2><div class="grid g3">
-<div class="card stat"><div class="n" style="color:var(--win)">0.152</div><div class="l">My model · avg RPS</div></div>
-<div class="card stat"><div class="n">0.154</div><div class="l">DraftKings · avg RPS</div></div>
-<div class="card stat"><div class="n">28/44</div><div class="l">Market correct picks</div></div>
-</div><p class="sub">Over 44 matches with published odds, <b>model is sharper</b> (my 28/44 correct vs market 28/44). My model never sees the odds; it is an independent forecast, shown head-to-head against the market.</p>
+<div class="card stat"><div class="n" style="color:var(--win)">0.150</div><div class="l">My model · avg RPS</div></div>
+<div class="card stat"><div class="n">0.150</div><div class="l">DraftKings · avg RPS</div></div>
+<div class="card stat"><div class="n">29/45</div><div class="l">Market correct picks</div></div>
+</div><p class="sub">Over 45 matches with published odds, <b>model is sharper</b> (my 29/45 correct vs market 29/45). My model never sees the odds; it is an independent forecast, shown head-to-head against the market.</p>
 <h2>Title odds <span class="badge">sharp blend · my model + Polymarket</span></h2>
 <div class="grid g2"><div class="card"><div class="sub">Champion probability · top 10</div>
-<div class="odds"><span class="fl">🇪🇸</span><b style="width:120px">Spain</b><div class="bar"><i style="width:100%"></i></div><div class="p">14.9%</div></div>
-<div class="odds"><span class="fl">🇫🇷</span><b style="width:120px">France</b><div class="bar"><i style="width:100%"></i></div><div class="p">14.8%</div></div>
-<div class="odds"><span class="fl">🇦🇷</span><b style="width:120px">Argentina</b><div class="bar"><i style="width:79%"></i></div><div class="p">11.8%</div></div>
-<div class="odds"><span class="fl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><b style="width:120px">England</b><div class="bar"><i style="width:66%"></i></div><div class="p">9.8%</div></div>
-<div class="odds"><span class="fl">🇵🇹</span><b style="width:120px">Portugal</b><div class="bar"><i style="width:41%"></i></div><div class="p">6.1%</div></div>
-<div class="odds"><span class="fl">🇩🇪</span><b style="width:120px">Germany</b><div class="bar"><i style="width:33%"></i></div><div class="p">4.9%</div></div>
-<div class="odds"><span class="fl">🇳🇱</span><b style="width:120px">Netherlands</b><div class="bar"><i style="width:31%"></i></div><div class="p">4.6%</div></div>
-<div class="odds"><span class="fl">🇧🇷</span><b style="width:120px">Brazil</b><div class="bar"><i style="width:30%"></i></div><div class="p">4.5%</div></div>
+<div class="odds"><span class="fl">🇪🇸</span><b style="width:120px">Spain</b><div class="bar"><i style="width:100%"></i></div><div class="p">14.7%</div></div>
+<div class="odds"><span class="fl">🇫🇷</span><b style="width:120px">France</b><div class="bar"><i style="width:99%"></i></div><div class="p">14.6%</div></div>
+<div class="odds"><span class="fl">🇦🇷</span><b style="width:120px">Argentina</b><div class="bar"><i style="width:81%"></i></div><div class="p">11.9%</div></div>
+<div class="odds"><span class="fl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><b style="width:120px">England</b><div class="bar"><i style="width:68%"></i></div><div class="p">10.1%</div></div>
+<div class="odds"><span class="fl">🇵🇹</span><b style="width:120px">Portugal</b><div class="bar"><i style="width:42%"></i></div><div class="p">6.2%</div></div>
+<div class="odds"><span class="fl">🇩🇪</span><b style="width:120px">Germany</b><div class="bar"><i style="width:32%"></i></div><div class="p">4.7%</div></div>
+<div class="odds"><span class="fl">🇳🇱</span><b style="width:120px">Netherlands</b><div class="bar"><i style="width:32%"></i></div><div class="p">4.7%</div></div>
+<div class="odds"><span class="fl">🇧🇷</span><b style="width:120px">Brazil</b><div class="bar"><i style="width:31%"></i></div><div class="p">4.6%</div></div>
 <div class="odds"><span class="fl">🇳🇴</span><b style="width:120px">Norway</b><div class="bar"><i style="width:25%"></i></div><div class="p">3.7%</div></div>
-<div class="odds"><span class="fl">🇺🇸</span><b style="width:120px">United States</b><div class="bar"><i style="width:21%"></i></div><div class="p">3.1%</div></div>
+<div class="odds"><span class="fl">🇺🇸</span><b style="width:120px">United States</b><div class="bar"><i style="width:22%"></i></div><div class="p">3.2%</div></div>
 </div><div class="card"><div class="sub">On the bubble · qualification still in doubt</div>
 <div class="odds"><span class="fl">🇧🇦</span><b style="width:120px">Bosnia &amp; Herzegovina</b><div class="bar"><i style="width:50%"></i></div><div class="p">50%</div></div>
-<div class="odds"><span class="fl">🇺🇾</span><b style="width:120px">Uruguay</b><div class="bar"><i style="width:40%"></i></div><div class="p">40%</div></div>
 <div class="odds"><span class="fl">🇸🇳</span><b style="width:120px">Senegal</b><div class="bar"><i style="width:61%"></i></div><div class="p">61%</div></div>
+<div class="odds"><span class="fl">🇺🇾</span><b style="width:120px">Uruguay</b><div class="bar"><i style="width:38%"></i></div><div class="p">38%</div></div>
 <div class="odds"><span class="fl">🇮🇷</span><b style="width:120px">Iran</b><div class="bar"><i style="width:65%"></i></div><div class="p">65%</div></div>
+<div class="odds"><span class="fl">🇸🇦</span><b style="width:120px">Saudi Arabia</b><div class="bar"><i style="width:35%"></i></div><div class="p">35%</div></div>
+<div class="odds"><span class="fl">🇨🇻</span><b style="width:120px">Cape Verde</b><div class="bar"><i style="width:66%"></i></div><div class="p">66%</div></div>
 <div class="odds"><span class="fl">🇨🇩</span><b style="width:120px">Congo DR</b><div class="bar"><i style="width:66%"></i></div><div class="p">66%</div></div>
-<div class="odds"><span class="fl">🇸🇦</span><b style="width:120px">Saudi Arabia</b><div class="bar"><i style="width:34%"></i></div><div class="p">34%</div></div>
-<div class="odds"><span class="fl">🇨🇻</span><b style="width:120px">Cape Verde</b><div class="bar"><i style="width:67%"></i></div><div class="p">67%</div></div>
-<div class="odds"><span class="fl">🇺🇿</span><b style="width:120px">Uzbekistan</b><div class="bar"><i style="width:28%"></i></div><div class="p">28%</div></div>
 <div class="odds"><span class="fl">🇪🇨</span><b style="width:120px">Ecuador</b><div class="bar"><i style="width:25%"></i></div><div class="p">25%</div></div>
-<div class="odds"><span class="fl">🇵🇾</span><b style="width:120px">Paraguay</b><div class="bar"><i style="width:76%"></i></div><div class="p">76%</div></div>
+<div class="odds"><span class="fl">🇵🇾</span><b style="width:120px">Paraguay</b><div class="bar"><i style="width:77%"></i></div><div class="p">77%</div></div>
+<div class="odds"><span class="fl">🇶🇦</span><b style="width:120px">Qatar</b><div class="bar"><i style="width:23%"></i></div><div class="p">23%</div></div>
 </div></div>
 <h2>My pure model vs the market <span class="badge">where my independent model disagrees with the crowd</span></h2><div class="card">
 <table><tr><th class="t">Team</th><th>Pure model</th><th>Polymarket</th><th>Sharp blend</th><th>Edge vs mkt</th></tr>
-<tr><td class="t">🇫🇷 France</td><td>8.9%</td><td>18.8%</td><td><b>14.8%</b></td><td style="color:var(--loss)">-10.0</td></tr>
-<tr><td class="t">🇪🇸 Spain</td><td>17.0%</td><td>13.5%</td><td><b>14.9%</b></td><td style="color:var(--win)">+3.5</td></tr>
-<tr><td class="t">🇦🇷 Argentina</td><td>7.9%</td><td>14.4%</td><td><b>11.8%</b></td><td style="color:var(--loss)">-6.6</td></tr>
-<tr><td class="t">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</td><td>6.5%</td><td>12.0%</td><td><b>9.8%</b></td><td style="color:var(--loss)">-5.5</td></tr>
-<tr><td class="t">🇵🇹 Portugal</td><td>3.4%</td><td>7.9%</td><td><b>6.1%</b></td><td style="color:var(--loss)">-4.6</td></tr>
-<tr><td class="t">🇩🇪 Germany</td><td>4.0%</td><td>5.5%</td><td><b>4.9%</b></td><td style="color:var(--loss)">-1.5</td></tr>
-<tr><td class="t">🇳🇱 Netherlands</td><td>4.1%</td><td>5.0%</td><td><b>4.6%</b></td><td style="color:var(--loss)">-0.9</td></tr>
+<tr><td class="t">🇫🇷 France</td><td>8.2%</td><td>18.9%</td><td><b>14.6%</b></td><td style="color:var(--loss)">-10.6</td></tr>
+<tr><td class="t">🇪🇸 Spain</td><td>16.5%</td><td>13.6%</td><td><b>14.7%</b></td><td style="color:var(--win)">+2.9</td></tr>
+<tr><td class="t">🇦🇷 Argentina</td><td>8.2%</td><td>14.4%</td><td><b>11.9%</b></td><td style="color:var(--loss)">-6.1</td></tr>
+<tr><td class="t">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</td><td>6.9%</td><td>12.2%</td><td><b>10.1%</b></td><td style="color:var(--loss)">-5.3</td></tr>
+<tr><td class="t">🇵🇹 Portugal</td><td>4.5%</td><td>7.3%</td><td><b>6.2%</b></td><td style="color:var(--loss)">-2.8</td></tr>
+<tr><td class="t">🇩🇪 Germany</td><td>3.7%</td><td>5.3%</td><td><b>4.7%</b></td><td style="color:var(--loss)">-1.7</td></tr>
+<tr><td class="t">🇳🇱 Netherlands</td><td>4.0%</td><td>5.1%</td><td><b>4.7%</b></td><td style="color:var(--loss)">-1.1</td></tr>
+<tr><td class="t">🇧🇷 Brazil</td><td>4.5%</td><td>4.7%</td><td><b>4.6%</b></td><td style="color:var(--loss)">-0.2</td></tr>
 <tr><td class="t">🇳🇴 Norway</td><td>4.7%</td><td>3.0%</td><td><b>3.7%</b></td><td style="color:var(--win)">+1.7</td></tr>
-<tr><td class="t">🇧🇷 Brazil</td><td>4.6%</td><td>4.3%</td><td><b>4.5%</b></td><td style="color:var(--win)">+0.3</td></tr>
-<tr><td class="t">🇺🇸 United States</td><td>2.7%</td><td>3.4%</td><td><b>3.1%</b></td><td style="color:var(--loss)">-0.6</td></tr>
-<tr><td class="t">🇲🇦 Morocco</td><td>2.8%</td><td>1.6%</td><td><b>2.1%</b></td><td style="color:var(--win)">+1.1</td></tr>
-<tr><td class="t">🇨🇴 Colombia</td><td>2.7%</td><td>1.5%</td><td><b>2.0%</b></td><td style="color:var(--win)">+1.2</td></tr>
+<tr><td class="t">🇺🇸 United States</td><td>2.9%</td><td>3.4%</td><td><b>3.2%</b></td><td style="color:var(--loss)">-0.5</td></tr>
+<tr><td class="t">🇯🇵 Japan</td><td>2.7%</td><td>1.9%</td><td><b>2.2%</b></td><td style="color:var(--win)">+0.8</td></tr>
+<tr><td class="t">🇨🇴 Colombia</td><td>2.6%</td><td>1.4%</td><td><b>1.9%</b></td><td style="color:var(--win)">+1.2</td></tr>
 </table></div><p class="sub"><b>Pure model</b> = my independent 20,000-sim forecast (never sees odds). <b>Polymarket</b> = real-money market, de-vigged. <b>Sharp blend</b> = 40% my model + 60% market (the headline Title odds above), because the market pools sharp money and information I do not have. Edge = where my pure model is higher than the market.</p>
 <h2>Next up <span class="badge">sharp blend · my model (news + form) + market</span></h2>
 <div class="card" style="padding:12px 14px;margin-bottom:9px">
-<div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇵🇹</span><b>Portugal</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Tue 23 Jun · 17:00</div><div class="side away"><span class="fl">🇺🇿</span><b>Uzbekistan</b></div></div>
-<div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇵🇹 <b>Portugal 2–0</b></span></div>
-<div class="pbar"><i class="w" style="width:75.4%"></i><i class="d" style="width:16.7%"></i><i class="l" style="width:8.0%"></i></div>
-<div class="pred"><span>Portugal 75% · Draw 17% · Uzbekistan 8% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">K</span></div>
-<div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">3.1</b> expected · 58% over 2.5</span><span class="tag">goals outlook</span></div>
-<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
-<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Portugal win</span><span><b style="color:var(--ink)">2-0</b> <span style="color:var(--mut)">12%</span> · <b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">12%</span> · <b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">11%</span></span></span>
-<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Tie</span><span><b style="color:var(--ink)">1-1</b> <span style="color:var(--mut)">7%</span> · <b style="color:var(--ink)">0-0</b> <span style="color:var(--mut)">5%</span> · <b style="color:var(--ink)">2-2</b> <span style="color:var(--mut)">3%</span></span></span>
-<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Uzbekistan win</span><span><b style="color:var(--ink)">0-1</b> <span style="color:var(--mut)">2%</span> · <b style="color:var(--ink)">1-2</b> <span style="color:var(--mut)">2%</span> · <b style="color:var(--ink)">0-2</b> <span style="color:var(--mut)">1%</span></span></span>
-<span class="tag" style="align-self:flex-end">likely scorelines · likely → less likely</span></div>
-<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px"><span style="color:var(--mut);font-size:12px">↓ How each side's completed matches this tournament shift these odds</span><span class="tag">live form</span></div>
-<div class="pred" style="padding-top:2px"><span style="font-size:12px">🇵🇹 Portugal · 1 played, 0W-1D-0L → <b style="color:var(--loss)">blunt -0.2/g</b></span></div>
-<div class="pred" style="padding-top:2px"><span style="font-size:12px">🇺🇿 Uzbekistan · 1 played, 0W-0D-1L → <b style="color:var(--loss)">leaky def +0.2/g</b>, <b style="color:var(--loss)">form -9</b></span></div>
-</div>
-<div class="card" style="padding:12px 14px;margin-bottom:9px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><b>England</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Tue 23 Jun · 20:00</div><div class="side away"><span class="fl">🇬🇭</span><b>Ghana</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🏴󠁧󠁢󠁥󠁮󠁧󠁿 <b>England 2–0</b></span></div>
-<div class="pbar"><i class="w" style="width:78.7%"></i><i class="d" style="width:15.2%"></i><i class="l" style="width:6.1%"></i></div>
+<div class="pbar"><i class="w" style="width:79.3%"></i><i class="d" style="width:14.6%"></i><i class="l" style="width:6.1%"></i></div>
 <div class="pred"><span>England 79% · Draw 15% · Ghana 6% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">L</span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">3.3</b> expected · 62% over 2.5</span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
 <span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">England win</span><span><b style="color:var(--ink)">2-0</b> <span style="color:var(--mut)">13%</span> · <b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">11%</span> · <b style="color:var(--ink)">3-0</b> <span style="color:var(--mut)">10%</span></span></span>
-<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Tie</span><span><b style="color:var(--ink)">1-1</b> <span style="color:var(--mut)">7%</span> · <b style="color:var(--ink)">0-0</b> <span style="color:var(--mut)">5%</span> · <b style="color:var(--ink)">2-2</b> <span style="color:var(--mut)">3%</span></span></span>
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Tie</span><span><b style="color:var(--ink)">1-1</b> <span style="color:var(--mut)">6%</span> · <b style="color:var(--ink)">0-0</b> <span style="color:var(--mut)">5%</span> · <b style="color:var(--ink)">2-2</b> <span style="color:var(--mut)">3%</span></span></span>
 <span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Ghana win</span><span><b style="color:var(--ink)">0-1</b> <span style="color:var(--mut)">2%</span> · <b style="color:var(--ink)">1-2</b> <span style="color:var(--mut)">2%</span> · <b style="color:var(--ink)">0-2</b> <span style="color:var(--mut)">1%</span></span></span>
 <span class="tag" style="align-self:flex-end">likely scorelines · likely → less likely</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px"><span style="color:var(--mut);font-size:12px">↓ How each side's completed matches this tournament shift these odds</span><span class="tag">live form</span></div>
@@ -196,25 +181,24 @@ html.pre-anim .wrap>*{opacity:0}
 </div>
 <div class="card" style="padding:12px 14px;margin-bottom:9px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇵🇦</span><b>Panama</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Tue 23 Jun · 23:00</div><div class="side away"><span class="fl">🇭🇷</span><b>Croatia</b></div></div>
-<div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇭🇷 <b>Croatia 2–0</b></span></div>
-<div class="pbar"><i class="w" style="width:14.2%"></i><i class="d" style="width:22.5%"></i><i class="l" style="width:63.4%"></i></div>
-<div class="pred"><span>Panama 14% · Draw 22% · Croatia 63% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">L</span></div>
+<div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇭🇷 <b>Croatia 2–1</b></span></div>
+<div class="pbar"><i class="w" style="width:13.7%"></i><i class="d" style="width:21.8%"></i><i class="l" style="width:64.5%"></i></div>
+<div class="pred"><span>Panama 14% · Draw 22% · Croatia 64% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">L</span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">3.3</b> expected · 62% over 2.5</span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
-<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Panama win</span><span><b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">4%</span> · <b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">3%</span> · <b style="color:var(--ink)">2-0</b> <span style="color:var(--mut)">2%</span></span></span>
-<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Tie</span><span><b style="color:var(--ink)">1-1</b> <span style="color:var(--mut)">10%</span> · <b style="color:var(--ink)">0-0</b> <span style="color:var(--mut)">6%</span> · <b style="color:var(--ink)">2-2</b> <span style="color:var(--mut)">5%</span></span></span>
-<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Croatia win</span><span><b style="color:var(--ink)">0-2</b> <span style="color:var(--mut)">9%</span> · <b style="color:var(--ink)">1-2</b> <span style="color:var(--mut)">9%</span> · <b style="color:var(--ink)">0-1</b> <span style="color:var(--mut)">9%</span></span></span>
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Panama win</span><span><b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">3%</span> · <b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">3%</span> · <b style="color:var(--ink)">2-0</b> <span style="color:var(--mut)">2%</span></span></span>
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Tie</span><span><b style="color:var(--ink)">1-1</b> <span style="color:var(--mut)">9%</span> · <b style="color:var(--ink)">0-0</b> <span style="color:var(--mut)">5%</span> · <b style="color:var(--ink)">2-2</b> <span style="color:var(--mut)">5%</span></span></span>
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Croatia win</span><span><b style="color:var(--ink)">1-2</b> <span style="color:var(--mut)">9%</span> · <b style="color:var(--ink)">0-2</b> <span style="color:var(--mut)">9%</span> · <b style="color:var(--ink)">0-1</b> <span style="color:var(--mut)">9%</span></span></span>
 <span class="tag" style="align-self:flex-end">likely scorelines · likely → less likely</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px"><span style="color:var(--mut);font-size:12px">↓ How each side's completed matches this tournament shift these odds</span><span class="tag">live form</span></div>
 <div class="pred" style="padding-top:2px"><span style="font-size:12px">🇵🇦 Panama · 1 played, 0W-0D-1L → <b style="color:var(--loss)">blunt -0.3/g</b>, <b style="color:var(--loss)">form -10</b></span></div>
 <div class="pred" style="padding-top:2px"><span style="font-size:12px">🇭🇷 Croatia · 1 played, 0W-0D-1L → <b style="color:var(--win)">attack +0.2/g</b>, <b style="color:var(--loss)">leaky def +0.4/g</b>, <b style="color:var(--loss)">form -11</b></span></div>
-<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px"><span>🇭🇷 <b style="color:var(--win)">Croatia +6</b> (auto) Luka Modric (Croatia): Recovered from a facial fracture and captains Croatia, now at AC Milan, at his fifth and likely final World Cup.</span><a href="https://worldcupwiki.com/world-cup-2026-injury-list/" target="_blank" rel="noopener" class="tag">WorldCupWiki, Jun 2026</a></div>
 </div>
 <div class="card" style="padding:12px 14px;margin-bottom:9px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇨🇴</span><b>Colombia</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Wed 24 Jun · 02:00</div><div class="side away"><span class="fl">🇨🇩</span><b>Congo DR</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇨🇴 <b>Colombia 2–1</b></span></div>
-<div class="pbar"><i class="w" style="width:58.3%"></i><i class="d" style="width:25.5%"></i><i class="l" style="width:16.3%"></i></div>
-<div class="pred"><span>Colombia 58% · Draw 25% · Congo DR 16% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">K</span></div>
+<div class="pbar"><i class="w" style="width:57.9%"></i><i class="d" style="width:25.5%"></i><i class="l" style="width:16.6%"></i></div>
+<div class="pred"><span>Colombia 58% · Draw 26% · Congo DR 17% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">K</span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">3.1</b> expected · 58% over 2.5</span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
 <span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Colombia win</span><span><b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">10%</span> · <b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">10%</span> · <b style="color:var(--ink)">2-0</b> <span style="color:var(--mut)">9%</span></span></span>
@@ -228,7 +212,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:9px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇧🇦</span><b>Bosnia &amp; Herzegovina</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Wed 24 Jun · 19:00</div><div class="side away"><span class="fl">🇶🇦</span><b>Qatar</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇧🇦 <b>Bosnia &amp; Herzegovina 2–1</b></span></div>
-<div class="pbar"><i class="w" style="width:64.5%"></i><i class="d" style="width:20.4%"></i><i class="l" style="width:15.1%"></i></div>
+<div class="pbar"><i class="w" style="width:64.6%"></i><i class="d" style="width:20.3%"></i><i class="l" style="width:15.1%"></i></div>
 <div class="pred"><span>Bosnia & Herzegovina 65% · Draw 20% · Qatar 15% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">B</span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">3.6</b> expected · 68% over 2.5</span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
@@ -245,7 +229,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:9px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇨🇭</span><b>Switzerland</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Wed 24 Jun · 19:00</div><div class="side away"><span class="fl">🇨🇦</span><b>Canada</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇨🇭 <b>Switzerland 2–1</b></span></div>
-<div class="pbar"><i class="w" style="width:35.2%"></i><i class="d" style="width:29.6%"></i><i class="l" style="width:35.1%"></i></div>
+<div class="pbar"><i class="w" style="width:35.3%"></i><i class="d" style="width:29.5%"></i><i class="l" style="width:35.2%"></i></div>
 <div class="pred"><span>Switzerland 35% · Draw 30% · Canada 35% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">B</span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">3.5</b> expected · 66% over 2.5</span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
@@ -261,7 +245,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:9px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇲🇦</span><b>Morocco</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Wed 24 Jun · 22:00</div><div class="side away"><span class="fl">🇭🇹</span><b>Haiti</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇲🇦 <b>Morocco 1–0</b></span></div>
-<div class="pbar"><i class="w" style="width:82.1%"></i><i class="d" style="width:14.3%"></i><i class="l" style="width:3.6%"></i></div>
+<div class="pbar"><i class="w" style="width:82.2%"></i><i class="d" style="width:14.1%"></i><i class="l" style="width:3.6%"></i></div>
 <div class="pred"><span>Morocco 82% · Draw 14% · Haiti 4% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">C</span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.3</b> expected · 41% over 2.5</span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
@@ -277,7 +261,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:9px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><b>Scotland</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Wed 24 Jun · 22:00</div><div class="side away"><span class="fl">🇧🇷</span><b>Brazil</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇧🇷 <b>Brazil 1–0</b></span></div>
-<div class="pbar"><i class="w" style="width:10.0%"></i><i class="d" style="width:21.2%"></i><i class="l" style="width:68.7%"></i></div>
+<div class="pbar"><i class="w" style="width:10.0%"></i><i class="d" style="width:21.1%"></i><i class="l" style="width:68.9%"></i></div>
 <div class="pred"><span>Scotland 10% · Draw 21% · Brazil 69% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">C</span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.3</b> expected · 40% over 2.5</span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
@@ -293,8 +277,8 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:9px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇨🇿</span><b>Czechia</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Thu 25 Jun · 01:00</div><div class="side away"><span class="fl">🇲🇽</span><b>Mexico</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇲🇽 <b>Mexico 1–0</b></span></div>
-<div class="pbar"><i class="w" style="width:17.6%"></i><i class="d" style="width:25.4%"></i><i class="l" style="width:57.0%"></i></div>
-<div class="pred"><span>Czechia 18% · Draw 25% · Mexico 57% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">A</span></div>
+<div class="pbar"><i class="w" style="width:17.4%"></i><i class="d" style="width:25.1%"></i><i class="l" style="width:57.4%"></i></div>
+<div class="pred"><span>Czechia 17% · Draw 25% · Mexico 57% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">A</span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.3</b> expected · 41% over 2.5</span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
 <span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Czechia win</span><span><b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">10%</span> · <b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">4%</span> · <b style="color:var(--ink)">2-0</b> <span style="color:var(--mut)">2%</span></span></span>
@@ -304,13 +288,12 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px"><span style="color:var(--mut);font-size:12px">↓ How each side's completed matches this tournament shift these odds</span><span class="tag">live form</span></div>
 <div class="pred" style="padding-top:2px"><span style="font-size:12px">🇨🇿 Czechia · 2 played, 0W-1D-1L → <b style="color:var(--loss)">blunt -0.2/g</b>, <b style="color:var(--loss)">form -12</b></span></div>
 <div class="pred" style="padding-top:2px"><span style="font-size:12px">🇲🇽 Mexico · 2 played, 2W-0D-0L → <b style="color:var(--loss)">blunt -0.2/g</b>, <b style="color:var(--win)">tight def -0.3/g</b>, <b style="color:var(--win)">form +11</b></span></div>
-<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px"><span>🇲🇽 <b style="color:var(--loss)">Mexico -8</b> (auto) Edson Alvarez Mexico Fitness concern Being monitored</span><a href="https://worldcupwiki.com/world-cup-2026-injury-list/" target="_blank" rel="noopener" class="tag">WorldCupWiki, Jun 2026</a></div>
 </div>
 <div class="card" style="padding:12px 14px;margin-bottom:9px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇿🇦</span><b>South Africa</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Thu 25 Jun · 01:00</div><div class="side away"><span class="fl">🇰🇷</span><b>South Korea</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇰🇷 <b>South Korea 1–0</b></span></div>
-<div class="pbar"><i class="w" style="width:15.9%"></i><i class="d" style="width:26.6%"></i><i class="l" style="width:57.5%"></i></div>
-<div class="pred"><span>South Africa 16% · Draw 27% · South Korea 58% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">A</span></div>
+<div class="pbar"><i class="w" style="width:15.9%"></i><i class="d" style="width:26.4%"></i><i class="l" style="width:57.6%"></i></div>
+<div class="pred"><span>South Africa 16% · Draw 26% · South Korea 58% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">A</span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.4</b> expected · 43% over 2.5</span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
 <span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">South Africa win</span><span><b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">7%</span> · <b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">4%</span> · <b style="color:var(--ink)">2-0</b> <span style="color:var(--mut)">2%</span></span></span>
@@ -325,7 +308,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:9px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇨🇼</span><b>Curaçao</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Thu 25 Jun · 20:00</div><div class="side away"><span class="fl">🇨🇮</span><b>Ivory Coast</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇨🇮 <b>Ivory Coast 2–0</b></span></div>
-<div class="pbar"><i class="w" style="width:5.6%"></i><i class="d" style="width:14.1%"></i><i class="l" style="width:80.4%"></i></div>
+<div class="pbar"><i class="w" style="width:5.6%"></i><i class="d" style="width:14.0%"></i><i class="l" style="width:80.5%"></i></div>
 <div class="pred"><span>Curaçao 6% · Draw 14% · Ivory Coast 80% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">E</span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">3.1</b> expected · 59% over 2.5</span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
@@ -340,27 +323,56 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:9px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇪🇨</span><b>Ecuador</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Thu 25 Jun · 20:00</div><div class="side away"><span class="fl">🇩🇪</span><b>Germany</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇩🇪 <b>Germany 2–0</b></span></div>
-<div class="pbar"><i class="w" style="width:18.9%"></i><i class="d" style="width:23.3%"></i><i class="l" style="width:57.8%"></i></div>
+<div class="pbar"><i class="w" style="width:18.9%"></i><i class="d" style="width:23.2%"></i><i class="l" style="width:57.9%"></i></div>
 <div class="pred"><span>Ecuador 19% · Draw 23% · Germany 58% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">E</span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5</span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
 <span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Ecuador win</span><span><b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">7%</span> · <b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">5%</span> · <b style="color:var(--ink)">2-0</b> <span style="color:var(--mut)">2%</span></span></span>
 <span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Tie</span><span><b style="color:var(--ink)">1-1</b> <span style="color:var(--mut)">10%</span> · <b style="color:var(--ink)">0-0</b> <span style="color:var(--mut)">9%</span> · <b style="color:var(--ink)">2-2</b> <span style="color:var(--mut)">4%</span></span></span>
-<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Germany win</span><span><b style="color:var(--ink)">0-2</b> <span style="color:var(--mut)">11%</span> · <b style="color:var(--ink)">0-1</b> <span style="color:var(--mut)">10%</span> · <b style="color:var(--ink)">0-3</b> <span style="color:var(--mut)">7%</span></span></span>
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Germany win</span><span><b style="color:var(--ink)">0-2</b> <span style="color:var(--mut)">10%</span> · <b style="color:var(--ink)">0-1</b> <span style="color:var(--mut)">10%</span> · <b style="color:var(--ink)">0-3</b> <span style="color:var(--mut)">7%</span></span></span>
 <span class="tag" style="align-self:flex-end">likely scorelines · likely → less likely</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px"><span style="color:var(--mut);font-size:12px">↓ How each side's completed matches this tournament shift these odds</span><span class="tag">live form</span></div>
 <div class="pred" style="padding-top:2px"><span style="font-size:12px">🇪🇨 Ecuador · 2 played, 0W-1D-1L → <b style="color:var(--loss)">blunt -0.6/g</b>, <b style="color:var(--win)">tight def -0.2/g</b>, <b style="color:var(--loss)">form -19</b></span></div>
 <div class="pred" style="padding-top:2px"><span style="font-size:12px">🇩🇪 Germany · 2 played, 2W-0D-0L → <b style="color:var(--win)">attack +0.6/g</b>, <b style="color:var(--win)">form +14</b></span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px"><span>🇩🇪 <b style="color:var(--loss)">Germany -15</b> (auto) Germany&#x27;s 18-year-old midfielder will miss the World Cup after suffering a thigh injury in training.</span><a href="https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info" target="_blank" rel="noopener" class="tag">ESPN, Jun 2026</a></div>
 </div>
+<div class="card" style="padding:12px 14px;margin-bottom:9px">
+<div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇯🇵</span><b>Japan</b></div><div class="sc" style="font-size:12px;color:var(--mut)">Thu 25 Jun · 23:00</div><div class="side away"><span class="fl">🇸🇪</span><b>Sweden</b></div></div>
+<div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇯🇵 <b>Japan 2–1</b></span></div>
+<div class="pbar"><i class="w" style="width:55.8%"></i><i class="d" style="width:24.1%"></i><i class="l" style="width:20.1%"></i></div>
+<div class="pred"><span>Japan 56% · Draw 24% · Sweden 20% · <span style="color:var(--mut)">blend of my model + market</span></span><span class="tag">F</span></div>
+<div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">4.4</b> expected · 80% over 2.5</span><span class="tag">goals outlook</span></div>
+<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Japan win</span><span><b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">6%</span> · <b style="color:var(--ink)">3-1</b> <span style="color:var(--mut)">6%</span> · <b style="color:var(--ink)">3-2</b> <span style="color:var(--mut)">5%</span></span></span>
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Tie</span><span><b style="color:var(--ink)">1-1</b> <span style="color:var(--mut)">8%</span> · <b style="color:var(--ink)">2-2</b> <span style="color:var(--mut)">8%</span> · <b style="color:var(--ink)">3-3</b> <span style="color:var(--mut)">4%</span></span></span>
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Sweden win</span><span><b style="color:var(--ink)">1-2</b> <span style="color:var(--mut)">4%</span> · <b style="color:var(--ink)">2-3</b> <span style="color:var(--mut)">3%</span> · <b style="color:var(--ink)">1-3</b> <span style="color:var(--mut)">2%</span></span></span>
+<span class="tag" style="align-self:flex-end">likely scorelines · likely → less likely</span></div>
+<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px"><span style="color:var(--mut);font-size:12px">↓ How each side's completed matches this tournament shift these odds</span><span class="tag">live form</span></div>
+<div class="pred" style="padding-top:2px"><span style="font-size:12px">🇯🇵 Japan · 2 played, 1W-1D-0L → <b style="color:var(--win)">attack +0.4/g</b>, <b style="color:var(--win)">form +11</b></span></div>
+<div class="pred" style="padding-top:2px"><span style="font-size:12px">🇸🇪 Sweden · 2 played, 1W-0D-1L → <b style="color:var(--win)">attack +0.6/g</b>, <b style="color:var(--loss)">leaky def +0.5/g</b>, <b style="color:var(--win)">form +8</b></span></div>
+</div>
 <p class="sub">News and injury deltas are curated from the cited reporting above (refreshed with the last30days / agent-reach tools). They move upcoming-match odds only, never the frozen scorecard.</p>
 <h2>Completed matches<span class="badge">my call vs reality</span></h2>
+<div class="card" style="padding:12px 14px;margin-bottom:10px">
+<div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇵🇹</span><b>Portugal</b></div><div class="sc">5–0</div><div class="side away"><span class="fl">🇺🇿</span><b>Uzbekistan</b></div></div>
+<div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇵🇹 <b>Portugal 1–0</b></span><span class="hit">✓ right result</span></div>
+<div class="pbar"><i class="w" style="width:62.0%"></i><i class="d" style="width:24.2%"></i><i class="l" style="width:13.8%"></i></div>
+<div class="pred"><span>Portugal 62% · Draw 24% · Uzbekistan 14%</span><span class="tag">my model</span></div>
+<div class="pred"><span>My call: <b>Portugal win</b> (62%) · RPS 0.082</span><span class="hit">✅ HIT · <span class="tag">K</span></span></div>
+<div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--win)">actual 5 ✓</b></span><span class="tag">goals outlook</span></div>
+<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Portugal win</span><span><b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">11%</span> · <b style="color:var(--ink)">2-0</b> <span style="color:var(--mut)">11%</span> · <b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">9%</span></span></span>
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Tie</span><span><b style="color:var(--ink)">1-1</b> <span style="color:var(--mut)">10%</span> · <b style="color:var(--ink)">0-0</b> <span style="color:var(--mut)">8%</span> · <b style="color:var(--ink)">2-2</b> <span style="color:var(--mut)">4%</span></span></span>
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Uzbekistan win</span><span><b style="color:var(--ink)">0-1</b> <span style="color:var(--mut)">4%</span> · <b style="color:var(--ink)">1-2</b> <span style="color:var(--mut)">4%</span> · <b style="color:var(--ink)">0-2</b> <span style="color:var(--mut)">2%</span></span></span>
+<span class="tag" style="align-self:flex-end">scoreline missed</span></div>
+<div class="pred" style="opacity:.72;border-top:1px dashed var(--line);padding-top:6px"><span>Market: Portugal 84% · Draw 11% · Uzbekistan 5% · RPS 0.014</span><span class="hit">✓ market hit</span></div>
+</div>
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇯🇴</span><b>Jordan</b></div><div class="sc">1–2</div><div class="side away"><span class="fl">🇩🇿</span><b>Algeria</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇩🇿 <b>Algeria 1–0</b></span><span class="hit">✓ right result</span></div>
 <div class="pbar"><i class="w" style="width:16.4%"></i><i class="d" style="width:25.0%"></i><i class="l" style="width:58.5%"></i></div>
 <div class="pred"><span>Jordan 16% · Draw 25% · Algeria 59%</span><span class="tag">my model</span></div>
-<div class="pred"><span>My call: <b>Algeria win</b> (59%) · RPS 0.100</span><span class="hit">✅ HIT · <span class="tag">J</span></span></div>
+<div class="pred"><span>My call: <b>Algeria win</b> (59%) · RPS 0.099</span><span class="hit">✅ HIT · <span class="tag">J</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--win)">actual 3 ✓</b></span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
 <span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Jordan win</span><span><b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">5%</span> · <b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">4%</span> · <b style="color:var(--ink)">2-0</b> <span style="color:var(--mut)">2%</span></span></span>
@@ -386,7 +398,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇫🇷</span><b>France</b></div><div class="sc">3–0</div><div class="side away"><span class="fl">🇮🇶</span><b>Iraq</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇫🇷 <b>France 2–0</b></span><span class="hit">✓ right result</span></div>
-<div class="pbar"><i class="w" style="width:83.3%"></i><i class="d" style="width:14.1%"></i><i class="l" style="width:2.6%"></i></div>
+<div class="pbar"><i class="w" style="width:83.4%"></i><i class="d" style="width:14.1%"></i><i class="l" style="width:2.6%"></i></div>
 <div class="pred"><span>France 83% · Draw 14% · Iraq 3%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>France win</b> (83%) · RPS 0.014</span><span class="hit">✅ HIT · <span class="tag">I</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 53% over 2.5 · <b style="color:var(--win)">actual 3 ✓</b></span><span class="tag">goals outlook</span></div>
@@ -442,7 +454,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇧🇪</span><b>Belgium</b></div><div class="sc">0–0</div><div class="side away"><span class="fl">🇮🇷</span><b>Iran</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇧🇪 <b>Belgium 1–0</b></span><span class="miss">✗ missed</span></div>
-<div class="pbar"><i class="w" style="width:52.1%"></i><i class="d" style="width:26.4%"></i><i class="l" style="width:21.5%"></i></div>
+<div class="pbar"><i class="w" style="width:52.1%"></i><i class="d" style="width:26.4%"></i><i class="l" style="width:21.4%"></i></div>
 <div class="pred"><span>Belgium 52% · Draw 26% · Iran 21%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>Belgium win</b> (52%) · RPS 0.159</span><span class="miss">❌ MISS · <span class="tag">G</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--mut)">actual 0</b></span><span class="tag">goals outlook</span></div>
@@ -491,14 +503,14 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
 <span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Ecuador win</span><span><b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">12%</span> · <b style="color:var(--ink)">2-0</b> <span style="color:var(--mut)">12%</span> · <b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">9%</span></span></span>
 <span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Tie</span><span><b style="color:var(--ink)">1-1</b> <span style="color:var(--mut)">10%</span> · <b style="color:var(--win)">0-0 ✓</b> <span style="color:var(--mut)">8%</span> · <b style="color:var(--ink)">2-2</b> <span style="color:var(--mut)">4%</span></span></span>
-<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Curaçao win</span><span><b style="color:var(--ink)">0-1</b> <span style="color:var(--mut)">3%</span> · <b style="color:var(--ink)">1-2</b> <span style="color:var(--mut)">3%</span> · <b style="color:var(--ink)">0-2</b> <span style="color:var(--mut)">2%</span></span></span>
+<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Curaçao win</span><span><b style="color:var(--ink)">0-1</b> <span style="color:var(--mut)">3%</span> · <b style="color:var(--ink)">1-2</b> <span style="color:var(--mut)">3%</span> · <b style="color:var(--ink)">0-2</b> <span style="color:var(--mut)">1%</span></span></span>
 <span class="hit" style="align-self:flex-end">scoreline called ✓</span></div>
 <div class="pred" style="opacity:.72;border-top:1px dashed var(--line);padding-top:6px"><span>Market: Ecuador 83% · Draw 11% · Curaçao 6% · RPS 0.344</span><span class="miss">✗ market miss</span></div>
 </div>
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇩🇪</span><b>Germany</b></div><div class="sc">2–1</div><div class="side away"><span class="fl">🇨🇮</span><b>Ivory Coast</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇩🇪 <b>Germany 1–0</b></span><span class="hit">✓ right result</span></div>
-<div class="pbar"><i class="w" style="width:51.9%"></i><i class="d" style="width:26.8%"></i><i class="l" style="width:21.3%"></i></div>
+<div class="pbar"><i class="w" style="width:51.9%"></i><i class="d" style="width:26.8%"></i><i class="l" style="width:21.4%"></i></div>
 <div class="pred"><span>Germany 52% · Draw 27% · Ivory Coast 21%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>Germany win</b> (52%) · RPS 0.139</span><span class="hit">✅ HIT · <span class="tag">E</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--win)">actual 3 ✓</b></span><span class="tag">goals outlook</span></div>
@@ -512,7 +524,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇳🇱</span><b>Netherlands</b></div><div class="sc">5–1</div><div class="side away"><span class="fl">🇸🇪</span><b>Sweden</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇳🇱 <b>Netherlands 1–0</b></span><span class="hit">✓ right result</span></div>
-<div class="pbar"><i class="w" style="width:59.7%"></i><i class="d" style="width:24.3%"></i><i class="l" style="width:16.1%"></i></div>
+<div class="pbar"><i class="w" style="width:59.6%"></i><i class="d" style="width:24.3%"></i><i class="l" style="width:16.1%"></i></div>
 <div class="pred"><span>Netherlands 60% · Draw 24% · Sweden 16%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>Netherlands win</b> (60%) · RPS 0.094</span><span class="hit">✅ HIT · <span class="tag">F</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--win)">actual 6 ✓</b></span><span class="tag">goals outlook</span></div>
@@ -583,7 +595,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇲🇽</span><b>Mexico</b></div><div class="sc">1–0</div><div class="side away"><span class="fl">🇰🇷</span><b>South Korea</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇲🇽 <b>Mexico 1–0</b></span><span class="hit">🎯 nailed the exact score</span></div>
 <div class="pbar"><i class="w" style="width:52.1%"></i><i class="d" style="width:26.4%"></i><i class="l" style="width:21.5%"></i></div>
-<div class="pred"><span>Mexico 52% · Draw 26% · South Korea 21%</span><span class="tag">my model</span></div>
+<div class="pred"><span>Mexico 52% · Draw 26% · South Korea 22%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>Mexico win</b> (52%) · RPS 0.138</span><span class="hit">✅ HIT · <span class="tag">A</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">3.0</b> expected · 56% over 2.5 · <b style="color:var(--mut)">actual 1</b></span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
@@ -652,7 +664,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇬🇭</span><b>Ghana</b></div><div class="sc">1–0</div><div class="side away"><span class="fl">🇵🇦</span><b>Panama</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇬🇭 <b>Ghana 1–0</b></span><span class="hit">🎯 nailed the exact score</span></div>
-<div class="pbar"><i class="w" style="width:40.0%"></i><i class="d" style="width:28.2%"></i><i class="l" style="width:31.7%"></i></div>
+<div class="pbar"><i class="w" style="width:40.1%"></i><i class="d" style="width:28.2%"></i><i class="l" style="width:31.7%"></i></div>
 <div class="pred"><span>Ghana 40% · Draw 28% · Panama 32%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>Ghana win</b> (40%) · RPS 0.230</span><span class="hit">✅ HIT · <span class="tag">L</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--mut)">actual 1</b></span><span class="tag">goals outlook</span></div>
@@ -806,7 +818,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇸🇪</span><b>Sweden</b></div><div class="sc">5–1</div><div class="side away"><span class="fl">🇹🇳</span><b>Tunisia</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇸🇪 <b>Sweden 1–0</b></span><span class="hit">✓ right result</span></div>
-<div class="pbar"><i class="w" style="width:40.8%"></i><i class="d" style="width:27.9%"></i><i class="l" style="width:31.3%"></i></div>
+<div class="pbar"><i class="w" style="width:40.9%"></i><i class="d" style="width:27.9%"></i><i class="l" style="width:31.2%"></i></div>
 <div class="pred"><span>Sweden 41% · Draw 28% · Tunisia 31%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>Sweden win</b> (41%) · RPS 0.224</span><span class="hit">✅ HIT · <span class="tag">F</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--win)">actual 6 ✓</b></span><span class="tag">goals outlook</span></div>
@@ -820,7 +832,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇨🇮</span><b>Ivory Coast</b></div><div class="sc">1–0</div><div class="side away"><span class="fl">🇪🇨</span><b>Ecuador</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇪🇨 <b>Ecuador 1–0</b></span><span class="miss">✗ missed</span></div>
-<div class="pbar"><i class="w" style="width:29.3%"></i><i class="d" style="width:30.1%"></i><i class="l" style="width:40.5%"></i></div>
+<div class="pbar"><i class="w" style="width:29.4%"></i><i class="d" style="width:30.1%"></i><i class="l" style="width:40.5%"></i></div>
 <div class="pred"><span>Ivory Coast 29% · Draw 30% · Ecuador 41%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>Ecuador win</b> (41%) · RPS 0.332</span><span class="miss">❌ MISS · <span class="tag">E</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--mut)">actual 1</b></span><span class="tag">goals outlook</span></div>
@@ -864,7 +876,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇹🇷 <b>Türkiye 1–0</b></span><span class="miss">✗ missed</span></div>
 <div class="pbar"><i class="w" style="width:28.7%"></i><i class="d" style="width:28.3%"></i><i class="l" style="width:43.0%"></i></div>
 <div class="pred"><span>Australia 29% · Draw 28% · Türkiye 43%</span><span class="tag">my model</span></div>
-<div class="pred"><span>My call: <b>Türkiye win</b> (43%) · RPS 0.346</span><span class="miss">❌ MISS · <span class="tag">D</span></span></div>
+<div class="pred"><span>My call: <b>Türkiye win</b> (43%) · RPS 0.347</span><span class="miss">❌ MISS · <span class="tag">D</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--mut)">actual 2</b></span><span class="tag">goals outlook</span></div>
 <div class="pred" style="border-top:1px dashed var(--line);padding-top:6px;flex-direction:column;align-items:stretch;gap:3px">
 <span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">Australia win</span><span><b style="color:var(--ink)">1-0</b> <span style="color:var(--mut)">7%</span> · <b style="color:var(--ink)">2-1</b> <span style="color:var(--mut)">6%</span> · <b style="color:var(--win)">2-0 ✓</b> <span style="color:var(--mut)">4%</span></span></span>
@@ -876,7 +888,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇭🇹</span><b>Haiti</b></div><div class="sc">0–1</div><div class="side away"><span class="fl">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><b>Scotland</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🏴󠁧󠁢󠁳󠁣󠁴󠁿 <b>Scotland 1–0</b></span><span class="hit">🎯 nailed the exact score</span></div>
-<div class="pbar"><i class="w" style="width:23.9%"></i><i class="d" style="width:26.6%"></i><i class="l" style="width:49.6%"></i></div>
+<div class="pbar"><i class="w" style="width:23.8%"></i><i class="d" style="width:26.6%"></i><i class="l" style="width:49.6%"></i></div>
 <div class="pred"><span>Haiti 24% · Draw 27% · Scotland 50%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>Scotland win</b> (50%) · RPS 0.156</span><span class="hit">✅ HIT · <span class="tag">C</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--mut)">actual 1</b></span><span class="tag">goals outlook</span></div>
@@ -890,7 +902,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇧🇷</span><b>Brazil</b></div><div class="sc">1–1</div><div class="side away"><span class="fl">🇲🇦</span><b>Morocco</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇧🇷 <b>Brazil 1–0</b></span><span class="miss">✗ missed</span></div>
-<div class="pbar"><i class="w" style="width:39.4%"></i><i class="d" style="width:29.0%"></i><i class="l" style="width:31.6%"></i></div>
+<div class="pbar"><i class="w" style="width:39.5%"></i><i class="d" style="width:29.0%"></i><i class="l" style="width:31.5%"></i></div>
 <div class="pred"><span>Brazil 39% · Draw 29% · Morocco 32%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>Brazil win</b> (39%) · RPS 0.128</span><span class="miss">❌ MISS · <span class="tag">C</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--mut)">actual 2</b></span><span class="tag">goals outlook</span></div>
@@ -946,7 +958,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇰🇷</span><b>South Korea</b></div><div class="sc">2–1</div><div class="side away"><span class="fl">🇨🇿</span><b>Czechia</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇰🇷 <b>South Korea 1–0</b></span><span class="hit">✓ right result</span></div>
-<div class="pbar"><i class="w" style="width:44.0%"></i><i class="d" style="width:28.1%"></i><i class="l" style="width:27.9%"></i></div>
+<div class="pbar"><i class="w" style="width:43.9%"></i><i class="d" style="width:28.1%"></i><i class="l" style="width:28.0%"></i></div>
 <div class="pred"><span>South Korea 44% · Draw 28% · Czechia 28%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>South Korea win</b> (44%) · RPS 0.196</span><span class="hit">✅ HIT · <span class="tag">A</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">2.9</b> expected · 54% over 2.5 · <b style="color:var(--win)">actual 3 ✓</b></span><span class="tag">goals outlook</span></div>
@@ -960,7 +972,7 @@ html.pre-anim .wrap>*{opacity:0}
 <div class="card" style="padding:12px 14px;margin-bottom:10px">
 <div class="match" style="margin:0;background:transparent;border:0;padding:0"><div class="side "><span class="fl">🇲🇽</span><b>Mexico</b></div><div class="sc">2–0</div><div class="side away"><span class="fl">🇿🇦</span><b>South Africa</b></div></div>
 <div class="pred" style="border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:4px"><span style="font-size:13px">Our bold call: 🇲🇽 <b>Mexico 2–0</b></span><span class="hit">🎯 nailed the exact score</span></div>
-<div class="pbar"><i class="w" style="width:73.9%"></i><i class="d" style="width:18.8%"></i><i class="l" style="width:7.4%"></i></div>
+<div class="pbar"><i class="w" style="width:73.8%"></i><i class="d" style="width:18.8%"></i><i class="l" style="width:7.4%"></i></div>
 <div class="pred"><span>Mexico 74% · Draw 19% · South Africa 7%</span><span class="tag">my model</span></div>
 <div class="pred"><span>My call: <b>Mexico win</b> (74%) · RPS 0.037</span><span class="hit">✅ HIT · <span class="tag">A</span></span></div>
 <div class="pred"><span style="color:var(--mut)">Total goals: <b style="color:var(--ink)">3.0</b> expected · 56% over 2.5 · <b style="color:var(--mut)">actual 2</b></span><span class="tag">goals outlook</span></div>
@@ -1033,10 +1045,10 @@ html.pre-anim .wrap>*{opacity:0}
 <tr class=""><td class="t">🇯🇴 Jordan</td><td>2</td><td>0</td><td>0</td><td>2</td><td>-3</td><td><b>0</b></td></tr>
 </table></div>
 <div class="card"><div class="sub">Group K</div><table><tr><th class="t">Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
-<tr class="q1"><td class="t">🇨🇴 Colombia</td><td>1</td><td>1</td><td>0</td><td>0</td><td>+2</td><td><b>3</b></td></tr>
-<tr class="q2"><td class="t">🇵🇹 Portugal</td><td>1</td><td>0</td><td>1</td><td>0</td><td>+0</td><td><b>1</b></td></tr>
+<tr class="q1"><td class="t">🇵🇹 Portugal</td><td>2</td><td>1</td><td>1</td><td>0</td><td>+5</td><td><b>4</b></td></tr>
+<tr class="q2"><td class="t">🇨🇴 Colombia</td><td>1</td><td>1</td><td>0</td><td>0</td><td>+2</td><td><b>3</b></td></tr>
 <tr class=""><td class="t">🇨🇩 Congo DR</td><td>1</td><td>0</td><td>1</td><td>0</td><td>+0</td><td><b>1</b></td></tr>
-<tr class=""><td class="t">🇺🇿 Uzbekistan</td><td>1</td><td>0</td><td>0</td><td>1</td><td>-2</td><td><b>0</b></td></tr>
+<tr class=""><td class="t">🇺🇿 Uzbekistan</td><td>2</td><td>0</td><td>0</td><td>2</td><td>-7</td><td><b>0</b></td></tr>
 </table></div>
 <div class="card"><div class="sub">Group L</div><table><tr><th class="t">Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
 <tr class="q1"><td class="t">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</td><td>1</td><td>1</td><td>0</td><td>0</td><td>+2</td><td><b>3</b></td></tr>
