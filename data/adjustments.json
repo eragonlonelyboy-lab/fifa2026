@@ -1,41 +1,14 @@
 {
   "germany": {
     "delta": -15,
-    "note": "(auto) LK Lennart KarlMidfielder Germany Muscle tear in left thighMuscle tear in left thigh Injured Ruled out for World Cup 2026 Jun 22, 2026",
-    "source": "Soccer26Live, Jun 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "note": "(auto) Germany's 18-year-old midfielder will miss the World Cup after suffering a thigh injury in training.",
+    "source": "ESPN, Jun 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
-  "spain": {
-    "delta": -15,
-    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
-    "source": "Covers, Jun 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
-    "auto": true
-  },
-  "england": {
+  "netherlands": {
     "delta": -5,
-    "note": "(auto) The star winger has returned to action after playing through the injury late in the club season, but England is likely to monitor his minutes closely during the tournamen",
-    "source": "Covers, Jun 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
-    "auto": true
-  },
-  "france": {
-    "delta": -8,
-    "note": "Saliba playing through a persistent back issue (surgery deferred to after the tournament); Dembele back in contention.",
-    "source": "FOX Sports, Jun 2026",
-    "url": "https://www.foxsports.com/stories/soccer/william-saliba-hands-france-massive-injury-lift-as-didier-deschamps-issues-blunt-selection-warning-over-ousmane-dembele"
-  },
-  "morocco": {
-    "delta": -8,
-    "note": "(auto) AE Abde EzzalzouliForward Morocco Knee injuryKnee injury Doubtful Uncertain for early stages Jun 22, 2026",
-    "source": "Soccer26Live, Jun 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "canada": {
-    "delta": -8,
-    "note": "(auto) Alfie JonesDefender Canada Ankle injuryAnkle injury Doubtful Unclear Jun 22, 2026",
+    "note": "(auto) Jurrien TimberDefender Netherlands Groin strainGroin strain Injured Not for World Cup 2026 Jun 23, 2026",
     "source": "Soccer26Live, Jun 2026",
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
@@ -54,11 +27,11 @@
     "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
   },
-  "netherlands": {
+  "england": {
     "delta": -5,
-    "note": "(auto) The Netherlands lost two more first-choice players to injury.",
-    "source": "WorldCupWiki, Jun 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "note": "(auto) The star winger has returned to action after playing through the injury late in the club season, but England is likely to monitor his minutes closely during the tournamen",
+    "source": "Covers, Jun 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "japan": {
@@ -89,6 +62,12 @@
     "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
   },
+  "france": {
+    "delta": -8,
+    "note": "Saliba playing through a persistent back issue (surgery deferred to after the tournament); Dembele back in contention.",
+    "source": "FOX Sports, Jun 2026",
+    "url": "https://www.foxsports.com/stories/soccer/william-saliba-hands-france-massive-injury-lift-as-didier-deschamps-issues-blunt-selection-warning-over-ousmane-dembele"
+  },
   "usa": {
     "delta": -5,
     "note": "(auto) Johnny Cardoso United States Ankle injury",
@@ -99,6 +78,13 @@
   "paraguay": {
     "delta": -5,
     "note": "(auto) Julio Enciso avoided a serious thigh injury, but Paraguay is unlikely to rush its star attacker back into action.",
+    "source": "Covers, Jun 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "auto": true
+  },
+  "morocco": {
+    "delta": -5,
+    "note": "(auto) Morocco could be without one of its top attacking weapons after Ezzalzouli picked up a knee injury in the team's final tune-up match before the World Cup.",
     "source": "Covers, Jun 2026",
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
@@ -114,6 +100,13 @@
     "note": "(auto) Luka Modric (Croatia): Recovered from a facial fracture and captains Croatia, now at AC Milan, at his fifth and likely final World Cup.",
     "source": "WorldCupWiki, Jun 2026",
     "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "spain": {
+    "delta": -15,
+    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
+    "source": "Covers, Jun 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "algeria": {
@@ -133,6 +126,13 @@
   "brazil": {
     "delta": -15,
     "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
+    "source": "ESPN, Jun 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "auto": true
+  },
+  "canada": {
+    "delta": -5,
+    "note": "(auto) Davies has not played for Canada since March 2025, when he tore an ACL in the CONCACAF Nations League finals, and injured a hamstring last month while playing for Bayern ",
     "source": "ESPN, Jun 2026",
     "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
