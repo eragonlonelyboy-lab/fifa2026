@@ -834,13 +834,20 @@ def pred_vs_reality(M, matches, estats):
     for m in matches:
         if not m["completed"] or m["g1"] is None: continue
         if m["t1"] not in M["elo"] or m["t2"] not in M["elo"]: continue
-        p = predict(M, m["t1"], m["t2"], host_side(m))["blend"]
+        _pr = predict(M, m["t1"], m["t2"], host_side(m))
+        p = _pr["blend"]
         actual = 0 if m["g1"] > m["g2"] else (2 if m["g1"] < m["g2"] else 1)
         y = [1 if actual==0 else 0, 1 if actual==1 else 0, 1 if actual==2 else 0]
         pick = p.index(max(p)); hit = (pick == actual)
         rps = 0.5 * ((p[0]-y[0])**2 + (p[0]+p[1]-y[0]-y[1])**2)
         rps_sum += rps; n += 1; hits += 1 if hit else 0
-        row = {**m, "p": p, "pick": pick, "hit": hit, "rps": rps}
+        # frozen predicted scoreline: top-3 from the same pre-match grid, with exact / top-3 match flags
+        _grid = _score_grid(_pr["eg"][0], _pr["eg"][1])
+        pscores = sorted(_grid.items(), key=lambda kv: kv[1], reverse=True)[:3]
+        _act = (m["g1"], m["g2"])
+        exact = (_act == pscores[0][0]); in_top3 = any(_act == sc for sc, _ in pscores)
+        row = {**m, "p": p, "pick": pick, "hit": hit, "rps": rps,
+               "pscores": pscores, "exact": exact, "in_top3": in_top3}
         mk = estats.get(m["id"], {}).get("market")
         if mk:
             mpick = mk.index(max(mk)); mhit = (mpick == actual)
@@ -1205,6 +1212,18 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
                  f'({max(p)*100:.0f}%) · RPS {m["rps"]:.3f}</span>'
                  f'<span class="{"hit" if m["hit"] else "miss"}">{"✅ HIT" if m["hit"] else "❌ MISS"}'
                  f' · <span class="tag">{m["group"] or "KO"}</span></span></div>')
+        ps = m.get("pscores")
+        if ps:                                              # predicted scoreline vs reality (frozen pre-match grid)
+            cells = " · ".join(
+                (f'<b style="color:{"var(--win)" if (a==m["g1"] and b==m["g2"]) else "var(--ink)"}">'
+                 f'{a}-{b}{" ✓" if (a==m["g1"] and b==m["g2"]) else ""}</b> '
+                 f'<span style="color:var(--mut)">{pp*100:.0f}%</span>')
+                for (a, b), pp in ps)
+            flagh = ('<span class="hit">🎯 exact score</span>' if m.get("exact") else
+                     '<span class="hit">scoreline in top 3 ✓</span>' if m.get("in_top3") else
+                     '<span class="tag">scoreline outside top 3</span>')
+            P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
+                     f'<span>Predicted score: {cells}</span>{flagh}</div>')
         if m.get("mk"):
             mk = m["mk"]
             P.append(f'<div class="pred" style="opacity:.72;border-top:1px dashed var(--line);padding-top:6px">'
