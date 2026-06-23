@@ -1057,6 +1057,11 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
     hits, n, avg_rps = summary
     finished = [m for m in matches if m["completed"]]
     upcoming = [m for m in matches if not m["completed"]]
+    gp = {}                                                 # games each team has played so far (for live-form notes)
+    for _m in finished:
+        if _m["g1"] is None: continue
+        for _t in (_m["t1"], _m["t2"]):
+            if _t: gp[_t] = gp.get(_t, 0) + 1
     goals = sum((m["g1"] or 0) + (m["g2"] or 0) for m in finished)
     yc = sum(estats.get(m["id"], {}).get("yellow", 0) for m in finished)
     rc = sum(estats.get(m["id"], {}).get("red", 0) for m in finished)
@@ -1184,7 +1189,23 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
                     P.append(f'<span style="display:flex;gap:8px"><span style="color:var(--mut);min-width:104px;flex:none">{lab[li]}</span>'
                              f'<span>{cells}</span></span>')
                 P.append('<span class="tag" style="align-self:flex-end">likely scorelines · likely → less likely</span></div>')
+        if any(gp.get(t, 0) for t in (m["t1"], m["t2"])):
+            P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
+                     '<span style="color:var(--mut);font-size:12px">↓ How each side\'s completed matches this tournament shift these odds</span>'
+                     '<span class="tag">live form</span></div>')
         for t in (m["t1"], m["t2"]):
+            g = gp.get(t, 0)
+            if g:                                           # always surface the in-tournament influence for teams that have played
+                fv = FORM.get(t, 0.0); aa = ATT_ADJ.get(t, 0.0); dd = DEF_ADJ.get(t, 0.0)
+                bits = []
+                if aa >= 0.15:    bits.append('<b style="color:var(--win)">attack +%.1f/g</b>' % aa)
+                elif aa <= -0.15: bits.append('<b style="color:var(--loss)">blunt %.1f/g</b>' % aa)
+                if dd >= 0.15:    bits.append('<b style="color:var(--loss)">leaky def +%.1f/g</b>' % dd)
+                elif dd <= -0.15: bits.append('<b style="color:var(--win)">tight def %.1f/g</b>' % dd)
+                if abs(fv) >= 5:  bits.append('<b style="color:%s">form %s%.0f</b>' % ("var(--win)" if fv > 0 else "var(--loss)", "+" if fv > 0 else "", fv))
+                summ = ", ".join(bits) if bits else '<span style="color:var(--mut)">tracking expectation</span>'
+                P.append('<div class="pred" style="padding-top:2px">'
+                         f'<span style="font-size:12px">{flag(t)} {disp(t)} · {g} played, {rec.get(t,"")} → {summ}</span></div>')
             a = ADJUSTMENTS.get(t)
             if a:
                 d = float(a.get("delta", 0)); col = "var(--win)" if d > 0 else "var(--loss)"
@@ -1198,18 +1219,6 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
                 P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
                          f'<span>{flag(t)} <b style="color:var(--loss)">{disp(t)} {su["delta"]:+d}</b> {html.escape(su.get("note",""))}</span>'
                          f'<span class="tag">suspension</span></div>')
-            fv = FORM.get(t, 0.0)
-            if abs(fv) >= 8:
-                col = "var(--win)" if fv > 0 else "var(--loss)"
-                P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
-                         f'<span>{flag(t)} <b style="color:{col}">{disp(t)} form {"+" if fv>0 else ""}{fv:.0f}</b> {rec.get(t,"")} so far, '
-                         f'{"over" if fv>0 else "under"}-performing expectations</span><span class="tag">in-tournament form</span></div>')
-            aa = ATT_ADJ.get(t, 0.0); dd = DEF_ADJ.get(t, 0.0)
-            if abs(aa) >= 0.15 or abs(dd) >= 0.15:
-                col = "var(--win)" if (aa - dd) > 0 else "var(--loss)"
-                P.append('<div class="pred" style="border-top:1px dashed var(--line);padding-top:6px">'
-                         f'<span>{flag(t)} <b style="color:{col}">{disp(t)} att {aa:+.1f} / def {dd:+.1f}</b> goals/game vs expectation so far</span>'
-                         f'<span class="tag">live attack/defence</span></div>')
         P.append('</div>')
     if ADJUSTMENTS:
         P.append('<p class="sub">News and injury deltas are curated from the cited reporting above (refreshed with the '
@@ -1231,6 +1240,8 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
             if _bt:
                 P.append(_headline(m["t1"], m["t2"], m["pick"], _bt[0][0], actual=(m["g1"], m["g2"])))
         P.append(_bar3(p))
+        P.append(f'<div class="pred"><span>{disp(m["t1"])} {p[0]*100:.0f}% · Draw {p[1]*100:.0f}% · {disp(m["t2"])} {p[2]*100:.0f}%</span>'
+                 f'<span class="tag">my model</span></div>')
         P.append(f'<div class="pred"><span>My call: <b>{html.escape(pickteam)}{"" if m["pick"]==1 else " win"}</b> '
                  f'({max(p)*100:.0f}%) · RPS {m["rps"]:.3f}</span>'
                  f'<span class="{"hit" if m["hit"] else "miss"}">{"✅ HIT" if m["hit"] else "❌ MISS"}'
