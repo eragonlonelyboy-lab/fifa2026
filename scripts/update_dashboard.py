@@ -495,13 +495,14 @@ def calibrate_goal_rate(M, matches, K=60, lo=0.9, hi=1.25):
 
 ATT_ADJ = {}   # live attack delta: goals/game a team scores ABOVE model expectation (forward-only)
 DEF_ADJ = {}   # live defence delta: goals/game a team concedes ABOVE expectation (leakiness, forward-only)
-def compute_att_def(M, matches, gate=24, K=4, cap=0.6, min_games=2):
+def compute_att_def(M, matches, gate=24, K=4, cap=0.6, min_games=1):
     """Per-team live attack/defence SPLIT. Measures how much each team out/under-scores AND
     out/under-concedes vs the model's forward expectation (predict adj=True = NET OF form + goals
     calibration, so it cannot double-count them). Captures 'potent attack / leaky defence' sides that
     net-margin form misses. Per-team sample-shrunk + clamped (+-cap g/g); active once `gate` matches
-    are in, applied per team only at >= min_games (a single result is noise). Forward-only; the frozen
-    scorecard is untouched."""
+    are in, applied per team from `min_games` (every completed game counts; one game is heavily shrunk —
+    w=g/(g+K)=0.2 — so an ordinary result nudges ~nothing and a standout one only a little). Forward-only;
+    the frozen scorecard is untouched."""
     global ATT_ADJ, DEF_ADJ, _EG_CACHE
     ATT_ADJ, DEF_ADJ = {}, {}                               # measure with the adapter OFF (no circularity)
     fin = [m for m in matches if m["completed"] and m["g1"] is not None
@@ -517,7 +518,7 @@ def compute_att_def(M, matches, gate=24, K=4, cap=0.6, min_games=2):
     applied = len(fin) >= gate
     if applied:
         for t, g in gp.items():
-            if g < min_games: continue                      # one game is noise; wait for a second
+            if g < min_games: continue                      # every team that has played is included (shrink handles small samples)
             w = g / (g + K)
             ATT_ADJ[t] = round(max(-cap, min(cap, w * sc[t] / g)), 3)
             DEF_ADJ[t] = round(max(-cap, min(cap, w * cc[t] / g)), 3)
