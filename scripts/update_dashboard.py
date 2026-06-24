@@ -241,7 +241,8 @@ def goals_outlook(mu1, mu2):
     grid = _score_grid(mu1, mu2)
     exp = sum((a + b) * p for (a, b), p in grid.items())
     over25 = sum(p for (a, b), p in grid.items() if a + b >= 3)
-    return exp, over25
+    blowout = sum(p for (a, b), p in grid.items() if abs(a - b) >= 3)   # P(3+ goal margin) — the "wild" lopsided result
+    return exp, over25, blowout
 
 def _fit_attack_defence(matches, now_ts, half_life=18.0, iters=80):
     rows, teams = [], set()
@@ -457,7 +458,7 @@ def predict(M, t1, t2, host_side=0, adj=False, draw_cal=False):
     if draw_cal: blend = _apply_draw(blend)
     return {"elo": pElo, "ad": pAD, "blend": blend, "eg": (a1, a2), "r": (r1, r2)}
 
-def calibrate_draw_rate(M, matches, K=50, lo=0.85, hi=1.6):
+def calibrate_draw_rate(M, matches, K=25, lo=0.85, hi=1.6):
     """Nudge the model's draw probability toward THIS tournament's observed draw rate, shrunk by
     sample size so few games don't overfit. Forward-looking only; the frozen scorecard is untouched."""
     global DRAW_FACTOR
@@ -529,7 +530,7 @@ def compute_att_def(M, matches, gate=24, K=4, cap=0.6, min_games=1):
             + (" (applied)" if applied else f" (monitor only, gate {gate})"))
     return ATT_ADJ, DEF_ADJ
 
-def calibrate_spread(M, matches, K=40, lo=0.78, hi=1.0):
+def calibrate_spread(M, matches, K=18, lo=0.68, hi=1.0):
     """Fatten the scoreline tails toward this tournament's observed over-dispersion (Poisson is too thin:
     variance > mean, so it can't make enough 4-5-6 goal games). Picks SPREAD_GAMMA so the tempered grid's
     avg P(4+ goals) tracks the observed rate, sample-shrunk. Display/scoreline scope -> the validated 1X2,
@@ -1176,9 +1177,10 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
             P.append(f'<div class="pred"><span>{disp(m["t1"])} {pr[0]*100:.0f}% · Draw {pr[1]*100:.0f}% · {disp(m["t2"])} {pr[2]*100:.0f}%{tail}</span>'
                      f'<span class="tag">{m["group"] or "KO"}</span></div>')
             if _pred:
-                _xg, _ou = goals_outlook(_pred["eg"][0], _pred["eg"][1])
+                _xg, _ou, _bl = goals_outlook(_pred["eg"][0], _pred["eg"][1])
                 P.append('<div class="pred"><span style="color:var(--mut)">Total goals: '
-                         f'<b style="color:var(--ink)">{_xg:.1f}</b> expected · {_ou*100:.0f}% over 2.5</span>'
+                         f'<b style="color:var(--ink)">{_xg:.1f}</b> expected · {_ou*100:.0f}% over 2.5 · '
+                         f'<b style="color:var(--ink)">{_bl*100:.0f}%</b> blowout (3+ margin)</span>'
                          '<span class="tag">goals outlook</span></div>')
                 sl = score_lines(_pred["eg"][0], _pred["eg"][1], pr)
                 lab = [f'{disp(m["t1"])} win', "Tie", f'{disp(m["t2"])} win']
@@ -1249,11 +1251,12 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
                  f' · <span class="tag">{m["group"] or "KO"}</span></span></div>')
         eg = m.get("eg")
         if eg:                                              # goals outlook + bucketed scorelines (same layout as Next up, frozen)
-            _xg, _ou = goals_outlook(eg[0], eg[1])
-            _act_tot = m["g1"] + m["g2"]
+            _xg, _ou, _bl = goals_outlook(eg[0], eg[1])
+            _act_tot = m["g1"] + m["g2"]; _act_blow = abs(m["g1"] - m["g2"]) >= 3
             _ou_hit = (_ou >= 0.5) == (_act_tot >= 3)
             P.append('<div class="pred"><span style="color:var(--mut)">Total goals: '
                      f'<b style="color:var(--ink)">{_xg:.1f}</b> expected · {_ou*100:.0f}% over 2.5 · '
+                     f'<b style="color:{"var(--win)" if _act_blow else "var(--ink)"}">{_bl*100:.0f}% blowout{" ✓" if _act_blow else ""}</b> · '
                      f'<b style="color:{"var(--win)" if _ou_hit else "var(--mut)"}">actual {_act_tot}{" ✓" if _ou_hit else ""}</b></span>'
                      '<span class="tag">goals outlook</span></div>')
             sl = score_lines(eg[0], eg[1], p)
