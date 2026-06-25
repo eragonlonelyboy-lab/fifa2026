@@ -1,9 +1,9 @@
 {
-  "hash": "d10de797335181c31df47e483c46f9ef9b125a6c8ae140afad687909734e5c15",
-  "updated": "2026-06-24T22:56:45+00:00",
-  "matches": 94,
-  "finished": 50,
-  "correct": 33,
-  "evaluated": 50,
-  "avg_rps": 0.153
+  "hash": "46285108fe73a33ba1aec3afcd8f7bc08a2d6722cd29a1f6a78a63c14b364536",
+  "updated": "2026-06-25T00:14:42+00:00",
+  "matches": 96,
+  "finished": 52,
+  "correct": 35,
+  "evaluated": 52,
+  "avg_rps": 0.149
 }
