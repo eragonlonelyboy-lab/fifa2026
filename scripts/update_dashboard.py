@@ -830,14 +830,61 @@ def host_side(m):
     if m["t2"] in HOSTS and m["t1"] not in HOSTS: return -1
     return 0
 
-def pred_vs_reality(M, matches, estats):
+# --- results-only confidence calibration --------------------------------------------------
+# Diagnosis (2026-06-30): the frozen scorecard is systematically UNDER-confident on favourites
+# (avg top-pick 0.57 vs DraftKings 0.63 at the SAME 31/50 hit rate), which is the whole RPS gap to
+# the market. A monotone power calibration fixes the confidence WITHOUT moving any pick. Fit on
+# RESULTS ONLY (never odds), shrunk by sample size, and applied WALK-FORWARD (each match calibrated
+# only from matches that kicked off earlier) so every displayed call stays a true pre-match call,
+# not a retrofit. Validated out-of-sample (expanding window) to beat the frozen scorecard.
+SHARPEN_G = 1.0   # live exponent for UPCOMING display (1.0 = off; set in main from all completed games)
+def _sharpen(p, g):
+    """Monotone power calibration of a 1X2 triplet. g>1 = more confident, g<1 = flatter.
+    argmax is invariant -> it can NEVER change the model's pick, only its confidence."""
+    if g == 1.0: return list(p)
+    q = [max(1e-12, x) ** g for x in p]; s = sum(q) or 1.0
+    return [x / s for x in q]
+
+def _fit_sharpen(pairs, K=40, lo=0.8, hi=2.0):
+    """RPS-minimising sharpen exponent over (prob_triplet, actual_idx) pairs, shrunk toward 1.0 by
+    sample size (n/(n+K)). Results-only -> independence from the bookmaker preserved."""
+    n = len(pairs)
+    if n < 8: return 1.0
+    def _r(p, a):
+        y = (1.0 if a==0 else 0.0, 1.0 if a==1 else 0.0, 1.0 if a==2 else 0.0)
+        return 0.5 * ((p[0]-y[0])**2 + ((p[0]+p[1])-(y[0]+y[1]))**2)
+    best = (9.0, 1.0); gi = int(lo*100)
+    while gi <= int(hi*100):
+        g = gi/100.0
+        r = sum(_r(_sharpen(p, g), a) for p, a in pairs) / n
+        if r < best[0]: best = (r, g)
+        gi += 2
+    return round(1.0 + (best[1] - 1.0) * (n / (n + K)), 3)
+
+def walkforward_sharpen(M, matches, K=40):
+    """Returns ({match_id: exponent}, live_exponent). Each completed match's exponent is fit ONLY on
+    matches that kicked off strictly earlier (leak-free). live_exponent is fit on ALL completed games,
+    for upcoming-match display."""
+    comp = sorted([m for m in matches if m["completed"] and m["g1"] is not None
+                   and m["t1"] in M["elo"] and m["t2"] in M["elo"]], key=lambda m: m.get("date", ""))
+    out = {}; pairs = []
+    for m in comp:
+        out[m["id"]] = _fit_sharpen(pairs, K)                 # available-at-the-time calibration
+        p = predict(M, m["t1"], m["t2"], host_side(m))["blend"]
+        a = 0 if m["g1"] > m["g2"] else (2 if m["g1"] < m["g2"] else 1)
+        pairs.append((p, a))
+    return out, _fit_sharpen(pairs, K)
+
+def pred_vs_reality(M, matches, estats, sharp_map=None):
+    if sharp_map is None:
+        sharp_map, _ = walkforward_sharpen(M, matches)
     rows, hits, n, rps_sum = [], 0, 0, 0.0
     mk_hits = mk_n = 0; mk_rps_sum = 0.0; both_model_rps = both_mkt_rps = 0.0; both_n = 0
     for m in matches:
         if not m["completed"] or m["g1"] is None: continue
         if m["t1"] not in M["elo"] or m["t2"] not in M["elo"]: continue
         _pr = predict(M, m["t1"], m["t2"], host_side(m))
-        p = _pr["blend"]
+        p = _sharpen(_pr["blend"], sharp_map.get(m["id"], 1.0))   # walk-forward confidence calibration (monotone -> pick unchanged)
         actual = 0 if m["g1"] > m["g2"] else (2 if m["g1"] < m["g2"] else 1)
         y = [1 if actual==0 else 0, 1 if actual==1 else 0, 1 if actual==2 else 0]
         pick = p.index(max(p)); hit = (pick == actual)
@@ -1155,7 +1202,7 @@ def render(M, matches, stand, pvr, summary, market, adv, champ, estats, poly=Non
     if not nxt: P.append('<p class="sub">No upcoming fixtures in range.</p>')
     for m in nxt:
         _pred = predict(M, m["t1"], m["t2"], host_side(m), adj=True, draw_cal=True) if (m["t1"] in M["elo"] and m["t2"] in M["elo"]) else None
-        modelp = _pred["blend"] if _pred else None
+        modelp = _sharpen(_pred["blend"], SHARPEN_G) if _pred else None   # same results-only confidence calibration as the scorecard
         mko = m.get("mkodds")
         if modelp and mko:                                  # sharp blend: 40% model + 60% market (matches title odds)
             pr = [SHARP_WM * modelp[i] + (1 - SHARP_WM) * mko[i] for i in range(3)]
@@ -1456,6 +1503,7 @@ def atomic_write(path, text):
     os.replace(tmp, path)
 
 def main():
+    global SHARPEN_G
     args = set(sys.argv[1:])
     source = "espn"
     for a in list(args):
@@ -1495,7 +1543,10 @@ def main():
     gsp, sobs, sbase, sn = calibrate_spread(M, matches)
     log(f"scoreline dispersion -> gamma {gsp} (4+ goals: tournament {sobs*100:.0f}% vs model {sbase*100:.0f}% over {sn} games)")
     stand = standings(matches)
-    pvr, summary, market = pred_vs_reality(M, matches, estats)
+    sharp_map, SHARPEN_G = walkforward_sharpen(M, matches)
+    log(f"confidence calibration -> live sharpen exponent {SHARPEN_G} "
+        f"(results-only, walk-forward, monotone -> picks unchanged)")
+    pvr, summary, market = pred_vs_reality(M, matches, estats, sharp_map)
     log(f"fetched {len(matches)} matches ({sum(1 for m in matches if m['completed'])} finished); "
         f"model {summary[0]}/{summary[1]} correct, avg RPS {summary[2]:.3f}; "
         f"market {market['hits']}/{market['n']} (RPS h2h model {market['model_rps_h2h']:.3f} vs market {market['mkt_rps_h2h']:.3f})")
