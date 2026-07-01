@@ -109,39 +109,11 @@
     "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
-  "austria": {
+  "canada": {
     "delta": -5,
-    "note": "(auto) Christoph Baumgartner Austria Pre-tournament injury Out (not replaced)",
-    "source": "WorldCupWiki, Jul 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
-    "auto": true
-  },
-  "japan": {
-    "delta": -15,
-    "note": "(auto) Japan captain Wataru Endo was ruled out three days before the tournament after failing to recover from a foot injury that required surgery in February, and he announced h",
-    "source": "WorldCupWiki, Jul 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
-    "auto": true
-  },
-  "uruguay": {
-    "delta": 6,
-    "note": "(auto) Jose Gimenez Uruguay Ankle Nearing return, Uruguay open June 21",
-    "source": "WorldCupWiki, Jul 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
-    "auto": true
-  },
-  "mexico": {
-    "delta": -8,
-    "note": "(auto) Edson Alvarez Mexico Fitness concern Being monitored",
-    "source": "WorldCupWiki, Jul 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
-    "auto": true
-  },
-  "usa": {
-    "delta": -5,
-    "note": "(auto) Johnny Cardoso United States Ankle injury",
-    "source": "Covers, Jul 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "note": "(auto) Davies has not played for Canada since March 2025, when he tore an ACL in the CONCACAF Nations League finals, and injured a hamstring last month while playing for Bayern ",
+    "source": "ESPN, Jul 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "paraguay": {
@@ -158,11 +130,11 @@
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
-  "canada": {
+  "usa": {
     "delta": -5,
-    "note": "(auto) Davies has not played for Canada since March 2025, when he tore an ACL in the CONCACAF Nations League finals, and injured a hamstring last month while playing for Bayern ",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "note": "(auto) Johnny Cardoso United States Ankle injury",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "norway": {
