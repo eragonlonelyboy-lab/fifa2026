@@ -35,9 +35,9 @@
   },
   "germany": {
     "delta": -15,
-    "note": "(auto) Germany's 18-year-old midfielder will miss the World Cup after suffering a thigh injury in training.",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "note": "(auto) Serge Gnabry: Germany will be without an experienced attacking option after Gnabry was ruled out with an adductor injury suffered late in the club season.",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "egypt": {
@@ -70,9 +70,9 @@
   },
   "brazil": {
     "delta": -15,
-    "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "note": "(auto) Rodrygo:Brazil enters the tournament without one of its most dangerous attackers after Rodrygo suffered a season-ending knee injury.",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "france": {
@@ -102,18 +102,11 @@
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
   },
-  "ghana": {
-    "delta": -15,
-    "note": "(auto) This is a major blow for Ghana, who look to Kudus for moments of inspiration.",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
-    "auto": true
-  },
   "canada": {
     "delta": -5,
-    "note": "(auto) Davies has not played for Canada since March 2025, when he tore an ACL in the CONCACAF Nations League finals, and injured a hamstring last month while playing for Bayern ",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "note": "(auto) Marcelo Flores Canada Knee injury",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "paraguay": {
@@ -126,6 +119,13 @@
   "morocco": {
     "delta": -5,
     "note": "(auto) Morocco could be without one of its top attacking weapons after Ezzalzouli picked up a knee injury in the team's final tune-up match before the World Cup.",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "auto": true
+  },
+  "ghana": {
+    "delta": -5,
+    "note": "(auto) Mohammed Kudus Ghana Hamstring injury",
     "source": "Covers, Jul 2026",
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
