@@ -631,9 +631,13 @@ def fetch_espn_day(d, allow_cache_final=True):
     today = datetime.datetime.now(LOCAL_TZ).date()
     if cached and allow_cache_final and d < today - datetime.timedelta(days=1):
         try:
-            txt = cached.read_text(encoding="utf-8")
-            if '"state":"in"' not in txt:   # don't trust cache if a match was live when cached
-                return json.loads(txt)
+            data = json.loads(cached.read_text(encoding="utf-8"))
+            evs = data.get("events", [])
+            # trust the cache only if EVERY event was final when cached — a day cached while its
+            # matches were still "pre" (fetched days early) must be refetched, not served forever
+            if evs and all((e.get("competitions", [{}])[0].get("status", {}).get("type", {}) or {}).get("completed")
+                           for e in evs):
+                return data
         except Exception:
             pass
     try:
@@ -837,6 +841,12 @@ def host_side(m):
 # RESULTS ONLY (never odds), shrunk by sample size, and applied WALK-FORWARD (each match calibrated
 # only from matches that kicked off earlier) so every displayed call stays a true pre-match call,
 # not a retrofit. Validated out-of-sample (expanding window) to beat the frozen scorecard.
+# Re-validated 2026-07-06 (91 matches): the under-confidence DRIFTS — it grows through the
+# tournament as the market's knockout priors sharpen, so a full-history fit lags the current
+# miscalibration. Fix: fit on a ROLLING WINDOW of the last SHARPEN_WINDOW matches (K=20 shrink,
+# cap 2.2). Beats the old full-history fit on 55 of 91 matches (worse on 27) and beats the market
+# at every recent burn-in; a 25-game window was rejected for riding the exponent cap (upset-chasing).
+SHARPEN_WINDOW = 40   # rolling fit window: recent games carry the calibration signal
 SHARPEN_G = 1.0   # live exponent for UPCOMING display (1.0 = off; set in main from all completed games)
 def _sharpen(p, g):
     """Monotone power calibration of a 1X2 triplet. g>1 = more confident, g<1 = flatter.
@@ -845,7 +855,7 @@ def _sharpen(p, g):
     q = [max(1e-12, x) ** g for x in p]; s = sum(q) or 1.0
     return [x / s for x in q]
 
-def _fit_sharpen(pairs, K=40, lo=0.8, hi=2.0):
+def _fit_sharpen(pairs, K=20, lo=0.8, hi=2.2):
     """RPS-minimising sharpen exponent over (prob_triplet, actual_idx) pairs, shrunk toward 1.0 by
     sample size (n/(n+K)). Results-only -> independence from the bookmaker preserved."""
     n = len(pairs)
@@ -861,19 +871,20 @@ def _fit_sharpen(pairs, K=40, lo=0.8, hi=2.0):
         gi += 2
     return round(1.0 + (best[1] - 1.0) * (n / (n + K)), 3)
 
-def walkforward_sharpen(M, matches, K=40):
+def walkforward_sharpen(M, matches, K=20):
     """Returns ({match_id: exponent}, live_exponent). Each completed match's exponent is fit ONLY on
-    matches that kicked off strictly earlier (leak-free). live_exponent is fit on ALL completed games,
-    for upcoming-match display."""
+    matches that kicked off strictly earlier (leak-free), over a rolling window of the most recent
+    SHARPEN_WINDOW games (the miscalibration drifts). live_exponent uses the same window, for
+    upcoming-match display."""
     comp = sorted([m for m in matches if m["completed"] and m["g1"] is not None
                    and m["t1"] in M["elo"] and m["t2"] in M["elo"]], key=lambda m: m.get("date", ""))
     out = {}; pairs = []
     for m in comp:
-        out[m["id"]] = _fit_sharpen(pairs, K)                 # available-at-the-time calibration
+        out[m["id"]] = _fit_sharpen(pairs[-SHARPEN_WINDOW:], K)   # available-at-the-time calibration
         p = predict(M, m["t1"], m["t2"], host_side(m))["blend"]
         a = 0 if m["g1"] > m["g2"] else (2 if m["g1"] < m["g2"] else 1)
         pairs.append((p, a))
-    return out, _fit_sharpen(pairs, K)
+    return out, _fit_sharpen(pairs[-SHARPEN_WINDOW:], K)
 
 def pred_vs_reality(M, matches, estats, sharp_map=None):
     if sharp_map is None:
