@@ -1,28 +1,7 @@
 {
-  "morocco": {
+  "belgium": {
     "delta": -15,
-    "note": "(auto) AE Abde EzzalzouliForward Morocco Injury (specifics not detailed)Injury (specifics not detailed) Injured Ruled out for WC2026 Jul 7, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "austria": {
-    "delta": -15,
-    "note": "(auto) Christoph BaumgartnerMidfielder Austria Thigh injuryThigh injury Injured Ruled out for WC2026 Jul 7, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "england": {
-    "delta": -5,
-    "note": "(auto) TL Tino LivramentoDefender England Injured (specifics not detailed)Injured (specifics not detailed) Injured Unknown Jul 7, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "germany": {
-    "delta": -15,
-    "note": "(auto) LK Lennart KarlMidfielder Germany Muscle tearMuscle tear Injured Ruled out for WC2026 Jul 7, 2026",
+    "note": "(auto) Amadou OnanaMidfielder Belgium Knee injuryKnee injury Injured Ruled out of tournament (several months) Jul 8, 2026",
     "source": "Soccer26Live, Jul 2026",
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
@@ -33,6 +12,20 @@
     "source": "ESPN, Jun 2026",
     "url": "https://www.espn.com/soccer/story/_/id/49075716"
   },
+  "brazil": {
+    "delta": -15,
+    "note": "(auto) WesleyDefender Brazil Thigh injuryThigh injury Injured Ruled out of tournament Jul 8, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "paraguay": {
+    "delta": -8,
+    "note": "(auto) Julio EncisoForward Paraguay Thigh injuryThigh injury Doubtful Later in group stage Jul 8, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
   "spain": {
     "delta": -15,
     "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
@@ -40,46 +33,32 @@
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
-  "south-africa": {
-    "delta": -8,
-    "note": "(auto) Lyle FosterForward South Africa Fitness Check Doubtful TBC May 25, 2026",
+  "canada": {
+    "delta": -15,
+    "note": "(auto) Moise BombitoDefender Canada Shin fracture relapseShin fracture relapse Injured Ruled out of tournament Jul 8, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "germany": {
+    "delta": -15,
+    "note": "(auto) LK Lennart KarlMidfielder Germany Thigh muscle tearThigh muscle tear Injured Ruled out of tournament Jul 8, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "morocco": {
+    "delta": -15,
+    "note": "(auto) AE Abde EzzalzouliForward Morocco Knee injuryKnee injury Injured Ruled out of tournament Jul 8, 2026",
     "source": "Soccer26Live, Jul 2026",
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
   },
   "netherlands": {
-    "delta": -8,
-    "note": "(auto) Denzel DumfriesDefender Netherlands Fitness Check Doubtful TBC May 25, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "haiti": {
-    "delta": -8,
-    "note": "(auto) Martin ExperienceDefender Haiti Fitness Check Doubtful TBC May 25, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "egypt": {
-    "delta": -8,
-    "note": "(auto) Mohamed SalahForward Egypt Fitness Check Doubtful TBC May 25, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "turkey": {
-    "delta": -8,
-    "note": "(auto) Kenan YildizForward Türkiye Fitness Check Doubtful TBC May 25, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "brazil": {
-    "delta": -15,
-    "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "delta": -5,
+    "note": "(auto) Jurrien Timber Netherlands Groin injury",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "ghana": {
@@ -89,16 +68,9 @@
     "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
-  "canada": {
+  "england": {
     "delta": -5,
-    "note": "(auto) Davies has not played for Canada since March 2025, when he tore an ACL in the CONCACAF Nations League finals, and injured a hamstring last month while playing for Bayern ",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
-    "auto": true
-  },
-  "paraguay": {
-    "delta": -5,
-    "note": "(auto) Julio Enciso avoided a serious thigh injury, but Paraguay is unlikely to rush its star attacker back into action.",
+    "note": "(auto) The star winger has returned to action after playing through the injury late in the club season, but England is likely to monitor his minutes closely during the tournamen",
     "source": "Covers, Jul 2026",
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
