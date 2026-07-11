@@ -1,69 +1,28 @@
 {
-  "algeria": {
+  "haiti": {
     "delta": -5,
-    "note": "(auto) Mohamed AmouraForward Algeria Hamstring InjuryHamstring Injury Injured Mid-Late July 2026 Jul 10, 2026",
+    "note": "(auto) JC Josue CasimirForward Haiti Knee injuryKnee injury Injured 4-6 weeks from early July 2026 Jul 11, 2026",
     "source": "Soccer26Live, Jul 2026",
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
   },
-  "argentina": {
-    "delta": -8,
-    "note": "Messi (hamstring) and Alvarez (ankle) carrying knocks; Martinez set to start with a fractured finger. All cleared but managed.",
-    "source": "ESPN, Jun 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/49075716"
-  },
-  "australia": {
-    "delta": -5,
-    "note": "(auto) JI Jacob ItalianoDefender Australia Muscle injuryMuscle injury Injured Mid July 2026 Jul 10, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "austria": {
-    "delta": -8,
-    "note": "(auto) Stefan PoschDefender Austria Broken jawBroken jaw Doubtful Unknown Jul 10, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "brazil": {
+  "ghana": {
     "delta": -15,
-    "note": "(auto) Lucas PaquetaMidfielder Brazil Hamstring InjuryHamstring Injury Injured N/A - Ruled out of WC Jul 10, 2026",
+    "note": "(auto) MS Marvin SenayaDefender Ghana Sidelined for months after surgery (no specific injury type mentioned)Sidelined for months after surgery (no specific injury type mentioned",
     "source": "Soccer26Live, Jul 2026",
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "spain": {
+    "delta": -15,
+    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "canada": {
-    "delta": -15,
-    "note": "(auto) Ismael KoneMidfielder Canada Broken ankleBroken ankle Injured N/A - Ruled out of WC Jul 10, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "colombia": {
-    "delta": -15,
-    "note": "(auto) Jhon CordobaForward Colombia Groin injuryGroin injury Injured N/A - Ruled out of WC Jul 10, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "egypt": {
-    "delta": -8,
-    "note": "(auto) Karim HafezDefender Egypt Muscle injuryMuscle injury Doubtful Unknown Jul 10, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "england": {
     "delta": -5,
-    "note": "(auto) TL Tino LivramentoDefender England Unknown (listed in tracker)Unknown (listed in tracker) Injured Unknown Jul 10, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "belgium": {
-    "delta": -5,
-    "note": "(auto) Amadou OnanaMidfielder Belgium Unknown (listed in tracker)Unknown (listed in tracker) Injured Unknown Jul 10, 2026",
+    "note": "(auto) Ismael KoneMidfielder Canada Broken legBroken leg Injured Unknown Jul 11, 2026",
     "source": "Soccer26Live, Jul 2026",
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
@@ -75,18 +34,38 @@
     "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
-  "netherlands": {
-    "delta": -5,
-    "note": "(auto) Jurrien Timber Netherlands Groin injury",
-    "source": "Covers, Jul 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
+  "argentina": {
+    "delta": -8,
+    "note": "Messi (hamstring) and Alvarez (ankle) carrying knocks; Martinez set to start with a fractured finger. All cleared but managed.",
+    "source": "ESPN, Jun 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/49075716"
+  },
+  "south-africa": {
+    "delta": -8,
+    "note": "(auto) Lyle FosterForward South Africa Fitness Check Doubtful TBC May 25, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
   },
-  "ghana": {
+  "netherlands": {
+    "delta": -8,
+    "note": "(auto) Denzel DumfriesDefender Netherlands Fitness Check Doubtful TBC May 25, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "brazil": {
     "delta": -15,
-    "note": "(auto) This is a major blow for Ghana, who look to Kudus for moments of inspiration.",
+    "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
     "source": "ESPN, Jul 2026",
     "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "auto": true
+  },
+  "england": {
+    "delta": -5,
+    "note": "(auto) The star winger has returned to action after playing through the injury late in the club season, but England is likely to monitor his minutes closely during the tournamen",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "paraguay": {
@@ -99,13 +78,6 @@
   "morocco": {
     "delta": -5,
     "note": "(auto) Morocco could be without one of its top attacking weapons after Ezzalzouli picked up a knee injury in the team's final tune-up match before the World Cup.",
-    "source": "Covers, Jul 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
-    "auto": true
-  },
-  "spain": {
-    "delta": -15,
-    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
     "source": "Covers, Jul 2026",
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
