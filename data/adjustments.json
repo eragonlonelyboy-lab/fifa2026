@@ -1,14 +1,21 @@
 {
-  "germany": {
-    "delta": -15,
-    "note": "(auto) Germany's 18-year-old midfielder will miss the World Cup after suffering a thigh injury in training.",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+  "belgium": {
+    "delta": -5,
+    "note": "(auto) Amadou OnanaMidfielder Belgium Knee injury (ACL)Knee injury (ACL) Injured Beyond World Cup Jul 14, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
   },
-  "netherlands": {
-    "delta": -5,
-    "note": "(auto) Jurrien Timber Netherlands Groin injury",
+  "england": {
+    "delta": -8,
+    "note": "(auto) Reece JamesDefender England Hamstring injuryHamstring injury Doubtful Unknown Jul 14, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "spain": {
+    "delta": -15,
+    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
     "source": "Covers, Jul 2026",
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
@@ -20,6 +27,54 @@
     "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
+  "canada": {
+    "delta": -8,
+    "note": "(auto) Alphonso DaviesDefender Canada Hamstring injuryHamstring injury Doubtful Trending in right direction Jul 14, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "senegal": {
+    "delta": -10,
+    "note": "Camp reportedly unsettled by off-field issues clouding the campaign; squad talent intact (Mane, Koulibaly, Mendy).",
+    "source": "Africa Top Sports, Jun 2026",
+    "url": "https://en.africatopsports.com/2026-fifa-world-cup-unrest-in-senegal-camp-as-off-field-issues-cloud-world-cup-campaign/"
+  },
+  "portugal": {
+    "delta": -8,
+    "note": "(auto) Ruben DiasDefender Portugal Unspecified injuryUnspecified injury Doubtful Unknown after opening match Jul 14, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "netherlands": {
+    "delta": -5,
+    "note": "(auto) Jurrien TimberDefender Netherlands Groin strainGroin strain Injured Beyond World Cup Jul 14, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "japan": {
+    "delta": -5,
+    "note": "(auto) Wataru EndoMidfielder Japan Foot injuryFoot injury Injured Beyond World Cup Jul 14, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "morocco": {
+    "delta": -5,
+    "note": "(auto) Nayef AguerdDefender Morocco Unspecified injuryUnspecified injury Injured Beyond World Cup Jul 14, 2026",
+    "source": "Soccer26Live, Jul 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "germany": {
+    "delta": -15,
+    "note": "(auto) Germany's 18-year-old midfielder will miss the World Cup after suffering a thigh injury in training.",
+    "source": "ESPN, Jul 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "auto": true
+  },
   "ghana": {
     "delta": -15,
     "note": "(auto) This is a major blow for Ghana, who look to Kudus for moments of inspiration.",
@@ -27,37 +82,9 @@
     "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
-  "canada": {
-    "delta": -5,
-    "note": "(auto) Davies has not played for Canada since March 2025, when he tore an ACL in the CONCACAF Nations League finals, and injured a hamstring last month while playing for Bayern ",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
-    "auto": true
-  },
-  "england": {
-    "delta": -5,
-    "note": "(auto) The star winger has returned to action after playing through the injury late in the club season, but England is likely to monitor his minutes closely during the tournamen",
-    "source": "Covers, Jul 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
-    "auto": true
-  },
   "paraguay": {
     "delta": -5,
     "note": "(auto) Julio Enciso avoided a serious thigh injury, but Paraguay is unlikely to rush its star attacker back into action.",
-    "source": "Covers, Jul 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
-    "auto": true
-  },
-  "morocco": {
-    "delta": -5,
-    "note": "(auto) Morocco could be without one of its top attacking weapons after Ezzalzouli picked up a knee injury in the team's final tune-up match before the World Cup.",
-    "source": "Covers, Jul 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
-    "auto": true
-  },
-  "spain": {
-    "delta": -15,
-    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
     "source": "Covers, Jul 2026",
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
@@ -74,12 +101,6 @@
     "source": "Covers, Jul 2026",
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
-  },
-  "senegal": {
-    "delta": -10,
-    "note": "Camp reportedly unsettled by off-field issues clouding the campaign; squad talent intact (Mane, Koulibaly, Mendy).",
-    "source": "Africa Top Sports, Jun 2026",
-    "url": "https://en.africatopsports.com/2026-fifa-world-cup-unrest-in-senegal-camp-as-off-field-issues-cloud-world-cup-campaign/"
   },
   "argentina": {
     "delta": -8,
