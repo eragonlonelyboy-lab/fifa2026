@@ -1,59 +1,4 @@
 {
-  "spain": {
-    "delta": -15,
-    "note": "(auto) VM Victor MunozForward Spain Calf injury and additional muscular injuryCalf injury and additional muscular injury Injured N/A (ruled out of final) Jul 18, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "argentina": {
-    "delta": -8,
-    "note": "Messi (hamstring) and Alvarez (ankle) carrying knocks; Martinez set to start with a fractured finger. All cleared but managed.",
-    "source": "ESPN, Jun 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/49075716"
-  },
-  "algeria": {
-    "delta": -5,
-    "note": "(auto) Mohamed AmouraForward Algeria Hamstring InjuryHamstring Injury Injured Late July 2026 Jul 18, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "australia": {
-    "delta": -5,
-    "note": "(auto) JI Jacob ItalianoDefender Australia Muscle injuryMuscle injury Injured Mid July 2026 Jul 18, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "austria": {
-    "delta": -8,
-    "note": "(auto) Stefan PoschDefender Austria Broken jawBroken jaw Doubtful Unknown Jul 18, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "belgium": {
-    "delta": -8,
-    "note": "(auto) Thibaut CourtoisGoalkeeper Belgium Thigh injuryThigh injury Doubtful Unknown Jul 18, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "brazil": {
-    "delta": -15,
-    "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
-    "auto": true
-  },
-  "egypt": {
-    "delta": -5,
-    "note": "(auto) Mohamed AbdelmonemDefender Egypt Muscle injuryMuscle injury Injured Late July 2026 Jul 18, 2026",
-    "source": "Soccer26Live, Jul 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
   "germany": {
     "delta": -15,
     "note": "(auto) Germany's 18-year-old midfielder will miss the World Cup after suffering a thigh injury in training.",
@@ -66,6 +11,13 @@
     "note": "(auto) Jurrien Timber Netherlands Groin injury",
     "source": "Covers, Jul 2026",
     "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "auto": true
+  },
+  "brazil": {
+    "delta": -15,
+    "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
+    "source": "ESPN, Jul 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "ghana": {
@@ -103,6 +55,13 @@
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
+  "spain": {
+    "delta": -15,
+    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "auto": true
+  },
   "france": {
     "delta": -8,
     "note": "Saliba playing through a persistent back issue (surgery deferred to after the tournament); Dembele back in contention.",
@@ -115,6 +74,12 @@
     "source": "Covers, Jul 2026",
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
+  },
+  "argentina": {
+    "delta": -8,
+    "note": "Messi (hamstring) and Alvarez (ankle) carrying knocks; Martinez set to start with a fractured finger. All cleared but managed.",
+    "source": "ESPN, Jun 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/49075716"
   },
   "senegal": {
     "delta": -10,
