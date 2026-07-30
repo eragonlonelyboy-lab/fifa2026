@@ -81,18 +81,46 @@
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
   },
-  "netherlands": {
-    "delta": -5,
-    "note": "(auto) Jurrien Timber Netherlands Groin injury",
-    "source": "Covers, Jul 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
-    "auto": true
-  },
   "ghana": {
     "delta": -15,
     "note": "(auto) This is a major blow for Ghana, who look to Kudus for moments of inspiration.",
     "source": "ESPN, Jul 2026",
     "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "auto": true
+  },
+  "netherlands": {
+    "delta": -5,
+    "note": "(auto) The Netherlands lost two more first-choice players to injury.",
+    "source": "WorldCupWiki, Jul 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "japan": {
+    "delta": -15,
+    "note": "(auto) Japan captain Wataru Endo was ruled out three days before the tournament after failing to recover from a foot injury that required surgery in February, and he announced h",
+    "source": "WorldCupWiki, Jul 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "uruguay": {
+    "delta": 6,
+    "note": "(auto) Jose Gimenez Uruguay Ankle Nearing return, Uruguay open June 21",
+    "source": "WorldCupWiki, Jul 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "mexico": {
+    "delta": -8,
+    "note": "(auto) Edson Alvarez Mexico Fitness concern Being monitored",
+    "source": "WorldCupWiki, Jul 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "usa": {
+    "delta": -5,
+    "note": "(auto) Johnny Cardoso United States Ankle injury",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "paraguay": {
@@ -109,11 +137,18 @@
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
-  "usa": {
-    "delta": -5,
-    "note": "(auto) Johnny Cardoso United States Ankle injury",
-    "source": "Covers, Jul 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
+  "croatia": {
+    "delta": 6,
+    "note": "(auto) Luka Modric (Croatia): Recovered from a facial fracture and captains Croatia, now at AC Milan, at his fifth and likely final World Cup.",
+    "source": "WorldCupWiki, Jul 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "turkey": {
+    "delta": 6,
+    "note": "(auto) Arda Guler (Turkey): Fully fit and the focal point of Turkey’s midfield on their return to the World Cup for the first time since 2002.",
+    "source": "WorldCupWiki, Jul 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
   },
   "senegal": {
