@@ -34,16 +34,16 @@
   },
   "brazil": {
     "delta": -15,
-    "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "note": "(auto) Rodrygo:Brazil enters the tournament without one of its most dangerous attackers after Rodrygo suffered a season-ending knee injury.",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "germany": {
     "delta": -15,
-    "note": "(auto) Germany's 18-year-old midfielder will miss the World Cup after suffering a thigh injury in training.",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "note": "(auto) Serge Gnabry: Germany will be without an experienced attacking option after Gnabry was ruled out with an adductor injury suffered late in the club season.",
+    "source": "Covers, Jul 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "canada": {
@@ -82,10 +82,10 @@
     "auto": true
   },
   "ghana": {
-    "delta": -15,
-    "note": "(auto) This is a major blow for Ghana, who look to Kudus for moments of inspiration.",
-    "source": "ESPN, Jul 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "delta": -5,
+    "note": "(auto) Mohammed Kudus Ghana Long-term injury Out",
+    "source": "WorldCupWiki, Jul 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
   },
   "netherlands": {
