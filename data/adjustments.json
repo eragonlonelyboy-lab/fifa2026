@@ -1,55 +1,56 @@
 {
-  "algeria": {
-    "delta": -8,
-    "note": "(auto) Luca ZidaneGoalkeeper Algeria Jaw and chin fractureJaw and chin fracture Doubtful Unknown Aug 10, 2026",
+  "brazil": {
+    "delta": -15,
+    "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
+    "source": "ESPN, Aug 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
+    "auto": true
+  },
+  "japan": {
+    "delta": -15,
+    "note": "(auto) Wataru EndoMidfielder Japan Foot injuryFoot injury Injured Ruled out for World Cup Aug 11, 2026",
     "source": "Soccer26Live, Aug 2026",
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
   },
-  "argentina": {
-    "delta": -8,
-    "note": "Messi (hamstring) and Alvarez (ankle) carrying knocks; Martinez set to start with a fractured finger. All cleared but managed.",
-    "source": "ESPN, Jun 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/49075716"
-  },
-  "australia": {
-    "delta": -5,
-    "note": "(auto) Aiden O'NeillMidfielder Australia Leg injuryLeg injury Injured 2026-08-31 Aug 10, 2026",
-    "source": "Soccer26Live, Aug 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "austria": {
-    "delta": -8,
-    "note": "(auto) Stefan PoschDefender Austria Broken jawBroken jaw Doubtful Doubtful Aug 10, 2026",
-    "source": "Soccer26Live, Aug 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "belgium": {
-    "delta": -8,
-    "note": "(auto) Thibaut CourtoisGoalkeeper Belgium Thigh injuryThigh injury Doubtful Doubtful Aug 10, 2026",
-    "source": "Soccer26Live, Aug 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "ecuador": {
-    "delta": -8,
-    "note": "(auto) Gonzalo PlataMidfielder Ecuador Bruised kneeBruised knee Doubtful Doubtful Aug 10, 2026",
-    "source": "Soccer26Live, Aug 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "egypt": {
-    "delta": -5,
-    "note": "(auto) Mohamed AbdelmonemDefender Egypt Muscle injuryMuscle injury Injured 2026-08-24 Aug 10, 2026",
+  "germany": {
+    "delta": -15,
+    "note": "(auto) LK Lennart KarlMidfielder Germany Muscle tear (left thigh)Muscle tear (left thigh) Injured Ruled out for World Cup Aug 11, 2026",
     "source": "Soccer26Live, Aug 2026",
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
   },
   "england": {
     "delta": -8,
-    "note": "(auto) Kobbie MainooMidfielder England UnknownUnknown Doubtful Unknown Aug 10, 2026",
+    "note": "(auto) TL Tino LivramentoDefender England N/AN/A Doubtful N/A Aug 11, 2026",
+    "source": "Soccer26Live, Aug 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "canada": {
+    "delta": -5,
+    "note": "(auto) Ismael KoneMidfielder Canada Ankle injuryAnkle injury Injured N/A (expected to return Late August 2026) Aug 11, 2026",
+    "source": "Soccer26Live, Aug 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "belgium": {
+    "delta": -8,
+    "note": "(auto) Thibaut CourtoisGoalkeeper Belgium Thigh injuryThigh injury Doubtful N/A Aug 11, 2026",
+    "source": "Soccer26Live, Aug 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "algeria": {
+    "delta": -5,
+    "note": "(auto) Mohamed AmouraForward Algeria HamstringHamstring Injured Mid August 2026 Aug 11, 2026",
+    "source": "Soccer26Live, Aug 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "australia": {
+    "delta": -5,
+    "note": "(auto) Aiden O'NeillMidfielder Australia Leg injuryLeg injury Injured Late August 2026 Aug 11, 2026",
     "source": "Soccer26Live, Aug 2026",
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
@@ -61,16 +62,16 @@
     "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
-  "netherlands": {
+  "austria": {
     "delta": -5,
-    "note": "(auto) The Netherlands lost two more first-choice players to injury.",
+    "note": "(auto) Christoph Baumgartner Austria Pre-tournament injury Out (not replaced)",
     "source": "WorldCupWiki, Aug 2026",
     "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
   },
-  "japan": {
-    "delta": -15,
-    "note": "(auto) Japan captain Wataru Endo was ruled out three days before the tournament after failing to recover from a foot injury that required surgery in February, and he announced h",
+  "netherlands": {
+    "delta": -5,
+    "note": "(auto) The Netherlands lost two more first-choice players to injury.",
     "source": "WorldCupWiki, Aug 2026",
     "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
@@ -85,6 +86,13 @@
   "mexico": {
     "delta": -8,
     "note": "(auto) Edson Alvarez Mexico Fitness concern Being monitored",
+    "source": "WorldCupWiki, Aug 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "egypt": {
+    "delta": 6,
+    "note": "(auto) Mohamed Salah (Egypt): Recovered from a hamstring tear and captains Egypt, who open against Belgium on June 15.",
     "source": "WorldCupWiki, Aug 2026",
     "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
@@ -116,6 +124,12 @@
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
+  "argentina": {
+    "delta": -8,
+    "note": "Messi (hamstring) and Alvarez (ankle) carrying knocks; Martinez set to start with a fractured finger. All cleared but managed.",
+    "source": "ESPN, Jun 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/49075716"
+  },
   "croatia": {
     "delta": 6,
     "note": "(auto) Luka Modric (Croatia): Recovered from a facial fracture and captains Croatia, now at AC Milan, at his fifth and likely final World Cup.",
@@ -130,32 +144,11 @@
     "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
-  "germany": {
-    "delta": -15,
-    "note": "(auto) Germany's 18-year-old midfielder will miss the World Cup after suffering a thigh injury in training.",
-    "source": "ESPN, Aug 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
-    "auto": true
-  },
   "turkey": {
     "delta": 6,
     "note": "(auto) Arda Guler (Turkey): Fully fit and the focal point of Turkey’s midfield on their return to the World Cup for the first time since 2002.",
     "source": "WorldCupWiki, Aug 2026",
     "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
-    "auto": true
-  },
-  "brazil": {
-    "delta": -15,
-    "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
-    "source": "ESPN, Aug 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
-    "auto": true
-  },
-  "canada": {
-    "delta": -5,
-    "note": "(auto) Davies has not played for Canada since March 2025, when he tore an ACL in the CONCACAF Nations League finals, and injured a hamstring last month while playing for Bayern ",
-    "source": "ESPN, Aug 2026",
-    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "senegal": {
