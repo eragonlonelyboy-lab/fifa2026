@@ -48,10 +48,10 @@
     "url": "https://www.espn.com/soccer/story/_/id/49075716"
   },
   "spain": {
-    "delta": -15,
-    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
-    "source": "Covers, Aug 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "delta": -8,
+    "note": "(auto) Lamine YamalForward Spain Fitness Check Doubtful TBC May 26, 2026",
+    "source": "Soccer26Live, Aug 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
   },
   "south-africa": {
@@ -117,24 +117,24 @@
     "url": "https://www.foxsports.com/stories/soccer/william-saliba-hands-france-massive-injury-lift-as-didier-deschamps-issues-blunt-selection-warning-over-ousmane-dembele"
   },
   "usa": {
-    "delta": -5,
-    "note": "(auto) Johnny Cardoso United States Ankle injury",
-    "source": "Covers, Aug 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "delta": 6,
+    "note": "(auto) Chris Richards (United States): Recovered from an ankle injury and started the co-hosts’ opening 4-1 win over Paraguay, anchoring the defense.",
+    "source": "WorldCupWiki, Aug 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
   },
   "paraguay": {
-    "delta": -5,
-    "note": "(auto) Julio Enciso avoided a serious thigh injury, but Paraguay is unlikely to rush its star attacker back into action.",
-    "source": "Covers, Aug 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "delta": 6,
+    "note": "(auto) Julio Enciso (Paraguay): Recovered after a pre-tournament scare and started against the United States.",
+    "source": "WorldCupWiki, Aug 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
   },
   "morocco": {
-    "delta": -5,
-    "note": "(auto) Morocco could be without one of its top attacking weapons after Ezzalzouli picked up a knee injury in the team's final tune-up match before the World Cup.",
-    "source": "Covers, Aug 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "delta": 6,
+    "note": "(auto) Achraf Hakimi (Morocco): Recovered from a hamstring tear and captained Morocco in their 1-1 draw with Brazil on June 13.",
+    "source": "WorldCupWiki, Aug 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
   },
   "croatia": {
