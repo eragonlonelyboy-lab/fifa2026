@@ -1,16 +1,16 @@
 {
   "germany": {
-    "delta": -5,
-    "note": "(auto) LK Lennart KarlMidfielder Germany Muscle tear in left thighMuscle tear in left thigh Injured Unknown Sep 27, 2026",
-    "source": "Soccer26Live, Sep 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "delta": -15,
+    "note": "(auto) Germany's 18-year-old midfielder will miss the World Cup after suffering a thigh injury in training.",
+    "source": "ESPN, Sep 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "brazil": {
-    "delta": -5,
-    "note": "(auto) Alex SandroDefender Brazil Hamstring injuryHamstring injury Injured Unknown Sep 27, 2026",
-    "source": "Soccer26Live, Sep 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "delta": -15,
+    "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
+    "source": "ESPN, Sep 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "haiti": {
@@ -70,10 +70,10 @@
     "auto": true
   },
   "ghana": {
-    "delta": -5,
-    "note": "(auto) Mohammed Kudus Ghana Long-term injury Out",
-    "source": "WorldCupWiki, Sep 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "delta": -15,
+    "note": "(auto) This is a major blow for Ghana, who look to Kudus for moments of inspiration.",
+    "source": "ESPN, Sep 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "austria": {
@@ -111,17 +111,17 @@
     "url": "https://www.foxsports.com/stories/soccer/william-saliba-hands-france-massive-injury-lift-as-didier-deschamps-issues-blunt-selection-warning-over-ousmane-dembele"
   },
   "usa": {
-    "delta": 6,
-    "note": "(auto) Chris Richards (United States): Recovered from an ankle injury and started the co-hosts’ opening 4-1 win over Paraguay, anchoring the defense.",
-    "source": "WorldCupWiki, Sep 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "delta": -5,
+    "note": "(auto) Johnny Cardoso United States Ankle injury",
+    "source": "Covers, Sep 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "morocco": {
-    "delta": 6,
-    "note": "(auto) Achraf Hakimi (Morocco): Recovered from a hamstring tear and captained Morocco in their 1-1 draw with Brazil on June 13.",
-    "source": "WorldCupWiki, Sep 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "delta": -5,
+    "note": "(auto) Morocco could be without one of its top attacking weapons after Ezzalzouli picked up a knee injury in the team's final tune-up match before the World Cup.",
+    "source": "Covers, Sep 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "argentina": {
@@ -138,10 +138,10 @@
     "auto": true
   },
   "spain": {
-    "delta": 6,
-    "note": "(auto) Mikel Merino (Spain): Recovered from a foot problem that had sidelined him since January.",
-    "source": "WorldCupWiki, Sep 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "delta": -15,
+    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
+    "source": "Covers, Sep 2026",
+    "url": "https://www.covers.com/world-cup/injury-report-2026",
     "auto": true
   },
   "algeria": {
