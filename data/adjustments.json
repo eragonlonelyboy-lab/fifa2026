@@ -34,10 +34,10 @@
     "auto": true
   },
   "germany": {
-    "delta": -8,
-    "note": "(auto) Florian WirtzMidfielder Germany Fitness Check Doubtful TBC May 25, 2026",
-    "source": "Soccer26Live, Oct 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "delta": -15,
+    "note": "(auto) Germany's 18-year-old midfielder will miss the World Cup after suffering a thigh injury in training.",
+    "source": "ESPN, Oct 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "turkey": {
@@ -68,10 +68,10 @@
     "url": "https://www.foxsports.com/stories/soccer/william-saliba-hands-france-massive-injury-lift-as-didier-deschamps-issues-blunt-selection-warning-over-ousmane-dembele"
   },
   "brazil": {
-    "delta": -8,
-    "note": "(auto) RaphinhaForward Brazil Fitness Check Doubtful TBC May 25, 2026",
-    "source": "Soccer26Live, Oct 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "delta": -15,
+    "note": "(auto) Brazil's national team doctor said May 28 that the Santos forward will be sidelined for up to three weeks.",
+    "source": "ESPN, Oct 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "england": {
@@ -103,10 +103,10 @@
     "auto": true
   },
   "ghana": {
-    "delta": -5,
-    "note": "(auto) Mohammed Kudus Ghana Long-term injury Out",
-    "source": "WorldCupWiki, Oct 2026",
-    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "delta": -15,
+    "note": "(auto) This is a major blow for Ghana, who look to Kudus for moments of inspiration.",
+    "source": "ESPN, Oct 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "austria": {
@@ -156,6 +156,13 @@
     "note": "(auto) Achraf Hakimi (Morocco): Recovered from a hamstring tear and captained Morocco in their 1-1 draw with Brazil on June 13.",
     "source": "WorldCupWiki, Oct 2026",
     "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "canada": {
+    "delta": -5,
+    "note": "(auto) Davies has not played for Canada since March 2025, when he tore an ACL in the CONCACAF Nations League finals, and injured a hamstring last month while playing for Bayern ",
+    "source": "ESPN, Oct 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "senegal": {
