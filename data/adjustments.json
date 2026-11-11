@@ -1,18 +1,4 @@
 {
-  "canada": {
-    "delta": -5,
-    "note": "(auto) Jonathan OsorioMidfielder Canada Unspecified injury, sustained in final week of MLS regular season.",
-    "source": "Soccer26Live, Nov 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
-  "switzerland": {
-    "delta": -5,
-    "note": "(auto) Granit XhakaMidfielder Switzerland Calf injury.Calf injury.",
-    "source": "Soccer26Live, Nov 2026",
-    "url": "https://soccer26live.com/world-cup-2026/injuries/",
-    "auto": true
-  },
   "argentina": {
     "delta": -8,
     "note": "Messi (hamstring) and Alvarez (ankle) carrying knocks; Martinez set to start with a fractured finger. All cleared but managed.",
@@ -20,10 +6,10 @@
     "url": "https://www.espn.com/soccer/story/_/id/49075716"
   },
   "spain": {
-    "delta": -15,
-    "note": "(auto) Fermín Lopez: Spain loses a rising midfield star after López was ruled out with a fractured metatarsal, reducing the squad's depth heading into the tournament.",
-    "source": "Covers, Nov 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "delta": -8,
+    "note": "(auto) Lamine YamalForward Spain Fitness Check Doubtful TBC May 26, 2026",
+    "source": "Soccer26Live, Nov 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
   },
   "south-africa": {
@@ -102,6 +88,20 @@
     "url": "https://soccer26live.com/world-cup-2026/injuries/",
     "auto": true
   },
+  "croatia": {
+    "delta": -8,
+    "note": "(auto) Luka ModricMidfielder Croatia Fitness Check Doubtful TBC May 25, 2026",
+    "source": "Soccer26Live, Nov 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
+  "portugal": {
+    "delta": -8,
+    "note": "(auto) Cristiano RonaldoForward Portugal Fitness Concern Doubtful TBC May 25, 2026",
+    "source": "Soccer26Live, Nov 2026",
+    "url": "https://soccer26live.com/world-cup-2026/injuries/",
+    "auto": true
+  },
   "ghana": {
     "delta": -15,
     "note": "(auto) This is a major blow for Ghana, who look to Kudus for moments of inspiration.",
@@ -138,31 +138,31 @@
     "auto": true
   },
   "usa": {
-    "delta": -5,
-    "note": "(auto) Johnny Cardoso United States Ankle injury",
-    "source": "Covers, Nov 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "delta": 6,
+    "note": "(auto) Chris Richards (United States): Recovered from an ankle injury and started the co-hosts’ opening 4-1 win over Paraguay, anchoring the defense.",
+    "source": "WorldCupWiki, Nov 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
   },
   "paraguay": {
-    "delta": -5,
-    "note": "(auto) Julio Enciso avoided a serious thigh injury, but Paraguay is unlikely to rush its star attacker back into action.",
-    "source": "Covers, Nov 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
+    "delta": 6,
+    "note": "(auto) Julio Enciso (Paraguay): Recovered after a pre-tournament scare and started against the United States.",
+    "source": "WorldCupWiki, Nov 2026",
+    "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
     "auto": true
   },
   "morocco": {
-    "delta": -5,
-    "note": "(auto) Morocco could be without one of its top attacking weapons after Ezzalzouli picked up a knee injury in the team's final tune-up match before the World Cup.",
-    "source": "Covers, Nov 2026",
-    "url": "https://www.covers.com/world-cup/injury-report-2026",
-    "auto": true
-  },
-  "croatia": {
     "delta": 6,
-    "note": "(auto) Luka Modric (Croatia): Recovered from a facial fracture and captains Croatia, now at AC Milan, at his fifth and likely final World Cup.",
+    "note": "(auto) Achraf Hakimi (Morocco): Recovered from a hamstring tear and captained Morocco in their 1-1 draw with Brazil on June 13.",
     "source": "WorldCupWiki, Nov 2026",
     "url": "https://worldcupwiki.com/world-cup-2026-injury-list/",
+    "auto": true
+  },
+  "canada": {
+    "delta": -5,
+    "note": "(auto) Davies has not played for Canada since March 2025, when he tore an ACL in the CONCACAF Nations League finals, and injured a hamstring last month while playing for Bayern ",
+    "source": "ESPN, Nov 2026",
+    "url": "https://www.espn.com/soccer/story/_/id/48572979/2026-fifa-world-cup-injuries-tracker-which-stars-miss-latest-info",
     "auto": true
   },
   "senegal": {
